@@ -107,7 +107,7 @@ static int cmd_info(char *args){
     printf("ecx\t%04x\n",cpu.ecx);
     printf("edi\t%04x\n",cpu.edi);
     printf("edx\t%04x\n",cpu.edx);
-    printf("eip\t%04x\n",cpu.eip);
+    printf("eip\t%x\n",cpu.eip);
     printf("esi\t%04x\n",cpu.esi);
     printf("esp\t%04x\n",cpu.esp);
   }
