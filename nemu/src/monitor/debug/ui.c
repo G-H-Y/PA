@@ -101,7 +101,7 @@ static int cmd_info(char *args){
     return 0;
   }
   else if(strcmp(arg,"r")==0){
-    printf("eax\t%04x\n",cpu.eax);
+    printf("eax\t%x\n",cpu.eax);
     printf("ebp\t%04x\n",cpu.ebp);
     printf("ebx\t%04x\n",cpu.ebx);
     printf("ecx\t%04x\n",cpu.ecx);
