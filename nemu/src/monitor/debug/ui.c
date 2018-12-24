@@ -128,7 +128,7 @@ static int cmd_x(char *args){
     return 0;
   }
   else{
-    addr = atoi(arg);
+    addr = strtol(arg,NULL,16);
     for(i = 0;i<atoi(n);i++){
       mem = vaddr_read(addr,4);
       printf("0x%x\t0x%x\n",addr,mem);
