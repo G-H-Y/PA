@@ -42,6 +42,8 @@ static int cmd_si(char *args);
 
 static int cmd_info(char *args);
 
+static int cmd_x(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -52,6 +54,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   {"si","Single step",cmd_si},
   {"info","Print state",cmd_info},
+  {"x","Scan memory",cmd_x},
 
   /* TODO: Add more commands */
 
@@ -110,6 +113,19 @@ static int cmd_info(char *args){
     printf("eip\t0x%04X\n",cpu.eip);
     printf("esi\t0x%04X\n",cpu.esi);
     printf("esp\t0x%04X\n",cpu.esp);
+  }
+  return 0;
+}
+
+static int cmd_x(char *args){
+  char *n = strtok(NULL," ");
+  char *arg = strtok(NULL," ");
+  if(n==NULL||arg==NULL){
+    printf("please use command \"help\" to know more about \"x\"");
+    return 0;
+  }
+  else{
+    vaddr_read((vaddr_t) atoi(arg),(int) atoi(n));
   }
   return 0;
 }
