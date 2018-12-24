@@ -120,12 +120,20 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
   char *n = strtok(NULL," ");
   char *arg = strtok(NULL," ");
+  int i;
+  uint32_t mem;
+  vaddr_t addr;
   if(n==NULL||arg==NULL){
     printf("please use command \"help\" to know more about \"x\"");
     return 0;
   }
   else{
-    vaddr_read((vaddr_t) atoi(arg),(int) atoi(n));
+    addr = atoi(arg);
+    for(i = 0;i<atoi(n);i++){
+      mem = vaddr_read(addr,4);
+      printf("0x%x\t0x%x\n",addr,mem);
+      addr += 4;
+    }
   }
   return 0;
 }
