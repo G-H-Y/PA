@@ -292,9 +292,10 @@ uint32_t eval(int p, int q, bool *success)
       }
       //Log("key_op is %d",key_op);
     }
-
+    
     else 
     {
+      printf("normal expr\n");
       for (i = p; i <= q; i++)
       {
         printf("tokens[%d].type = %d\n",i,tokens[i].type);
