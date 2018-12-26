@@ -220,6 +220,7 @@ uint32_t eval(int p, int q, bool *success)
       return strtol(tokens[p].str, NULL, 16);
     else if (tokens[p].type == TK_REG)
     {
+      Log("%s = %x\n", tokens[p].str, get_reg(tokens[p].str));
       return get_reg(tokens[p].str);
     }
     else
@@ -264,7 +265,7 @@ uint32_t eval(int p, int q, bool *success)
         {
           key_op = tokens[p].type;
           val2 = get_reg(tokens[q].str);
-          Log("%s = %x\n",tokens[q].str,val2);
+          Log("%s = %x\n", tokens[q].str, val2);
         }
         else
         {
