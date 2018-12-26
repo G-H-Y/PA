@@ -31,7 +31,7 @@ static struct rule
    * Pay attention to the precedence level of different rules.
    */
 
-    {"\\s+", TK_NOTYPE}, // spaces
+    {" +", TK_NOTYPE}, // spaces
     {"\\)", ')'},      //right parenthsis
     {"\\(", '('},      //left parenthsis
     {"&&", TK_LA},     //logical and
@@ -133,7 +133,9 @@ static bool make_token(char *e)
           strncpy(tokens[nr_token++].str, e + position - substr_len,4);
           break;
         default:
-          TODO();
+          //TODO();
+          Log("It is space!");
+          break;
         }
         break;
       }
