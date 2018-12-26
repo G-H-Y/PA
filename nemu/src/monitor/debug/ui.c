@@ -142,9 +142,9 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  printf("%s\n",args);
+  //printf("%s\n",args);
   bool success = true;
-  uint32_t res = expr(args+1,&success);
+  uint32_t res = expr(args,&success);
   if(success){
     printf("%d\n",res);
   }
