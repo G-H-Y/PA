@@ -244,6 +244,7 @@ uint32_t eval(int p, int q, bool *success)
     *success = false;
     return 0;
   }
+  //expr  ( valid expr )
   else if (check_parentheses(p, q)&&tokens[p].type == '('&&tokens[q].type == ')'&&check_parentheses(p+1,q-1))
   {
     return eval(p + 1, q - 1, success);
@@ -284,10 +285,10 @@ uint32_t eval(int p, int q, bool *success)
         }
         
       }
-      else if (check_parentheses(p + 1, q)==0)
+      else if (check_parentheses(p + 1, q) && tokens[p+1].type == '(' && tokens[q].type == ')')
       {
         key_op = tokens[i].type;
-        val2 = eval(p + 1, q - 1, success);
+        val2 = eval(p + 2, q - 1, success);
       }
       Log("key_op is %d",key_op);
     }
