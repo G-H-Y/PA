@@ -389,6 +389,7 @@ uint32_t expr(char *e, bool *success)
 
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
+  printf("Now begin to check defer and negtive!\n");
   int i;
   for (i = 0; i < nr_token; i++)
   {
