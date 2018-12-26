@@ -123,10 +123,12 @@ static bool make_token(char *e)
         case TK_DECNUM:
         case TK_HEXNUM:
           tokens[nr_token].type = rules[i].token_type;
-          strncpy(tokens[nr_token++].str, e + position - substr_len, (substr_len > 32) ? 32 : substr_len);
+          memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
+          strncpy(tokens[nr_token++].str, e + position - substr_len, (substr_len > sizeof(tokens[nr_token].str)) ? sizeof(tokens[nr_token].str) : substr_len);
           break;
         case TK_REG:
           tokens[nr_token].type = rules[i].token_type;
+          memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
           strncpy(tokens[nr_token++].str, e + position - substr_len,4);
           break;
         default:
