@@ -270,12 +270,14 @@ uint32_t eval(int p, int q, bool *success)
           *success = false;
           return 0;
         }
+        
       }
       else if (check_parentheses(p + 1, q)==0)
       {
         key_op = tokens[i].type;
         val2 = eval(p + 1, q - 1, success);
       }
+      Log("key_op is %d",key_op);
     }
 
     else 
@@ -336,6 +338,7 @@ uint32_t eval(int p, int q, bool *success)
           break;
         }
       }
+      Log("key_op is %d",key_op);
       val1 = eval(p, op - 1, success);
       val2 = eval(op + 1, q, success);
     }
