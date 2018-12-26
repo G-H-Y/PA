@@ -392,10 +392,16 @@ uint32_t expr(char *e, bool *success)
   int i;
   for (i = 0; i < nr_token; i++)
   {
-    if (tokens[i].type == '-' && (i == 0 || is_defer_neg(tokens[i - 1].type)))
+    if (tokens[i].type == '-' && (i == 0 || is_defer_neg(tokens[i - 1].type))){
       tokens[i].type = TK_NEG;
-    else if (tokens[i].type == '*' && (i == 0 || is_defer_neg(tokens[i - 1].type)))
+      printf("position %d is negtive!\n",i);
+    }
+      
+    else if (tokens[i].type == '*' && (i == 0 || is_defer_neg(tokens[i - 1].type))){
       tokens[i].type = TK_DEFER;
+      printf("position %d is defer!\n",i);
+    }
+      
   }
   return eval(0, nr_token, success);
 }
