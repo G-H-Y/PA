@@ -268,7 +268,7 @@ uint32_t eval(int p, int q, bool *success)
         }
         else
         {
-          Log("DEFER_NEG\tThe expression is invalid");
+          Log("DEFER_NEG\t%d\tThe expression is invalid",tokens[p].type);
           *success = false;
           return 0;
         }
