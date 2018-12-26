@@ -202,6 +202,7 @@ uint32_t get_reg(char *str)
 uint32_t eval(int p, int q, bool *success)
 {
   *success = true;
+  Log("p=%d\tq=%d",p,q);
   if (p > q)
   {
     Log("p=%d>q=%d\tThe expression is invalid",p,q);
@@ -404,6 +405,6 @@ uint32_t expr(char *e, bool *success)
       Log("position %d is defer!\n",i);
     }     
   }
-  Log("It's time to get the result!\n");
+  Log("nr_token = %d",nr_token);
   return eval(0, nr_token, success);
 }
