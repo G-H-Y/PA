@@ -127,7 +127,7 @@ static bool make_token(char *e)
           break;
         case TK_REG:
           tokens[nr_token].type = rules[i].token_type;
-          strcpy(tokens[nr_token++].str, e + position - substr_len);
+          strncpy(tokens[nr_token++].str, e + position - substr_len,4);
           break;
         default:
           TODO();
@@ -181,23 +181,24 @@ int check_parentheses(int p, int q)
 
 uint32_t get_reg(char *str)
 {
-  if (strcmp(str, "eax"))
+  Log("the reg is %s",str);
+  if (strcmp(str, "$eax"))
     return cpu.eax;
-  else if (strcmp(str, "ecx"))
+  else if (strcmp(str, "$ecx"))
     return cpu.ecx;
-  else if (strcmp(str, "edx"))
+  else if (strcmp(str, "$edx"))
     return cpu.edx;
-  else if (strcmp(str, "ebx"))
+  else if (strcmp(str, "$ebx"))
     return cpu.ebx;
-  else if (strcmp(str, "esp"))
+  else if (strcmp(str, "$esp"))
     return cpu.esp;
-  else if (strcmp(str, "ebp"))
+  else if (strcmp(str, "$ebp"))
     return cpu.ebp;
-  else if (strcmp(str, "esi"))
+  else if (strcmp(str, "$esi"))
     return cpu.esi;
-  else if (strcmp(str, "edi"))
+  else if (strcmp(str, "$edi"))
     return cpu.edi;
-  else if (strcmp(str, "eip"))
+  else if (strcmp(str, "$eip"))
     return cpu.eip;
   return 0;
 }
