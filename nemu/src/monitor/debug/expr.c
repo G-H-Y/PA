@@ -103,7 +103,7 @@ static bool make_token(char *e)
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
-        if(e[position]!='\0'){
+        if(e[position]=='\0'){
            Log("e[position] is at end!");
         }
         /* TODO: Now a new token is recognized with rules[i]. Add codes
