@@ -181,7 +181,7 @@ int check_parentheses(int p, int q)
 
 uint32_t get_reg(char *str)
 {
-  Log("the reg is %s",str);
+  Log("get_reg\tthe reg is %s",str);
   if (strcmp(str, "$eax"))
     return cpu.eax;
   else if (strcmp(str, "$ecx"))
@@ -200,6 +200,8 @@ uint32_t get_reg(char *str)
     return cpu.edi;
   else if (strcmp(str, "$eip"))
     return cpu.eip;
+  else
+  Log("no reg match!");
   return 0;
 }
 
