@@ -388,7 +388,7 @@ uint32_t expr(char *e, bool *success)
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  //TODO();s
+  //TODO();
   Log("Now begin to check defer and negtive!\n");
   int i;
   for (i = 0; i < nr_token; i++)
@@ -401,8 +401,8 @@ uint32_t expr(char *e, bool *success)
     else if (tokens[i].type == '*' && (i == 0 || is_defer_neg(tokens[i - 1].type))){
       tokens[i].type = TK_DEFER;
       Log("position %d is defer!\n",i);
-    }
-      
+    }     
   }
+  Log("It's time to get the result!\n");
   return eval(0, nr_token, success);
 }
