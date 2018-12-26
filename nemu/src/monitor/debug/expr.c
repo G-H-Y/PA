@@ -257,45 +257,34 @@ uint32_t eval(int p, int q, bool *success)
     int cnt = 0;
     uint32_t val1=0;
     uint32_t val2=0;
-    if (tokens[p].type == TK_DEFER || tokens[p].type == TK_NEG)
-    {
-      if (p == q - 1)
-      {
-        if (tokens[q].type == TK_DECNUM)
-        {
-          key_op = tokens[p].type;
-          val2 = atoi(tokens[q].str);
-        }
-        else if (tokens[q].type == TK_HEXNUM)
-        {
-          key_op = tokens[p].type;
-          val2 = (uint32_t) strtol(tokens[q].str, NULL, 16);
-        }
-        else if (tokens[q].type == TK_REG)
-        {
-          key_op = tokens[p].type;
-          val2 = get_reg(tokens[q].str);
-          Log("%s = %x\n", tokens[q].str, val2);
-        }
-        else
-        {
-          Log("DEFER_NEG\t%d\tThe expression is invalid",tokens[q].type);
-          *success = false;
-          return 0;
-        }
-        
+    if ((tokens[p].type == TK_DEFER || tokens[p].type == TK_NEG)&& (p == q - 1)){
+      if (tokens[q].type == TK_DECNUM){
+        key_op = tokens[p].type;
+        val2 = atoi(tokens[q].str);
       }
-      else if (check_parentheses(p + 1, q) && tokens[p+1].type == '(' && tokens[q].type == ')')
-      {
-        key_op = tokens[i].type;
-        val2 = eval(p + 2, q - 1, success);
+      else if (tokens[q].type == TK_HEXNUM){
+        key_op = tokens[p].type;
+        val2 = (uint32_t) strtol(tokens[q].str, NULL, 16);
       }
-      //Log("key_op is %d",key_op);
+      else if (tokens[q].type == TK_REG){
+        key_op = tokens[p].type;
+        val2 = get_reg(tokens[q].str);
+        Log("%s = %x\n", tokens[q].str, val2);
+      }
+      else{
+        Log("DEFER_NEG\t%d\tThe expression is invalid",tokens[q].type);
+        *success = false;
+        return 0;
+      }    
     }
-    
-    else 
-    {
-      printf("normal expr\n");
+    else if ((tokens[p].type == TK_DEFER || tokens[p].type == TK_NEG) 
+            && check_parentheses(p + 1, q) && tokens[p+1].type == '(' && tokens[q].type == ')'){
+      key_op = tokens[i].type;
+      val2 = eval(p + 2, q - 1, success);
+    }
+      //Log("key_op is %d",key_op);
+    //printf("normal expr\n");
+    else {   
       for (i = p; i <= q; i++)
       {
         printf("tokens[%d].type = %d\n",i,tokens[i].type);
