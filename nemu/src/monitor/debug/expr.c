@@ -103,6 +103,9 @@ static bool make_token(char *e)
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
         position += substr_len;
 
+        if(e[position]!='\0'){
+           Log("e[position] is at end!");
+        }
         /* TODO: Now a new token is recognized with rules[i]. Add codes
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
@@ -124,16 +127,13 @@ static bool make_token(char *e)
         case TK_DECNUM:
         case TK_HEXNUM:
           tokens[nr_token].type = rules[i].token_type;
-          //memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
           strncpy(tokens[nr_token++].str, e + position - substr_len, (substr_len > sizeof(tokens[nr_token].str)) ? sizeof(tokens[nr_token].str) : substr_len);
           break;
         case TK_REG:
           tokens[nr_token].type = rules[i].token_type;
-          //memset(tokens[nr_token].str,'\0',sizeof(tokens[nr_token].str));
           strncpy(tokens[nr_token++].str, e + position - substr_len,4);
           break;
         default:
-          //TODO();
           Log("It is space!");
           break;
         }
