@@ -101,6 +101,7 @@ static bool make_token(char *e)
 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
+        printf("after match e.length = %ld\n",sizeof(e));
         printf("position = %d\n",position);
         position += substr_len;
         printf("position = %d\tsubstr_len = %d\n",position,substr_len);
