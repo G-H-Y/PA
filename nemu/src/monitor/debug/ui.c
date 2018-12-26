@@ -142,9 +142,9 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  char *exp = strtok(NULL," ");
+  //char *exp = strtok(NULL," ");
   bool success = true;
-  uint32_t res = expr(exp,&success);
+  uint32_t res = expr(args+1,&success);
   if(success){
     printf("%d\n",res);
   }
