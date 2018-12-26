@@ -297,6 +297,7 @@ uint32_t eval(int p, int q, bool *success)
     {
       for (i = p; i <= q; i++)
       {
+        printf("tokens[%d].type = %d\n",i,tokens[i].type);
         switch (tokens[i].type)
         {
         case '(':
