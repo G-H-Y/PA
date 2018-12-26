@@ -42,7 +42,7 @@ static struct rule
     {"\\*", '*'},  // multiply
     {"/", '/'},    //divide
     {"[1-9][0-9]*", TK_DECNUM},
-    {"0x[0-9]+", TK_HEXNUM},
+    {"0x[0-9a-zA-Z]+", TK_HEXNUM},
     {"\\$[a-z][a-z][a-z]", TK_REG}};
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]))
