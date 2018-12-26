@@ -107,7 +107,6 @@ static bool make_token(char *e)
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-        Log("Record a new token!\n");
         switch (rules[i].token_type)
         {
         case TK_EQ:
@@ -143,7 +142,9 @@ static bool make_token(char *e)
       return false;
     }
   }
-
+  for(i=0;i<nr_token;i++){
+    Log("%d\t%s",tokens[i].type,tokens[i].str);
+  }
   return true;
 }
 
@@ -203,7 +204,7 @@ uint32_t eval(int p, int q, bool *success)
   *success = true;
   if (p > q)
   {
-    Log("The expression is invalid");
+    Log("p>q\tThe expression is invalid");
     *success = false;
     return 0;
   }
@@ -219,7 +220,7 @@ uint32_t eval(int p, int q, bool *success)
     }
     else
     {
-      Log("The expression is invalid");
+      Log("p==p\tThe expression is invalid");
       *success = false;
       return 0;
     }
@@ -265,7 +266,7 @@ uint32_t eval(int p, int q, bool *success)
         }
         else
         {
-          Log("The expression is invalid");
+          Log("DEFER_NEG\tThe expression is invalid");
           *success = false;
           return 0;
         }
