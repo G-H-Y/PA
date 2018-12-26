@@ -164,6 +164,7 @@ bool is_defer_neg(int tp)
 
 int check_parentheses(int p, int q)
 {
+  if(p > q) return 0;
   int i;
   int cnt = 0;
   for (i = p; i <= q; i++)
