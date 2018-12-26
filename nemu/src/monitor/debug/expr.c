@@ -339,7 +339,7 @@ uint32_t eval(int p, int q, bool *success)
 
         case '*':
         case '/':
-          if ((cnt == 0) && ((key_op == '*')||(key_op == '/')))
+          if ((cnt == 0) && ((key_op == '*')||(key_op == '/')||(key_op == 0)))
           {
             key_op = tokens[i].type;
             op = i;
