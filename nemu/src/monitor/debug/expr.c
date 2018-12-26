@@ -352,16 +352,16 @@ uint32_t eval(int p, int q, bool *success)
       }
       Log("key_op is %d",key_op);
       val1 = eval(p, op - 1, success);
+      printf("val1 = %d\n",val1);
       val2 = eval(op + 1, q, success);
+      printf("val2 = %d\n",val2);
     }
 
     switch (key_op)
     {
-    case '+':
-      printf("res = %d",val1+val2);
+    case '+':      
       return val1 + val2;
-    case '-':
-      printf("res = %d",val1-val2);
+    case '-':      
       return val1 - val2;
     case '*':
       return val1 * val2;
