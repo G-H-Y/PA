@@ -260,17 +260,17 @@ uint32_t eval(int p, int q, bool *success)
       {
         if (tokens[q].type == TK_DECNUM)
         {
-          key_op = tokens[q].type;
+          key_op = tokens[p].type;
           val2 = atoi(tokens[q].str);
         }
         else if (tokens[q].type == TK_HEXNUM)
         {
-          key_op = tokens[q].type;
+          key_op = tokens[p].type;
           val2 = (uint32_t) strtol(tokens[q].str, NULL, 16);
         }
         else if (tokens[q].type == TK_REG)
         {
-          key_op = tokens[q].type;
+          key_op = tokens[p].type;
           val2 = get_reg(tokens[q].str);
         }
         else
