@@ -234,7 +234,7 @@ uint32_t eval(int p, int q, bool *success)
     *success = false;
     return 0;
   }
-  else if (check_parentheses(p, q)&&check_parentheses(p+1,q-1))
+  else if (check_parentheses(p, q)&&tokens[p].type == '('&&tokens[q].type == ')'&&check_parentheses(p+1,q-1))
   {
     return eval(p + 1, q - 1, success);
   }  
