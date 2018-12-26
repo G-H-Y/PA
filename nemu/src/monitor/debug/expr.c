@@ -264,6 +264,7 @@ uint32_t eval(int p, int q, bool *success)
         {
           key_op = tokens[p].type;
           val2 = get_reg(tokens[q].str);
+          Log("%s = %x\n",tokens[q].str,val2);
         }
         else
         {
