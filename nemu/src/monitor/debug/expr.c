@@ -173,16 +173,9 @@ int check_parentheses(int p, int q)
     else if (tokens[i].type == ')')
       cnt--;
     if (cnt < 0)
-      return -1;
-  }
-  if(cnt == 0){
-    if(tokens[p].type == '('&& tokens[q].type == ')'){
       return 0;
-    }
-    else 
-      return 1;
   }
-  return -1;
+  return (cnt == 0);
 }
 
 uint32_t get_reg(char *str)
@@ -235,18 +228,15 @@ uint32_t eval(int p, int q, bool *success)
       return 0;
     }
   }
-  else if (check_parentheses(p, q) == 0)
-  {
-    /* The expression is surrounded by a matched pair of parentheses.
-     * If that is the case, just throw away the parentheses.
-     */
-    return eval(p + 1, q - 1, success);
-  }
-  else if(check_parentheses(p,q) == -1){
+  else if(!check_parentheses(p,q)){
     Log("Parenthese didn't match");
     *success = false;
     return 0;
   }
+  else if (check_parentheses(p, q)&&check_parentheses(p+1,q-1))
+  {
+    return eval(p + 1, q - 1, success);
+  }  
   else 
   {
     int i = p;
