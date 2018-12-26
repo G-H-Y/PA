@@ -406,5 +406,5 @@ uint32_t expr(char *e, bool *success)
     }     
   }
   Log("nr_token = %d",nr_token);
-  return eval(0, nr_token, success);
+  return eval(0, nr_token-1, success);
 }
