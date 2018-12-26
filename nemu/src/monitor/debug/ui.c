@@ -44,6 +44,8 @@ static int cmd_info(char *args);
 
 static int cmd_x(char *args);
 
+static int cmd_p(char *args);
+
 static struct {
   char *name;
   char *description;
@@ -55,6 +57,7 @@ static struct {
   {"si","Single step",cmd_si},
   {"info","Print state",cmd_info},
   {"x","Scan memory",cmd_x},
+  {"p","Evaluate expression",cmd_p}
 
   /* TODO: Add more commands */
 
@@ -134,6 +137,19 @@ static int cmd_x(char *args){
       printf("0x%x\t0x%x\n",addr,mem);
       addr += 4;
     }
+  }
+  return 0;
+}
+
+static int cmd_p(char *args){
+  char *exp = strtok(NULL," ");
+  bool success = true;
+  uint32_t res = expr(exp,&success);
+  if(success){
+    printf("%d\n",res);
+  }
+  else{
+    printf("The expression is invalid!\n");
   }
   return 0;
 }
