@@ -204,7 +204,7 @@ uint32_t eval(int p, int q, bool *success)
   *success = true;
   if (p > q)
   {
-    Log("p>q\tThe expression is invalid");
+    Log("p=%d>q=%d\tThe expression is invalid",p,q);
     *success = false;
     return 0;
   }
@@ -220,7 +220,7 @@ uint32_t eval(int p, int q, bool *success)
     }
     else
     {
-      Log("p==p\tThe expression is invalid");
+      Log("p=%d==q=%d\tThe expression is invalid",p,q);
       *success = false;
       return 0;
     }
@@ -372,7 +372,7 @@ uint32_t eval(int p, int q, bool *success)
       return vaddr_read(val2, 4);
 
     default:
-      Log("The expression is invalid");
+      Log("key_op = %d is invalid",key_op);
       *success = false;
       return 0;
       break;
