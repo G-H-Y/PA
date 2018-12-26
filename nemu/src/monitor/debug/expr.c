@@ -287,7 +287,7 @@ uint32_t eval(int p, int q, bool *success)
     else {   
       for (i = p; i <= q; i++)
       {
-        //printf("tokens[%d].type = %d\n",i,tokens[i].type);s
+        //printf("tokens[%d].type = %d\n",i,tokens[i].type);
         switch (tokens[i].type)
         {
         case '(':
@@ -326,7 +326,7 @@ uint32_t eval(int p, int q, bool *success)
           {
             key_op = tokens[i].type;
             op = i;
-            printf("key_op is + or -\n");
+           // printf("key_op is + or -\n");
           }
           break;
 
