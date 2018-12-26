@@ -151,7 +151,14 @@ static bool make_token(char *e)
 bool is_defer_neg(int tp)
 {
   Log("tp = %d",tp);
-  return (tp == '-') || (tp == '+') || (tp == '/') || (tp == '*') || (tp == '(') || (tp == TK_EQ) || (tp == TK_LA) || (tp = TK_NEQ);
+  if((tp == '-') || (tp == '+') || (tp == '/') || (tp == '*') || (tp == '(') || (tp == TK_EQ) || (tp == TK_LA) || (tp = TK_NEQ)){
+    Log("return true!");
+    return true;
+  }
+  else{
+    Log("return false!");
+    return false;
+  }
 }
 
 int check_parentheses(int p, int q)
@@ -251,24 +258,24 @@ uint32_t eval(int p, int q, bool *success)
     {
       if (p == q - 1)
       {
-        if (tokens[p].type == TK_DECNUM)
+        if (tokens[q].type == TK_DECNUM)
         {
-          key_op = tokens[p].type;
-          val2 = atoi(tokens[p].str);
+          key_op = tokens[q].type;
+          val2 = atoi(tokens[q].str);
         }
-        else if (tokens[p].type == TK_HEXNUM)
+        else if (tokens[q].type == TK_HEXNUM)
         {
-          key_op = tokens[p].type;
-          val2 = (uint32_t) strtol(tokens[p].str, NULL, 16);
+          key_op = tokens[q].type;
+          val2 = (uint32_t) strtol(tokens[q].str, NULL, 16);
         }
-        else if (tokens[p].type == TK_REG)
+        else if (tokens[q].type == TK_REG)
         {
-          key_op = tokens[p].type;
-          val2 = get_reg(tokens[p].str);
+          key_op = tokens[q].type;
+          val2 = get_reg(tokens[q].str);
         }
         else
         {
-          Log("DEFER_NEG\t%d\tThe expression is invalid",tokens[p].type);
+          Log("DEFER_NEG\t%d\tThe expression is invalid",tokens[q].type);
           *success = false;
           return 0;
         }
