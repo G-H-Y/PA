@@ -150,6 +150,7 @@ static bool make_token(char *e)
 
 bool is_defer_neg(int tp)
 {
+  Log("tp = %d",tp);
   return (tp == '-') || (tp == '+') || (tp == '/') || (tp == '*') || (tp == '(') || (tp == TK_EQ) || (tp == TK_LA) || (tp = TK_NEQ);
 }
 
