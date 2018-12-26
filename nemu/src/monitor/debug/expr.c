@@ -290,7 +290,7 @@ uint32_t eval(int p, int q, bool *success)
         key_op = tokens[i].type;
         val2 = eval(p + 2, q - 1, success);
       }
-      Log("key_op is %d",key_op);
+      //Log("key_op is %d",key_op);
     }
 
     else 
@@ -302,7 +302,7 @@ uint32_t eval(int p, int q, bool *success)
         case '(':
           if ((cnt == 0) && (key_op != 0))
           {
-            i = q + 1; //break out of the loop
+            i = q + 1; //break out of the loops
           }
           else
             cnt++;
@@ -335,6 +335,7 @@ uint32_t eval(int p, int q, bool *success)
           {
             key_op = tokens[i].type;
             op = i;
+            printf("key_op is + or -\n");
           }
           break;
 
@@ -351,13 +352,13 @@ uint32_t eval(int p, int q, bool *success)
           break;
         }
       }
-      Log("key_op is %d",key_op);
+      
       val1 = eval(p, op - 1, success);
       printf("val1 = %d\n",val1);
       val2 = eval(op + 1, q, success);
       printf("val2 = %d\n",val2);
     }
-
+    Log("key_op is %d",key_op);
     switch (key_op)
     {
     case '+':      
