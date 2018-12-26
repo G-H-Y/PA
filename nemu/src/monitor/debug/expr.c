@@ -88,7 +88,7 @@ static bool make_token(char *e)
   regmatch_t pmatch;
 
   nr_token = 0;
-  printf("e = %s\n",e);
+  //printf("e = %s\n",e);
   while (e[position] != '\0')
   {
     /* Try all rules one by one. */
@@ -101,10 +101,10 @@ static bool make_token(char *e)
 
         Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
             i, rules[i].regex, position, substr_len, substr_len, substr_start);
-        printf("after match e = %s\n",e);
-        printf("position = %d\n",position);
+        //printf("after match e = %s\n",e);
+        //printf("position = %d\n",position);
         position += substr_len;
-        printf("position = %d\tsubstr_len = %d\n",position,substr_len);
+        //printf("position = %d\tsubstr_len = %d\n",position,substr_len);
         
         
         /* TODO: Now a new token is recognized with rules[i]. Add codes
@@ -156,14 +156,14 @@ static bool make_token(char *e)
 
 bool is_defer_neg(int tp)
 {
-  Log("tp = %d",tp);
+  //Log("tp = %d",tp);
   if((tp == '-') || (tp == '+') || (tp == '/') || (tp == '*') 
      || (tp == '(') || (tp == TK_EQ) || (tp == TK_LA) || (tp == TK_NEQ)){
-    Log("return true!");
+    //Log("return true!");
     return true;
   }
   else{
-    Log("return false!");
+    //Log("return false!");
     return false;
   }
 }
@@ -187,7 +187,7 @@ int check_parentheses(int p, int q)
 
 uint32_t get_reg(char *str)
 {
-  Log("get_reg\tthe reg is %s",str);
+  //Log("get_reg\tthe reg is %s",str);
   if (strcmp(str, "$eax")==0)
     return cpu.eax;
   else if (strcmp(str, "$ecx")==0)
@@ -358,8 +358,10 @@ uint32_t eval(int p, int q, bool *success)
     switch (key_op)
     {
     case '+':
+      printf("res = %d",val1+val2);
       return val1 + val2;
     case '-':
+      printf("res = %d",val1-val2);
       return val1 - val2;
     case '*':
       return val1 * val2;
