@@ -31,7 +31,7 @@ static struct rule
    * Pay attention to the precedence level of different rules.
    */
 
-    {" +", TK_NOTYPE}, // spaces
+    {"\\s+", TK_NOTYPE}, // spaces
     {"\\)", ')'},      //right parenthsis
     {"\\(", '('},      //left parenthsis
     {"&&", TK_LA},     //logical and
