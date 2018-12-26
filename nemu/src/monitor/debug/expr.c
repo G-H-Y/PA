@@ -389,18 +389,18 @@ uint32_t expr(char *e, bool *success)
 
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
-  printf("Now begin to check defer and negtive!\n");
+  Log("Now begin to check defer and negtive!\n");
   int i;
   for (i = 0; i < nr_token; i++)
   {
     if (tokens[i].type == '-' && (i == 0 || is_defer_neg(tokens[i - 1].type))){
       tokens[i].type = TK_NEG;
-      printf("position %d is negtive!\n",i);
+      Log("position %d is negtive!\n",i);
     }
       
     else if (tokens[i].type == '*' && (i == 0 || is_defer_neg(tokens[i - 1].type))){
       tokens[i].type = TK_DEFER;
-      printf("position %d is defer!\n",i);
+      Log("position %d is defer!\n",i);
     }
       
   }
