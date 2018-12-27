@@ -43,7 +43,9 @@ void free_wp(int NO)
   WP *p,*pre;
   p = head;
   pre = head;
+  printf("delete wp!\n");
   while((p!=NULL)&&(p->NO != NO)){
+    printf("%d\n",p->NO);
     pre = p;
     p = p->next;
   }
