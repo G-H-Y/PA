@@ -43,19 +43,19 @@ void free_wp(int NO)
   WP *p,*pre;
   p = head;
   pre = head;
-  printf("delete wp!\n");
-  while((p!=NULL)&&(p->NO != NO)){
-    printf("%d\n",p->NO);
+  while(p!=NULL){
     pre = p;
     p = p->next;
+    if(p->NO == NO) {
+      printf("find NO!\n");
+      break;
+    }
   }
-  if(pre->next == NULL){
-    printf("no such wp!\n");
-    assert(0);
+  if(pre->next != NULL){
+    pre->next = p->next;
+    p->next = free_;
+    free_ = p;
   }
-  pre->next = p->next;
-  wp_pool[NO].next = free_;
-  free_ = wp_pool+NO;
 }
 
 bool is_hit()
