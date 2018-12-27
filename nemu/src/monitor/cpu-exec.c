@@ -41,8 +41,8 @@ void cpu_exec(uint64_t n) {
 
 #ifdef DEBUG
     /* TODO: check watchpoints here. */
-    printf("now debug!\n");
-    if(is_hit()) break; 
+    //printf("now debug!\n");
+    //if(is_hit()) break; 
 #endif
 
 #ifdef HAS_IOE
