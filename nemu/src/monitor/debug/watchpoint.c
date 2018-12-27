@@ -75,6 +75,7 @@ bool is_hit()
         (*tmp).old_value = new_value;
         hit = true;
       }
+      tmp = tmp->next;
     }
   }
   return hit;
