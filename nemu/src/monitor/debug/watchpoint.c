@@ -44,18 +44,18 @@ void free_wp(int NO)
   p = head;
   pre = head;
   while(p!=NULL){
-    if(p->NO == NO) {
-      printf("find NO!\n");
-      break;
-    }
+    if(p->NO == NO) break;
     pre = p;
     p = p->next;
   }
-  if(pre->next != NULL){
+  if(pre != head){
     pre->next = p->next;
-    p->next = free_;
-    free_ = p;
   }
+  else{
+    head = p->next;
+  }
+  p->next = free_;
+  free_ = p;
 }
 
 bool is_hit()
