@@ -44,12 +44,12 @@ void free_wp(int NO)
   p = head;
   pre = head;
   while(p!=NULL){
-    pre = p;
-    p = p->next;
     if(p->NO == NO) {
       printf("find NO!\n");
       break;
     }
+    pre = p;
+    p = p->next;
   }
   if(pre->next != NULL){
     pre->next = p->next;
