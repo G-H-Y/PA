@@ -40,30 +40,20 @@ WP *new_wp()
 
 void free_wp(int NO)
 {
-  WP *tmp = head;
-  WP *forward = head;
-  if (forward == NULL)
-  {
-    Log("no such wp!");
+  WP *p,*pre;
+  p = head;
+  pre = head;
+  while((p!=NULL)&&(p->NO != NO)){
+    pre = p;
+    p = p->next;
+  }
+  if(pre->next == NULL){
+    printf("no such wp!\n");
     assert(0);
   }
-  while (tmp != NULL)
-  {
-    if ((*tmp).NO == NO)
-    {
-      forward = tmp->next;
-      tmp->next = free_;
-      free_ = tmp;
-      break;
-    }
-    forward = tmp;
-    tmp = tmp->next;
-  }
-  if (tmp == NULL)
-  {
-    Log("no such wp!");
-    assert(0);
-  }
+  pre->next = p->next;
+  wp_pool[NO].next = free_;
+  free_ = wp_pool+NO;
 }
 
 bool is_hit()
