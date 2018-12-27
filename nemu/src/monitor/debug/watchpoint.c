@@ -6,10 +6,15 @@
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
 
-void init_wp_pool() {
+void init_wp_pool()
+{
   int i;
-  for (i = 0; i < NR_WP; i ++) {
+  for (i = 0; i < NR_WP; i++)
+  {
     wp_pool[i].NO = i;
+    strcpy(wp_pool[i].exp, "");
+    wp_pool[i].old_value = 0;
+    wp_pool[i].hit = 0;
     wp_pool[i].next = &wp_pool[i + 1];
   }
   wp_pool[NR_WP - 1].next = NULL;
@@ -19,5 +24,83 @@ void init_wp_pool() {
 }
 
 /* TODO: Implement the functionality of watchpoint */
+WP *new_wp()
+{
+  if (free_ == NULL)
+  {
+    Log("no free wp!");
+    assert(0);
+  }
+  WP *new_w = free_;
+  free_ = free_->next;
+  new_w->next = head;
+  head = new_w;
+  return new_w;
+}
 
+void free_wp(int NO)
+{
+  WP *tmp = head;
+  WP *forward = head;
+  if (forward == NULL)
+  {
+    Log("no such wp!");
+    assert(0);
+  }
+  while (tmp != NULL)
+  {
+    if ((*tmp).NO == NO)
+    {
+      forward = tmp->next;
+      tmp->next = free_;
+      free_ = tmp;
+    }
+    forward = tmp;
+    tmp = tmp->next;
+  }
+  if (tmp == NULL)
+  {
+    Log("no such wp!");
+    assert(0);
+  }
+}
 
+bool is_hit()
+{
+  bool hit = false;
+  if (head != NULL)
+  {
+    WP *tmp = head;
+    while (tmp != NULL)
+    {
+      bool s = true;
+      int new_value = expr((*tmp).exp, &s);
+      if (new_value != (*tmp).old_value)
+      {
+        (*tmp).hit++;
+        printf("Hit watchpoint: %s\nnew_value = %d\nold_value = %d", (*tmp).exp, new_value, (*tmp).old_value);
+        (*tmp).old_value = new_value;
+        hit = true;
+      }
+    }
+  }
+  return hit;
+}
+
+void print_wp()
+{
+  if (head == NULL)
+  {
+    printf("no watchpoints!");
+  }
+  else
+  {
+    WP *tmp = head;
+    printf("Num\t\tWhat\t\tHit Time(s)\n");
+    while (tmp != NULL)
+    {
+      printf("%d\t\t%s\t\t%d\n", (*tmp).NO, (*tmp).exp, (*tmp).hit);
+      tmp = tmp->next;
+    }
+  }
+}
