@@ -71,7 +71,7 @@ bool is_hit()
       if (new_value != (*tmp).old_value)
       {
         (*tmp).hit++;
-        printf("Hit watchpoint: %s\nnew_value = %d\nold_value = %d", (*tmp).exp, new_value, (*tmp).old_value);
+        printf("Hit watchpoint: %s\nnew_value = %d\nold_value = %d\n", (*tmp).exp, new_value, (*tmp).old_value);
         (*tmp).old_value = new_value;
         hit = true;
       }
