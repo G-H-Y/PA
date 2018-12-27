@@ -148,9 +148,9 @@ static bool make_token(char *e)
       return false;
     }
   }
-  for(i=0;i<nr_token;i++){
+  /*for(i=0;i<nr_token;i++){
     Log("%d\t%s",tokens[i].type,tokens[i].str);
-  }
+  }*/
   return true;
 }
 
@@ -217,7 +217,7 @@ uint32_t eval(int p, int q, bool *success)
   Log("p=%d\tq=%d",p,q);
   if (p > q)
   {
-    Log("p=%d>q=%d\tThe expression is invalid",p,q);
+    //Log("p=%d>q=%d\tThe expression is invalid",p,q);
     *success = false;
     return 0;
   }
@@ -229,7 +229,7 @@ uint32_t eval(int p, int q, bool *success)
       return strtol(tokens[p].str, NULL, 16);
     else if (tokens[p].type == TK_REG)
     {
-      Log("%s = %x\n", tokens[p].str, get_reg(tokens[p].str));
+      //Log("%s = %x\n", tokens[p].str, get_reg(tokens[p].str));
       return get_reg(tokens[p].str);
     }
     else
@@ -269,7 +269,7 @@ uint32_t eval(int p, int q, bool *success)
       else if (tokens[q].type == TK_REG){
         key_op = tokens[p].type;
         val2 = get_reg(tokens[q].str);
-        Log("%s = %x\n", tokens[q].str, val2);
+        //Log("%s = %x\n", tokens[q].str, val2);
       }
       else{
         Log("DEFER_NEG\t%d\tThe expression is invalid",tokens[q].type);
@@ -345,11 +345,11 @@ uint32_t eval(int p, int q, bool *success)
       }
       
       val1 = eval(p, op - 1, success);
-      printf("val1 = %d\n",val1);
+      //printf("val1 = %d\n",val1);
       val2 = eval(op + 1, q, success);
-      printf("val2 = %d\n",val2);
+     // printf("val2 = %d\n",val2);
     }
-    Log("key_op is %d",key_op);
+   // Log("key_op is %d",key_op);
     switch (key_op)
     {
     case '+':      
@@ -400,20 +400,20 @@ uint32_t expr(char *e, bool *success)
 
   /* TODO: Insert codes to evaluate the expression. */
   //TODO();
-  Log("Now begin to check defer and negtive!\n");
+  //Log("Now begin to check defer and negtive!\n");
   int i;
   for (i = 0; i < nr_token; i++)
   {
     if (tokens[i].type == '-' && (i == 0 || is_defer_neg(tokens[i - 1].type))){
       tokens[i].type = TK_NEG;
-      Log("position %d is negtive!\n",i);
+      //Log("position %d is negtive!\n",i);
     }
       
     else if (tokens[i].type == '*' && (i == 0 || is_defer_neg(tokens[i - 1].type))){
       tokens[i].type = TK_DEFER;
-      Log("position %d is defer!\n",i);
+      //Log("position %d is defer!\n",i);
     }     
   }
-  Log("nr_token = %d",nr_token);
+  //Log("nr_token = %d",nr_token);
   return eval(0, nr_token-1, success);
 }
