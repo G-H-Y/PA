@@ -54,6 +54,7 @@ void free_wp(int NO)
       forward = tmp->next;
       tmp->next = free_;
       free_ = tmp;
+      break;
     }
     forward = tmp;
     tmp = tmp->next;
