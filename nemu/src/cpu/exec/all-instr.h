@@ -13,5 +13,6 @@ make_EHelper(push);
 make_EHelper(pop);
 //arith
 make_EHelper(sub);
+make_EHelper(add);
 //logic
 make_EHelper(xor);
