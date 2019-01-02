@@ -72,9 +72,40 @@ void difftest_step(uint32_t eip) {
   // TODO: Check the registers state with the reference design.
   // Set `nemu_state` to `NEMU_ABORT` if they are not the same.
   //TODO();
-  if((ref_r.eax != cpu.eax)||(ref_r.ebp != cpu.ebp)||(ref_r.ebx != cpu.ebx)||(ref_r.ecx !=cpu.ecx)
-  ||(ref_r.edi !=cpu.edi)||(ref_r.edx != cpu.edx)||(ref_r.eip != cpu.eip)||(ref_r.esi != cpu.esi)
-  ||(ref_r.esp != cpu.esp)){
+  if(ref_r.eax != cpu.eax){
+    printf("ref_r.eax = %x != cpu.eax = %x\n",ref_r.eax,cpu.eax);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.ebp != cpu.ebp){
+    printf("ref_r.ebp = %x != cpu.ebp = %x\n",ref_r.ebp,cpu.ebp);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.ebx != cpu.ebx){
+    printf("ref_r.ebx = %x != cpu.ebx = %x\n",ref_r.ebx,cpu.ebx);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.ecx !=cpu.ecx){
+    printf("ref_r.ecx = %x != cpu.ecx = %x\n",ref_r.ecx,cpu.ecx);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.edi !=cpu.edi){
+    printf("ref_r.edi = %x != cpu.edi = %x\n",ref_r.edi,cpu.edi);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.edx != cpu.edx){
+    printf("ref_r.edx = %x != cpu.edx = %x\n",ref_r.edx,cpu.edx);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.eip != cpu.eip){
+    printf("ref_r.eip = %x != cpu.eip = %x\n",ref_r.eip,cpu.eip);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.esi != cpu.esi){
+    printf("ref_r.esi = %x != cpu.esi = %x\n",ref_r.esi,cpu.esi);
+    nemu_state = NEMU_ABORT;
+  }
+  else if(ref_r.esp != cpu.esp){
+    printf("ref_r.esp = %x != cpu.esp = %x\n",ref_r.esp,cpu.esp);
     nemu_state = NEMU_ABORT;
   }
 }
