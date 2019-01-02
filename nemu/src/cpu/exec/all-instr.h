@@ -19,3 +19,5 @@ make_EHelper(xor);
 make_EHelper(and);
 //data-move
 make_EHelper(lea);
+//special
+make_EHelper(nop);
