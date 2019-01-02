@@ -16,5 +16,6 @@ make_EHelper(sub);
 make_EHelper(add);
 //logic
 make_EHelper(xor);
+make_EHelper(and);
 //data-move
 make_EHelper(lea);
