@@ -65,7 +65,7 @@ void difftest_step(uint32_t eip) {
     is_skip_ref = false;
     return;
   }
-
+  
   ref_difftest_exec(1);
   ref_difftest_getregs(&ref_r);
 
