@@ -31,6 +31,19 @@ typedef struct {
     };  
   };
 
+  union{
+    struct{
+      uint32_t CF : 1;
+      uint32_t bits1_5 : 5;
+      uint32_t ZF :1;
+      uint32_t SF :1;
+      uint32_t bits8_10 :3;
+      uint32_t OF :1;
+      uint32_t bits12_31 :20;
+    };
+    rtlreg_t val;
+  }eflags;
+
   vaddr_t eip;
   
 } CPU_state;
