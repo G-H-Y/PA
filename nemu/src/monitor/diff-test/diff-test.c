@@ -114,6 +114,7 @@ void difftest_step(uint32_t eip) {
     printf("cpu.ZF = %d\n",cpu.eflags.ZF);
     printf("cpu.SF = %d\n",cpu.eflags.SF);
     printf("cpu.OF = %d\n",cpu.eflags.OF);
+    print_r();
     nemu_state = NEMU_ABORT;
   }
   if(ref_r.esi != cpu.esi){
