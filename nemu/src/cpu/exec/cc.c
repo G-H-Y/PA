@@ -40,8 +40,13 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       //printf("dest = %d\n",t0==t1);
       break;
     case CC_LE:
-    printf("CC_LE\n");
-      TODO();
+      rtl_get_ZF(&t0);
+      rtl_get_SF(&t1);
+      rtl_get_OF(&t2);
+      rtl_xori(&t0,&t0,0x1);
+      rtl_xor(&t3,&t1,&t2);
+      rtl_or(dest,&t0,&t3);
+      break;
     default: panic("should not reach here");
     case CC_P: panic("n86 does not have PF");
   }
