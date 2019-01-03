@@ -21,11 +21,13 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       TODO();
     case CC_E:
       rtl_get_ZF(&t0);
-      *dest = (t0 == 1);
+      //*dest = (t0 == 1);
+      rtl_xori(dest,&t0,0x1);
       break;
     case CC_NE:
       rtl_get_ZF(&t0);
-      *dest = (t0 == 0);
+      //*dest = (t0 == 0);
+      rtl_xori(dest,&t0,0x0);
       break;
     case CC_BE:
     case CC_S:
@@ -34,7 +36,7 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       rtl_get_SF(&t0);
       rtl_get_OF(&t1);
       printf("in cc SF = %d,OF = %d\n",t0,t1);
-      *dest = (t0 == t1);
+      rtl_xor(dest,&t0,&t1);
       printf("dest = %d\n",t0==t1);
       break;
     case CC_LE:
