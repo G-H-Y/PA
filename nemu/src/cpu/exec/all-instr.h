@@ -18,6 +18,7 @@ make_EHelper(adc);
 //logic
 make_EHelper(xor);
 make_EHelper(and);
+make_EHelper(or);
 //data-move
 make_EHelper(lea);
 //special
