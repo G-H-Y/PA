@@ -48,7 +48,7 @@ static inline make_DopHelper(SI) {
   }
   else if(op->width == 1){
     if(((imm >> 7) & 0x1)==1)
-      op->simm = imm & 0x000000ff;
+      op->simm = imm | 0xffffff00;
     else
       op->simm = imm;
   }
