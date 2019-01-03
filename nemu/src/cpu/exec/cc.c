@@ -35,9 +35,9 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     case CC_L:
       rtl_get_SF(&t0);
       rtl_get_OF(&t1);
-      printf("in cc SF = %d,OF = %d\n",t0,t1);
+      //printf("in cc SF = %d,OF = %d\n",t0,t1);
       rtl_xor(dest,&t0,&t1);
-      printf("dest = %d\n",t0==t1);
+      //printf("dest = %d\n",t0==t1);
       break;
     case CC_LE:
     printf("CC_LE\n");
