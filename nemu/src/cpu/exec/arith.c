@@ -30,7 +30,7 @@ make_EHelper(sub) {
   //set OF
   rtl_xor(&t2,&id_dest->val,&id_src->val);
   rtl_xor(&t3,&id_dest->val,&t0);
-  rtl_add(&t2,&t2,&t3);
+  rtl_and(&t2,&t2,&t3);
   rtl_msb(&t2,&t2,id_dest->width);
   rtl_set_OF(&t2);
   print_asm_template2(sub);
@@ -47,7 +47,7 @@ make_EHelper(cmp) {
   //set OF
   rtl_xor(&t2,&id_dest->val,&id_src->val);
   rtl_xor(&t3,&id_dest->val,&t0);
-  rtl_add(&t2,&t2,&t3);
+  rtl_and(&t2,&t2,&t3);
   rtl_msb(&t2,&t2,id_dest->width);
   rtl_set_OF(&t2);
 
@@ -61,8 +61,15 @@ make_EHelper(inc) {
 }
 
 make_EHelper(dec) {
-  TODO();
-
+  //TODO();
+  rtl_subi(&t0,&id_dest->val,0x1);
+  operand_write(id_dest,&t0);
+  rtl_update_ZFSF(&t0,id_dest->width);
+  rtl_xori(&t1,&id_dest->val,0x1);
+  rtl_xor(&t2,&id_dest->val,&t0);
+  rtl_and(&t1,&t1,&t2);
+  rtl_msb(&t1,&t1,id_dest->width);
+  rtl_set_OF(&t1);
   print_asm_template1(dec);
 }
 
