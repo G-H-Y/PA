@@ -39,6 +39,7 @@ make_EHelper(sub) {
 make_EHelper(cmp) {
   //calculate
   rtl_sub(&t0,&id_dest->val,&id_src->val);
+  printf("in cmp:res = %d,dest = %d,src = %d\n",t0,id_dest->val,id_src->val);
   //set ZFSF
   rtl_update_ZFSF(&t0,id_dest->width);
   //set CF
