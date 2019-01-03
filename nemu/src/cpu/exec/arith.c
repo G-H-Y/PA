@@ -37,7 +37,19 @@ make_EHelper(sub) {
 }
 
 make_EHelper(cmp) {
-  TODO();
+  //calculate
+  rtl_sub(&t0,&id_dest->val,&id_src->val);
+  //set ZFSF
+  rtl_update_ZFSF(&t0,id_dest->width);
+  //set CF
+  rtl_setrelop(RELOP_LTU,&t1,&id_dest->val,&t0);
+  rtl_set_CF(&t1);
+  //set OF
+  rtl_xor(&t2,&id_dest->val,&id_src->val);
+  rtl_xor(&t3,&id_dest->val,&t0);
+  rtl_add(&t2,&t2,&t3);
+  rtl_msb(&t2,&t2,id_dest->width);
+  rtl_set_OF(&t2);
 
   print_asm_template2(cmp);
 }
