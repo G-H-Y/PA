@@ -31,8 +31,12 @@ make_EHelper(popa) {
 }
 
 make_EHelper(leave) {
-  TODO();
-
+  //set esp to ebp (esp := ebp)
+  rtl_lr(&t0,R_EBP,id_dest->width);
+  rtl_sr(R_ESP,&t0,id_dest->width);
+  //pop ebp
+  rtl_pop(&t1);
+  rtl_sr(R_EBP,&t1,id_dest->width);
   print_asm("leave");
 }
 

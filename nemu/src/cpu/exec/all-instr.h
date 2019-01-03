@@ -25,5 +25,6 @@ make_EHelper(test);
 //data-move
 make_EHelper(lea);
 make_EHelper(movzx);
+make_EHelper(leave);
 //special
 make_EHelper(nop);
