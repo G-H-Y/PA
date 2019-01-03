@@ -51,6 +51,18 @@ void init_difftest(char *ref_so_file, long img_size) {
   ref_difftest_setregs(&cpu);
 }
 
+void print_r(){
+  printf("eax\t0x%04X\n", cpu.eax);
+    printf("ebp\t0x%04X\n", cpu.ebp);
+    printf("ebx\t0x%04X\n", cpu.ebx);
+    printf("ecx\t0x%04X\n", cpu.ecx);
+    printf("edi\t0x%04X\n", cpu.edi);
+    printf("edx\t0x%04X\n", cpu.edx);
+    printf("eip\t0x%04X\n", cpu.eip);
+    printf("esi\t0x%04X\n", cpu.esi);
+    printf("esp\t0x%04X\n", cpu.esp);
+}
+
 void difftest_step(uint32_t eip) {
   CPU_state ref_r;
 
@@ -74,6 +86,7 @@ void difftest_step(uint32_t eip) {
   //TODO();
   if(ref_r.eax != cpu.eax){
     printf("ref_r.eax = %x != cpu.eax = %x\n",ref_r.eax,cpu.eax);
+    print_r();
     nemu_state = NEMU_ABORT;
   }
   if(ref_r.ebp != cpu.ebp){
