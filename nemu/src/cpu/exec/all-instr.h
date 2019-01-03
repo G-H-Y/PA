@@ -23,6 +23,7 @@ make_EHelper(and);
 make_EHelper(or);
 make_EHelper(setcc);
 make_EHelper(test);
+make_EHelper(sar);
 //data-move
 make_EHelper(lea);
 make_EHelper(movzx);
