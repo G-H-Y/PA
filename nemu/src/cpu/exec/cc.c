@@ -21,13 +21,11 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       TODO();
     case CC_E:
       rtl_get_ZF(&t0);
-      //*dest = (t0 == 1);
-      rtl_xori(dest,&t0,0x1);
+      *dest = (t0 == 1);
       break;
     case CC_NE:
       rtl_get_ZF(&t0);
-      //*dest = (t0 == 0);
-      rtl_xori(dest,&t0,0x0);
+      *dest = (t0 == 0);
       break;
     case CC_BE:
     case CC_S:
@@ -36,16 +34,14 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       rtl_get_SF(&t0);
       rtl_get_OF(&t1);
       //printf("in cc SF = %d,OF = %d\n",t0,t1);
-      rtl_xor(dest,&t0,&t1);
+      *dest = (t0 == t1);
       //printf("dest = %d\n",t0==t1);
       break;
     case CC_LE:
       rtl_get_ZF(&t0);
       rtl_get_SF(&t1);
       rtl_get_OF(&t2);
-      rtl_xori(&t0,&t0,0x1);
-      rtl_xor(&t3,&t1,&t2);
-      rtl_or(dest,&t0,&t3);
+      *dest = ((t0 == 1) || (t1 != t2));
       break;
     default: panic("should not reach here");
     case CC_P: panic("n86 does not have PF");
