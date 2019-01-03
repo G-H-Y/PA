@@ -28,6 +28,12 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
     case CC_BE:
     case CC_S:
     case CC_L:
+    TODO();
+    case CC_NL:
+      rtl_get_SF(&t0);
+      rtl_get_OF(&t1);
+      *dest = (t0 == t1);
+      break;
     case CC_LE:
       TODO();
     default: panic("should not reach here");
