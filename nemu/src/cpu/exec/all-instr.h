@@ -22,5 +22,6 @@ make_EHelper(or);
 make_EHelper(setcc);
 //data-move
 make_EHelper(lea);
+make_EHelper(movzx);
 //special
 make_EHelper(nop);
