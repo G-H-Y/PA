@@ -98,6 +98,7 @@ void difftest_step(uint32_t eip) {
   }
   else if(ref_r.eip != cpu.eip){
     printf("ref_r.eip = %x != cpu.eip = %x\n",ref_r.eip,cpu.eip);
+    printf("cpu.ZF = %d\n",cpu.eflags.ZF);
     nemu_state = NEMU_ABORT;
   }
   else if(ref_r.esi != cpu.esi){
