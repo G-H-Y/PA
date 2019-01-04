@@ -79,7 +79,7 @@ int sprintf(char *out, const char *fmt, ...) {
         index++;
       }
     }
-    *out = 0;
+    *out = 0; //一定要加！！
     va_end(arg_ptr);
     return cnt;
 }
