@@ -16,9 +16,12 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
   printf("subcode=%x\n",subcode);
   switch (subcode & 0xe) {
     case CC_O:
-    case CC_B:
-      printf("CC_0 CC_B\n");
+      printf("CC_0\n");
       TODO();
+    case CC_B:
+      rtl_get_CF(&t0);
+      *dest = (t0 == 1);
+      break;
     case CC_E:
       rtl_get_ZF(&t1);
       *dest = (t1 == 1);
