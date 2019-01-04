@@ -61,7 +61,7 @@ make_EHelper(sar) {
     rtl_li(&t2,0xffffffff);
     rtl_shli(&t2,&t2,(id_dest->width << 3)-id_src->val);
     printf("in sar:t2 = 0x%x\n",t2);
-    rtl_or(&t0,&t0,&t1);
+    rtl_or(&t0,&t0,&t2);
   }
   operand_write(id_dest,&t0);
   rtl_update_ZFSF(&t0,id_dest->width);
