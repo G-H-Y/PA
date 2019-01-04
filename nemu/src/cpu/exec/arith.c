@@ -201,10 +201,10 @@ make_EHelper(imul1) {
 
 // imul with two operands
 make_EHelper(imul2) {
-  printf("in imul2: src = %x,dest = %x\n",id_src->val,id_dest->val);
+  //printf("in imul2: src = %x,dest = %x\n",id_src->val,id_dest->val);
   rtl_sext(&t0, &id_src->val, id_src->width);
   rtl_sext(&t1, &id_dest->val, id_dest->width);
-  printf("in imul2:t0/src_ext = %x,t1/dest_ext = %x\n",t0,t1);
+  //printf("in imul2:t0/src_ext = %x,t1/dest_ext = %x\n",t0,t1);
 
   rtl_imul_lo(&t2, &t1, &t0);
   operand_write(id_dest, &t2);
