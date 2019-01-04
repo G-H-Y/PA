@@ -28,8 +28,12 @@ void rtl_setcc(rtlreg_t* dest, uint8_t subcode) {
       *dest = (t1 == 0);
       break;
     case CC_BE:
+      rtl_get_CF(&t0);
+      rtl_get_ZF(&t1);
+      *dest = ((t0 == 1)||(t1 == 0));
+      break;
     case CC_S:
-    printf("CC_BE,CC_S\n");
+    printf("CC_S\n");
     TODO();
     case CC_L:
       rtl_get_SF(&t1);
