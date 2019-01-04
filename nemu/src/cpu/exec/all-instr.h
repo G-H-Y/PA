@@ -24,7 +24,7 @@ make_EHelper(inc);
 make_EHelper(imul2);
 make_EHelper(idiv);
 make_EHelper(neg);
-make_EHelper(mul);
+make_EHelper(imul1);
 //logic
 make_EHelper(xor);
 make_EHelper(and);
