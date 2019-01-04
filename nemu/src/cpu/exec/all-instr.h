@@ -13,6 +13,7 @@ make_EHelper(push);
 make_EHelper(pop);
 make_EHelper(jcc);
 make_EHelper(jmp);
+make_EHelper(call_rm);
 //arith
 make_EHelper(sub);
 make_EHelper(add);
