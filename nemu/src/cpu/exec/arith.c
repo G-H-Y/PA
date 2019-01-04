@@ -2,12 +2,14 @@
 
 make_EHelper(add) {
   rtl_add(&t0,&id_dest->val,&id_src->val);
+  printf("in add: t0 = %d,dest = %d,src = %d\n",t0,id_dest->val,id_src->val);
+  printf("before: eax = %d\n",cpu.eax);
   operand_write(id_dest,&t0);
-
+  printf("after: eax = %d\n",cpu.eax);
   rtl_update_ZFSF(&t0,id_dest->width);
 
   rtl_setrelop(RELOP_LTU,&t1,&t0,&id_dest->val);
-  printf("in add: t0 = %d,dest = %d,src = %d\n",t0,id_dest->val,id_src->val);
+ 
   rtl_set_CF(&t1);
   printf("in add: CF = %d\n",t1);
 
