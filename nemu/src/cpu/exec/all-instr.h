@@ -37,5 +37,6 @@ make_EHelper(lea);
 make_EHelper(movzx);
 make_EHelper(leave);
 make_EHelper(cltd);
+make_EHelper(movsx);
 //special
 make_EHelper(nop);
