@@ -7,6 +7,7 @@ make_EHelper(add) {
   rtl_update_ZFSF(&t0,id_dest->width);
 
   rtl_setrelop(RELOP_LTU,&t1,&t0,&id_dest->val);
+  printf("in add: t0 = %d,dest = %d\n",t0,id_dest->val);
   rtl_set_CF(&t1);
   printf("in add: CF = %d\n",t1);
 
