@@ -42,7 +42,7 @@ int snprintf(char *out,size_t n, const char *fmt, ...) {
 }
 
 int sprintf(char *out, const char *fmt, ...) {
-  va_list arg_ptr;
+    va_list arg_ptr;
     //uint32_t out_length = strlen(out);
     uint32_t fmt_length = strlen(fmt);
     uint32_t index = 0;
