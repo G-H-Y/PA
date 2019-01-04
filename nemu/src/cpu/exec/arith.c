@@ -8,6 +8,7 @@ make_EHelper(add) {
 
   rtl_setrelop(RELOP_LTU,&t1,&t0,&id_dest->val);
   rtl_set_CF(&t1);
+  printf("in add: CF = %d\n",t1);
 
   rtl_xor(&t2,&id_dest->val,&id_src->val);
   rtl_not(&t2,&t2);
