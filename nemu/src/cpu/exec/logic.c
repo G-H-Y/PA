@@ -52,15 +52,15 @@ make_EHelper(or) {
 make_EHelper(sar) {
   //TODO();
   // unnecessary to update CF and OF in NEMU
-  printf("in sar: dest = %x,src = %x\n",id_dest->val,id_src->val);
+  //printf("in sar: dest = %x,src = %x\n",id_dest->val,id_src->val);
   rtl_shr(&t0,&id_dest->val,&id_src->val);//logic
-  printf("in sar: res = %x\n",t0);
+  //printf("in sar: res = %x\n",t0);
   rtl_msb(&t1,&id_dest->val,id_dest->width);
   if(t1){
-    printf("in sar: sign\n");
+   // printf("in sar: sign\n");
     rtl_li(&t2,0xffffffff);
     rtl_shli(&t2,&t2,(id_dest->width << 3)-id_src->val);
-    printf("in sar:t2 = 0x%x\n",t2);
+   // printf("in sar:t2 = 0x%x\n",t2);
     rtl_or(&t0,&t0,&t2);
   }
   operand_write(id_dest,&t0);
