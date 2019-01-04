@@ -57,8 +57,10 @@ make_EHelper(sar) {
   printf("in sar: res = %x\n",t0);
   rtl_msb(&t1,&id_dest->val,id_dest->width);
   if(t1){
+    printf("in sar: sign\n");
     rtl_li(&t2,0xffffffff);
     rtl_shli(&t2,&t2,(id_dest->width << 3)-id_src->val);
+    printf("in sar:t2 = 0x%x\n",t2);
     rtl_or(&t0,&t0,&t1);
   }
   operand_write(id_dest,&t0);
