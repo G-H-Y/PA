@@ -198,7 +198,7 @@ make_DHelper(r) {
 
 make_DHelper(E) {
   decode_op_rm(eip, id_dest, true, NULL, false);
-  printf("in decode_E: dest = %x\n",id_dest->val);
+  //printf("in decode_E: dest = %x\n",id_dest->val);
 }
 
 make_DHelper(setcc_E) {
