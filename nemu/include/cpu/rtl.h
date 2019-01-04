@@ -163,8 +163,8 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   //printf("eip = %x\n",cpu.eip);
   //TODO();
   uint32_t sign = (*src1) >> ((width << 3)-1);
-  if(sign) *dest = (*src1) | 0xffffffff;
-  else *dest = (*src1) & 0x0;
+  if(sign) *dest = (*src1) | (0xffffffff << (width << 3));
+  else *dest = (*src1) & ~(0xffffffff << (width << 3));
 }
 
 static inline void rtl_push(const rtlreg_t* src1) {
