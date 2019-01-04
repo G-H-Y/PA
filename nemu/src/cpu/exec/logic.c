@@ -3,7 +3,7 @@
 
 make_EHelper(test) {
   rtl_and(&t0,&id_dest->val,&id_src->val);
-
+  printf("in test:t0 = %d,dest = %d,src = %d\n",t0,id_dest->val,id_src->val);
   rtl_xor(&t1,&t0,&t0);
   rtl_set_CF(&t1);
   rtl_set_OF(&t1);
