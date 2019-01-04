@@ -54,6 +54,7 @@ make_EHelper(sar) {
   // unnecessary to update CF and OF in NEMU
   printf("in sar: dest = %x,src = %x\n",id_dest->val,id_src->val);
   rtl_shr(&t0,&id_dest->val,&id_src->val);//logic
+  printf("in sar: res = %x\n",t0);
   rtl_msb(&t1,&id_dest->val,id_dest->width);
   if(t1){
     rtl_li(&t2,0xffffffff);
