@@ -76,9 +76,9 @@ make_EHelper(cwtl) {
 
 make_EHelper(movsx) {
   id_dest->width = decoding.is_operand_size_16 ? 2 : 4;
-  printf("in movsx: src = %x,src_addr = %x\n",id_src->val,id_src->addr);
+  //printf("in movsx: src = %x,src_addr = %x\n",id_src->val,id_src->addr);
   rtl_sext(&t0, &id_src->val, id_src->width);
-  printf("in movsx: res/t0 = %x\n",t0);
+  //printf("in movsx: res/t0 = %x\n",t0);
   operand_write(id_dest, &t0);
   print_asm_template2(movsx);
 }
