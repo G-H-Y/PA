@@ -3,6 +3,9 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+uint32_t write_int(char* buffer,int value);
+int sprintf(char *out, const char *fmt, ...);
+
 uint32_t write_int(char* buffer,int value)
 {
     unsigned char stack[100];
@@ -79,7 +82,7 @@ int sprintf(char *out, const char *fmt, ...) {
         index++;
       }
     }
-    *out = 0; //一定要加！！
+    *out = '\0'; //一定要加！！
     va_end(arg_ptr);
     return cnt;
 }
