@@ -165,7 +165,8 @@ make_EHelper(mul) {
       break;
     case 4:
       rtl_mul_hi(&t2, &id_dest->val, &t0);
-      printf("in mul:mul_hi = %x\n",t2);
+      printf("eax = %x, esi = %x\n",cpu.eax,cpu.esi);
+      printf("in mul:mul_hi = %x,mul_lo = %x\n",t2,t1);
       rtl_sr(R_EDX, &t2, 4);
       rtl_sr(R_EAX, &t1, 4);
       break;
