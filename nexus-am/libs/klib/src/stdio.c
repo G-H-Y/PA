@@ -79,6 +79,7 @@ int sprintf(char *out, const char *fmt, ...) {
         index++;
       }
     }
+    *out = 0;
     va_end(arg_ptr);
     return cnt;
 }
