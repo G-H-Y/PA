@@ -63,6 +63,13 @@ void print_r(){
     printf("esp\t0x%04X\n", cpu.esp);
 }
 
+void print_flag(){
+   printf("cpu.ZF = %d\n",cpu.eflags.ZF);
+    printf("cpu.SF = %d\n",cpu.eflags.SF);
+    printf("cpu.OF = %d\n",cpu.eflags.OF);
+    printf("cpu.CF = %d\n",cpu.eflags.CF);
+}
+
 void difftest_step(uint32_t eip) {
   CPU_state ref_r;
 
@@ -107,13 +114,13 @@ void difftest_step(uint32_t eip) {
   }
   if(ref_r.edx != cpu.edx){
     printf("ref_r.edx = %x != cpu.edx = %x\n",ref_r.edx,cpu.edx);
+    print_flag();
+    print_r();
     nemu_state = NEMU_ABORT;
   }
   if(ref_r.eip != cpu.eip){
     printf("ref_r.eip = %x != cpu.eip = %x\n",ref_r.eip,cpu.eip);
-    printf("cpu.ZF = %d\n",cpu.eflags.ZF);
-    printf("cpu.SF = %d\n",cpu.eflags.SF);
-    printf("cpu.OF = %d\n",cpu.eflags.OF);
+    print_flag();
     print_r();
     nemu_state = NEMU_ABORT;
   }
