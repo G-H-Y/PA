@@ -162,10 +162,16 @@ static inline void rtl_sext(rtlreg_t* dest, const rtlreg_t* src1, int width) {
   // dest <- signext(src1[(width * 8 - 1) .. 0])
   //printf("eip = %x\n",cpu.eip);
   //TODO();
-  uint32_t sign = (*src1) >> ((width << 3)-1);
-  if(sign) *dest = (*src1) | (0xffffffff << (width << 3));
-  else *dest = (*src1) & (~(0xffffffff << (width << 3)));
-  printf("in sext:(~(0xffffffff << (width << 3))) = %x\n",((0xffffffff << (width << 3))));
+  if(width == 4){
+    *dest = *src1;
+  }
+  else{
+    uint32_t sign = (*src1) >> ((width << 3)-1);
+    if(sign) *dest = (*src1) | (0xffffffff << (width << 3));
+    else *dest = (*src1) & (~(0xffffffff << (width << 3)));
+  }
+  
+  //printf("in sext:(~(0xffffffff << (width << 3))) = %x\n",((0xffffffff << (width << 3))));
 }
 
 static inline void rtl_push(const rtlreg_t* src1) {
