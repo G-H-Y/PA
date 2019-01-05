@@ -8,7 +8,7 @@ int sprintf(char *out, const char *fmt, ...);
 
 int printf(const char *fmt, ...)
 {
-  char buf[30];
+  char buf[200];
   memset(buf, '\0', 30);
   char *out = buf;
   va_list arg_ptr;
