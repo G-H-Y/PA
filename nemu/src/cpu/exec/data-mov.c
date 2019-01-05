@@ -1,7 +1,7 @@
 #include "cpu/exec.h"
 
 make_EHelper(mov) {
-  printf("in mov: id_src = %d\n",id_src->val);
+  //printf("in mov: id_src = %d\n",id_src->val);
   operand_write(id_dest, &id_src->val);
   print_asm_template2(mov);
 }
