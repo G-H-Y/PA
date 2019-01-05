@@ -48,8 +48,8 @@ int printf(const char *fmt, ...) {
     }
     *out = '\0'; //一定要加！！
     va_end(arg_ptr);
-  while(out[i]!='\0'){
-    _putc(out[i++]);
+  while(buf[i]!='\0'){
+    _putc(buf[i++]);
   }
   return cnt;
 }
