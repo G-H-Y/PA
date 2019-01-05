@@ -13,7 +13,7 @@ size_t video_read(uintptr_t reg, void *buf, size_t size)
   {
     _VideoInfoReg *info = (_VideoInfoReg *)buf;
     info->width = (inl(0x100) >> 16);
-    info->height = (inl(0x100) & 0xff);
+    info->height = (inl(0x100) & 0xffff);
     return sizeof(_VideoInfoReg);
   }
   }
