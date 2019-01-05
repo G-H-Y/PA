@@ -9,12 +9,14 @@ int sprintf(char *out, const char *fmt, ...);
 
 int printf(const char *fmt, ...) {
   char buf[100];
+  memset(buf,'\0',100);
   char* out = buf;
    va_list arg_ptr;
     uint32_t fmt_length = strlen(fmt);
     uint32_t index = 0;
     uint32_t cnt = 0;
     uint32_t i = 0;
+    uint32_t tmp = 0;
      
     int a_int;
     char a_char;
@@ -34,6 +36,19 @@ int printf(const char *fmt, ...) {
             a_int = va_arg(arg_ptr,int);
             out += write_int(out,a_int);
             break;
+          case '0': //02d
+            index++;
+            a_int = va_arg(arg_ptr,int);
+            i = fmt[++index] - '0';
+            tmp = write_int(out,a_int);
+            if(tmp < i){
+              memset(out,'0',i-tmp);
+              out += (i-tmp);
+              out += write_int(out,a_int);
+            }
+            else
+              out += write_int(out,a_int);
+            break;
           case 's':
             a_str =(char*)va_arg(arg_ptr,char*);
             strcpy(out,a_str);
@@ -49,9 +64,9 @@ int printf(const char *fmt, ...) {
     }
     *out = '\0'; //一定要加！！
     va_end(arg_ptr);
-  while(buf[i]!='\0'){
-    _putc(buf[i++]);
-  }
+
+    for(i = 0; buf[i]!='\0';i++)
+       _putc(buf[i]);
   return cnt;
 }
 
