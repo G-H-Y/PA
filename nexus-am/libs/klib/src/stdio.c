@@ -125,7 +125,7 @@ int sprintf(char *out, const char *fmt, ...) {
 
 uint32_t write_int(char* buffer,int value)
 {
-    unsigned char stack[10];
+    unsigned char stack[5];
     uint32_t length = 0;
     uint32_t tmp = 0;
     if(value<0){
