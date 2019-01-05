@@ -8,8 +8,8 @@ uint32_t write_int(char* buffer,int value);
 int sprintf(char *out, const char *fmt, ...);
 
 int printf(const char *fmt, ...) {
-  char buf[100];
-  memset(buf,'\0',100);
+  char buf[30];
+  memset(buf,'\0',30);
   char* out = buf;
    va_list arg_ptr;
     uint32_t fmt_length = strlen(fmt);
