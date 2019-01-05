@@ -179,6 +179,7 @@ static inline void rtl_push(const rtlreg_t* src1) {
   // M[esp] <- src1
   //TODO();
   cpu.esp -= 4;
+  //operand_write()
   vaddr_write(cpu.esp, *src1, 4);
 }
 
