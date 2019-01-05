@@ -1,7 +1,7 @@
 #include "cpu/exec.h"
 
 make_EHelper(mov) {
-  printf("in mov: id_src = %d",id_src->val);
+  printf("in mov: id_src = %d\n",id_src->val);
   operand_write(id_dest, &id_src->val);
   print_asm_template2(mov);
 }
@@ -58,7 +58,7 @@ make_EHelper(cltd) {
       rtl_li(&t2,0xffffffff);
     else 
       rtl_li(&t2,0x0);
-    rtl_sr(R_DX,&t2,4);
+    rtl_sr(R_EDX,&t2,4);
   }
 
   print_asm(decoding.is_operand_size_16 ? "cwtl" : "cltd");
