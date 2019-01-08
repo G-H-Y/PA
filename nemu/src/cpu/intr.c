@@ -5,7 +5,10 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * That is, use ``NO'' to index the IDT.
    */
-  rtl_push(&ret_addr);
+  rtl_push(&cpu.eflags.val);
+  rtl_push(&cpu.cs);
+  rtl_li(&t0,ret_addr);
+  rtl_push(&t0);
   rtl_li(&t0,vaddr_read(cpu.ldtr.base + (NO << 3),4) & 0x0000ffff);
   rtl_li(&t1,vaddr_read(cpu.ldtr.base + (NO << 3) + 4,4) & 0xffff0000);
   rtl_or(&t2,&t0,&t1);
