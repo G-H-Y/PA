@@ -11,8 +11,11 @@ void pio_write_w(ioaddr_t addr, uint32_t data);
 void pio_write_l(ioaddr_t addr, uint32_t data);
 
 make_EHelper(lidt) {
-  TODO();
-
+  //TODO();
+  rtl_li(&cpu.ldtr.limit,(id_dest->val & 0xff));
+  rtl_li(&t0,vaddr_read(id_dest->addr+4,2));
+  rtl_shli(&t0,&t0,16);
+  rtl_ori(&cpu.ldtr.base,&t0,id_dest->val >> 16);
   print_asm_template1(lidt);
 }
 

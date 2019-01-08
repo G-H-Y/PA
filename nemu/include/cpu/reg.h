@@ -44,6 +44,11 @@ typedef struct {
     rtlreg_t val;
   }eflags;
   rtlreg_t cs;
+
+  struct{
+    rtlreg_t limit;
+    rtlreg_t base;
+  }ldtr;
   
 } CPU_state;
 
