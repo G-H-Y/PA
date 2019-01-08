@@ -7,6 +7,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
    */
   rtl_push(&ret_addr);
   rtl_li(&decoding.seq_eip,vaddr_read(cpu.ldtr.base + NO,4));
+  printf("in raise_intr: seq_eip = 0x%x\n",decoding.seq_eip);
   //TODO();
 }
 
