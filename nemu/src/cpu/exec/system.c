@@ -13,11 +13,17 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr);
 
 make_EHelper(lidt) {
   //TODO();
-  rtl_li(&cpu.ldtr.limit,(id_dest->val & 0xff));
+  /*rtl_li(&cpu.ldtr.limit,(id_dest->val & 0xff));
   rtl_li(&t0,vaddr_read(id_dest->addr+4,2));
   rtl_shli(&t0,&t0,16);
-  rtl_ori(&cpu.ldtr.base,&t0,id_dest->val >> 16);
-  printf("in lidt:id_dest = 0x%x, low_addr = 0x%x, high_addr = 0x%x\n",id_dest->val,id_dest->val >> 16,t0);
+  rtl_ori(&cpu.ldtr.base,&t0,id_dest->val >> 16);*/
+  rtl_li(&cpu.ldtr.limit,vaddr_read(id_dest->addr,2));
+  if(decoding.is_operand_size_16){
+    rtl_li(&cpu.ldtr.base, vaddr_read(id_dest->addr + 2, 4) & 0x00ffffff);
+  }
+  else{
+    rtl_li(&cpu.ldtr.base, vaddr_read(id_dest->addr + 2, 4));
+  }
   print_asm_template1(lidt);
 }
 
