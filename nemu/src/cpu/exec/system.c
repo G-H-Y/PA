@@ -45,7 +45,7 @@ make_EHelper(mov_cr2r) {
 
 make_EHelper(int) {
   //TODO();
-  raise_intr(id_dest->val,decoding.seq_eip);
+  raise_intr(id_dest->val,*eip);
   print_asm("int %s", id_dest->str);
 
 #if defined(DIFF_TEST) && defined(DIFF_TEST_QEMU)
@@ -54,8 +54,10 @@ make_EHelper(int) {
 }
 
 make_EHelper(iret) {
-  TODO();
-
+  //TODO();
+  rtl_pop(eip);
+  rtl_pop(&cpu.cs);
+  rtl_pop(&cpu.eflags.val);
   print_asm("iret");
 }
 
