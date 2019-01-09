@@ -103,9 +103,9 @@ void* memcpy(void* out, const void* in, size_t n) {
   printf("char* tmpout = (char*)out\n");
   char* tmpin = (char*)in;
   printf("char* tmpin = (char*)in\n");
-  while(n--){
-    //printf("while n = %d\n",n);
-    *(tmpout++)= *(tmpin++);
+  size_t i = 0;
+  for(;(i < n) && (tmpin[i] != '\0'); i++){
+    tmpout[i] = tmpin[i];
   }
   return out;
 }
