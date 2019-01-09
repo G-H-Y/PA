@@ -100,9 +100,12 @@ void* memcpy(void* out, const void* in, size_t n) {
     return NULL;
   printf("in memcpy\n");
   char* tmpout = (char*)out; 
+  printf("char* tmpout = (char*)out\n");
   char* tmpin = (char*)in;
+  printf("char* tmpin = (char*)in\n");
   while(n--){
-    *(tmpout++ )= *(tmpin++);
+    printf("while n = %d\n",n);
+    *(tmpout++)= *(tmpin++);
   }
   return out;
 }
