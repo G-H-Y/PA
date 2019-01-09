@@ -102,7 +102,7 @@ void* memcpy(void* out, const void* in, size_t n) {
   char* tmpout = (char*)out; 
   char* tmpin = (char*)in;
   while(n--){
-    *tmpout++ = *tmpin++;
+    *(tmpout++ )= *(tmpin++);
   }
   return out;
 }
