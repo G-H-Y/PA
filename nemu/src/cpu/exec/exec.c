@@ -236,7 +236,7 @@ void exec_wrapper(bool print_flag) {
 
   decoding.seq_eip = ori_eip;
   exec_real(&decoding.seq_eip);
-  printf("in exec: leave exec_real\n");
+  //printf("in exec: leave exec_real\n");
 
 #ifdef DEBUG
   int instr_len = decoding.seq_eip - ori_eip;
@@ -249,7 +249,7 @@ void exec_wrapper(bool print_flag) {
   }
   
 #endif
- printf("leave debug\n");
+
   update_eip();
 
 #if defined(DIFF_TEST)
