@@ -223,7 +223,7 @@ static inline void update_eip(void) {
   //
   if (decoding.is_jmp) { decoding.is_jmp = 0; }
   else { cpu.eip = decoding.seq_eip; }
-    printf("in update_eip: eip = %x\n",cpu.eip);
+    //printf("in update_eip: eip = %x\n",cpu.eip);
 }
 
 void exec_wrapper(bool print_flag) {
@@ -246,7 +246,7 @@ void exec_wrapper(bool print_flag) {
     puts(decoding.asm_buf);
   }
 #endif
-
+   printf("in exec: now update eip\n");
   update_eip();
 
 #if defined(DIFF_TEST)
