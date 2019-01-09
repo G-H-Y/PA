@@ -240,8 +240,7 @@ void exec_wrapper(bool print_flag) {
     printf("in exec: leave exec_real\n");
 
 #ifdef DEBUG
- if(decoding.seq_eip == 0x100a47)
-    printf("in exec: DEBUG\n");
+
   int instr_len = decoding.seq_eip - ori_eip;
   sprintf(decoding.p, "%*.s", 50 - (12 + 3 * instr_len), "");
   strcat(decoding.asm_buf, decoding.assembly);
@@ -249,6 +248,8 @@ void exec_wrapper(bool print_flag) {
   if (print_flag) {
     puts(decoding.asm_buf);
   }
+   if(decoding.seq_eip == 0x100a47)
+    printf("in exec: DEBUG\n");
 #endif
  
   update_eip();
