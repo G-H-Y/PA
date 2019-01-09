@@ -17,7 +17,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtl_or(&t2,&t0,&t1);
   rtl_li(&cpu.eip,t2);
   decoding.is_jmp = 1;
-  //printf("now leave int,seq_eip = 0x%x\n",decoding.seq_eip);
+  //printf("now leave int,eip = 0x%x\n",cpu.eip);
   //printf("in raise_intr: seq_eip = 0x%x, +NO = %d\n",decoding.seq_eip,cpu.ldtr.base + NO);
   //TODO();
 }
