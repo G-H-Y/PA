@@ -1,9 +1,17 @@
 #include "proc.h"
 
+size_t get_ramdisk_size();
+size_t ramdisk_read(void *buf, size_t offset, size_t len);
 #define DEFAULT_ENTRY 0x4000000
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
+  //TODO();
+  size_t len = get_ramdisk_size();
+  uintptr_t entry = DEFAULT_ENTRY;
+  printf("in loader: ramdisk_size = %x",len);
+  char buf[4000000];
+  ramdisk_read(buf,0,len);
+  memcpy(&entry,buf,len);
   return DEFAULT_ENTRY;
 }
 
