@@ -21,7 +21,7 @@ void hello_fun(void *arg) {
 }
 
 void init_proc() {
-  printf("in init_proc\n");
+  //printf("in init_proc\n");
   naive_uload(NULL, NULL);
 }
 
