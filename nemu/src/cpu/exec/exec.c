@@ -26,6 +26,7 @@ static inline void idex(vaddr_t *eip, opcode_entry *e) {
   if (e->decode)
     e->decode(eip);
   e->execute(eip);
+  printf("in index\n");
 }
 
 static make_EHelper(2byte_esc);
@@ -217,6 +218,7 @@ make_EHelper(real) {
   decoding.opcode = opcode;
   set_width(opcode_table[opcode].width);
   idex(eip, &opcode_table[opcode]);
+  printf("in exec real\n");
 }
 
 static inline void update_eip(void) {
