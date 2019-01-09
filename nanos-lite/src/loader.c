@@ -7,11 +7,8 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   //TODO();
   size_t len = get_ramdisk_size();
-  uintptr_t* entry = (void *)DEFAULT_ENTRY;
   printf("in loader: ramdisk_size = %x",len);
-  char buf[4000000];
-  ramdisk_read(buf,0,len);
-  memcpy(entry,buf,len);
+  ramdisk_read((void*)DEFAULT_ENTRY,0,len);
   return DEFAULT_ENTRY;
 }
 
