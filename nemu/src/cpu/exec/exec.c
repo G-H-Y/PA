@@ -236,7 +236,8 @@ void exec_wrapper(bool print_flag) {
 
   decoding.seq_eip = ori_eip;
   exec_real(&decoding.seq_eip);
-  printf("in exec: leave exec_real\n");
+  if(decoding.seq_eip == 0x100a47)
+    printf("in exec: leave exec_real\n");
 
 #ifdef DEBUG
   int instr_len = decoding.seq_eip - ori_eip;
@@ -247,7 +248,8 @@ void exec_wrapper(bool print_flag) {
     puts(decoding.asm_buf);
   }
 #endif
-   printf("in exec: now update eip\n");
+  if(decoding.seq_eip == 0x100a47)
+    printf("in exec: now update eip\n");
   update_eip();
 
 #if defined(DIFF_TEST)
