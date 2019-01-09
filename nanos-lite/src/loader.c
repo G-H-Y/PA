@@ -15,7 +15,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 void naive_uload(PCB *pcb, const char *filename) {
   printf("in native_uload\n");
   uintptr_t entry = loader(pcb, filename);
-  printf("in native uload: entry = 0x%x\n",entry);
+  printf("in native uload: entry = %d\n",entry);
   ((void(*)())entry) ();
 }
 
