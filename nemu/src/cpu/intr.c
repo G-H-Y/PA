@@ -10,7 +10,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtl_push(&cpu.cs);
   rtl_li(&t0,ret_addr);
   rtl_push(&t0);
-  printf("NO = %d\n",NO);
+  printf("NO = 0x%x\n",NO);
   printf("base = 0x%x\n",cpu.ldtr.base);
   rtl_li(&t0,vaddr_read(cpu.ldtr.base + (NO << 3),4) & 0x0000ffff);
   rtl_li(&t1,vaddr_read(cpu.ldtr.base + (NO << 3) + 4,4) & 0xffff0000);
