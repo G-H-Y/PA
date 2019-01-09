@@ -22,7 +22,7 @@ void hello_fun(void *arg) {
 
 void init_proc() {
   printf("in init_proc\n");
- // naive_uload(NULL, NULL);
+  naive_uload(NULL, NULL);
 }
 
 _Context* schedule(_Context *prev) {
