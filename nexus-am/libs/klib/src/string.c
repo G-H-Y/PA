@@ -98,17 +98,12 @@ void* memset(void* v,int c,size_t n) {
 void* memcpy(void* out, const void* in, size_t n) {
   if((out == NULL) || (in == NULL)|| (n < 0))
     return NULL;
-  printf("in memcpy\n");
-  char* tmpout = (char*)out; 
-  printf("char* tmpout = (char*)out\n");
-  char* tmpin = (char*)in;
-  printf("char* tmpin = (char*)in\n");
-  size_t i = 0;
-  for(;i < n; i++){
-    tmpout[i] = tmpin[i];
-    printf("i = %d\n",i);
-  }
-  printf("now return!\n");
+  char *dp = out;
+  const char *sp = in;
+  while (n--){
+    *dp++ = *sp++;
+  } 
+  printf("n = %d\n",n);
   return out;
 }
 
