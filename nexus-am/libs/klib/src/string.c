@@ -108,6 +108,7 @@ void* memcpy(void* out, const void* in, size_t n) {
     tmpout[i] = tmpin[i];
     printf("i = %d\n",i);
   }
+  printf("now return!\n");
   return out;
 }
 
