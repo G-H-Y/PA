@@ -20,7 +20,7 @@ _Context *do_syscall(_Context *c)
   int flags = a[2];
   int mode = a[3];
 
-
+Log("sys = %d",a[0]);
   switch (a[0])
   {
   case SYS_yield:
@@ -31,7 +31,7 @@ _Context *do_syscall(_Context *c)
     _halt(a[1]);
     break;
   case SYS_write:
-
+    
     if ((fd == 1) || (fd == 2))
     {
       size_t i = 0;
