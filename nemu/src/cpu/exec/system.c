@@ -57,7 +57,7 @@ make_EHelper(int) {
 make_EHelper(iret) {
   //TODO();
   rtl_pop(&cpu.eip);
-  printf("in iret: cpu_eip = 0x%x\n",cpu.eip);
+  //printf("in iret: cpu_eip = 0x%x\n",cpu.eip);
   rtl_pop(&cpu.cs);
   rtl_pop(&cpu.eflags.val);
   decoding.is_jmp = 1;
