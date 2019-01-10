@@ -10,7 +10,7 @@ make_EHelper(push) {
   //TODO();
 
   rtl_push(&(id_dest->val));
- // Log("in push: id_dest->val = 0x%x\n",id_dest->val);
+  Log("in push: id_dest->val = 0x%x\n",id_dest->val);
   print_asm_template1(push);
 }
 
