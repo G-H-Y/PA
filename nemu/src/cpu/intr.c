@@ -9,7 +9,7 @@ void raise_intr(uint8_t NO, vaddr_t ret_addr) {
   rtl_push(&cpu.eflags.val);
   rtl_push(&cpu.cs);
   rtl_li(&t0,ret_addr);
-  printf("in int ret_Addr = 0x%x\n",ret_addr);
+  printf("///////////////in int: ret_addr = 0x%x////////////////\n",ret_addr);
   rtl_push(&t0);
   printf("NO = 0x%x\n",NO);
   printf("base = 0x%x\n",cpu.ldtr.base);

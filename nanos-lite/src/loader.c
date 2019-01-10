@@ -5,17 +5,17 @@ size_t ramdisk_read(void *buf, size_t offset, size_t len);
 #define DEFAULT_ENTRY 0x4000000
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  printf("in loader\n");
-  printf("ramdisk size = %d\n",get_ramdisk_size());
+  //printf("in loader\n");
+  //printf("ramdisk size = %d\n",get_ramdisk_size());
   ramdisk_read((void*)DEFAULT_ENTRY,0,get_ramdisk_size());
-  printf("in loader: return!\n");
+  //printf("in loader: return!\n");
   return DEFAULT_ENTRY;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
-  printf("in native_uload\n");
+  //printf("in native_uload\n");
   uintptr_t entry = loader(pcb, filename);
-  printf("in native uload: entry = %d\n",entry);
+  //printf("in native uload: entry = %d\n",entry);
   ((void(*)())entry) ();
 }
 
