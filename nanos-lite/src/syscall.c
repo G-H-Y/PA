@@ -8,9 +8,11 @@ _Context *do_syscall(_Context *c)
   a[1] = c->GPR2;
   a[2] = c->GPR3;
   a[3] = c->GPR4;
+
   int fd = a[1];
   char *buf = (char *)a[2];
   size_t count = a[3];
+
   switch (a[0])
   {
   case SYS_yield:
@@ -27,8 +29,11 @@ _Context *do_syscall(_Context *c)
       for (; i < count; i++)
         _putc(buf[i]);
     }
-    //Log("in sys_write\n");
+    Log("in sys_write");
     c->GPRx = count;
+    break;
+  case SYS_brk:
+    c->GPRx = 0;
     break;
   default:
     panic("Unhandled syscall ID = %d", a[0]);

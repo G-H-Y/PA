@@ -35,12 +35,13 @@ int _open(const char *path, int flags, mode_t mode) {
 
 int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
-  //printf("in _write: fd = %x,buf = %x, count = %x\n",fd,buf,count);
   int ret = _syscall_(SYS_write, (uintptr_t)fd, (uintptr_t)buf, (uintptr_t)count);
   return ret;
 }
 
 void *_sbrk(intptr_t increment){
+  int ret = _syscall_(SYS_brk,increment,0,0);
+  if(ret == 0) return (void*)increment;
   return (void *)-1;
 }
 
