@@ -9,18 +9,21 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //printf("in loader\n");
   //printf("ramdisk size = %d\n",get_ramdisk_size());
   //ramdisk_read((void*)DEFAULT_ENTRY,0,get_ramdisk_size());
-  //printf("in loader: return!\n");
+  Log("filename : %s",filename);
   int fd = fs_open(filename,0,0);
+  Log("open file");
   if(fd){
     fs_read(fd,(void*)DEFAULT_ENTRY,fs_filesz(fd));
+    Log("read file");
     fs_close(fd);
+    Log("close file");
   }
   
   return DEFAULT_ENTRY;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
-  //printf("in native_uload\n");
+  Log("filename : %s",filename);
   uintptr_t entry = loader(pcb, filename);
   //printf("in native uload: entry = %d\n",entry);
   ((void(*)())entry) ();

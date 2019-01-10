@@ -22,7 +22,7 @@ void hello_fun(void *arg) {
 }
 
 void init_proc() {
-  //printf("in init_proc\n");
+  Log("in init_proc");
   naive_uload(NULL, "/bin/text");
 }
 
