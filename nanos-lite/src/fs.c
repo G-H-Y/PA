@@ -67,14 +67,15 @@ size_t fs_read(int fd, void *buf, size_t len)
 {
   if (fd>= FD_FB)
   {
-    Log("fd > FD_FB");
+    //Log("fd > FD_FB");
     size_t disk_offset = file_table[fd].disk_offset;
     size_t open_offset = file_table[fd].open_offset;
     size_t fsize = file_table[fd].size;
-    size_t aval_size = fsize - (open_offset - disk_offset);
+    size_t aval_size = fsize - open_offset ;
     size_t read_len = (aval_size > len) ? len : aval_size;
-    ramdisk_read(buf, open_offset, read_len);
-    return ((open_offset + read_len) == disk_offset) ? 0 : read_len;
+    Log("offset = %d",disk_offset + open_offset);
+    ramdisk_read(buf, disk_offset + open_offset, read_len);
+    return ((open_offset + read_len) == fsize) ? 0 : read_len;
   }
   return -1;
 }
@@ -86,21 +87,21 @@ __off_t fs_lseek(int fd, __off_t offset, int whence)
     switch (whence)
     {
     case SEEK_SET:
-      if (offset <= (file_table[fd].disk_offset + file_table[fd].size))
+      if (offset <= file_table[fd].size)
       {
         file_table[fd].open_offset = offset;
         return file_table[fd].open_offset;
       }
     case SEEK_CUR:
-      if ((offset + file_table[fd].open_offset) <= (file_table[fd].disk_offset + file_table[fd].size))
+      if ((offset + file_table[fd].open_offset) <= file_table[fd].size)
       {
         file_table[fd].open_offset += offset;
         return file_table[fd].open_offset;
       }
     case SEEK_END:
-      if (offset <= file_table[fd].size)
+      if ((offset + file_table[fd].size) <= file_table[fd].size)
       {
-        file_table[fd].open_offset = file_table[fd].disk_offset + offset;
+        file_table[fd].open_offset = file_table[fd].size + offset;
         return file_table[fd].open_offset;
       }
     }
@@ -116,9 +117,9 @@ size_t fs_write(int fd, const void *buf, size_t len)
     size_t disk_offset = file_table[fd].disk_offset;
     size_t open_offset = file_table[fd].open_offset;
     size_t fsize = file_table[fd].size;
-    size_t aval_size = fsize - (open_offset - disk_offset);
+    size_t aval_size = fsize - open_offset;
     size_t write_len = (aval_size > len) ? len : aval_size;
-    ramdisk_write(buf, open_offset,write_len);
+    ramdisk_write(buf, disk_offset + open_offset,write_len);
     return write_len;
   }
   return -1;
