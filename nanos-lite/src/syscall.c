@@ -32,9 +32,9 @@ _Context *do_syscall(_Context *c)
     //Log("in sys_write");
     c->GPRx = count;
     break;
- // case SYS_brk:
- //   c->GPRx = 0;
- //   break;
+  case SYS_brk:
+    c->GPRx = 0;
+    break;
   default:
     panic("Unhandled syscall ID = %d", a[0]);
   }
