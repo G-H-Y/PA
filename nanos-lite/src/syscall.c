@@ -37,7 +37,7 @@ Log("sys = %d",a[0]);
       for (; i < count; i++)
         _putc(buf[i]);
     }
-    //Log("in sys_write");
+    Log("in sys_write");
     c->GPRx = count;
     break;
   case SYS_brk:
