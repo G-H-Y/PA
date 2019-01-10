@@ -15,6 +15,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   if(fd){
     int len = fs_read(fd,(void*)DEFAULT_ENTRY,fs_filesz(fd));
     Log("read file size %d",len);
+    fs_lseek(fd,0,SEEK_SET);
     fs_close(fd);
     Log("close file");
   }
