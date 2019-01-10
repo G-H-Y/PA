@@ -11,10 +11,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //ramdisk_read((void*)DEFAULT_ENTRY,0,get_ramdisk_size());
   Log("filename : %s",filename);
   int fd = fs_open(filename,0,0);
-  Log("open file");
+  Log("open file %d",fd);
   if(fd){
     fs_read(fd,(void*)DEFAULT_ENTRY,fs_filesz(fd));
-    Log("read file");
+    Log("read file size");
     fs_close(fd);
     Log("close file");
   }
