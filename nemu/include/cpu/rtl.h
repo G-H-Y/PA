@@ -180,7 +180,7 @@ static inline void rtl_push(const rtlreg_t* src1) {
   //TODO();
   cpu.esp -= 4;
   //operand_write()
-  printf("in rtl_push: cpu.esp = 0x%x\n",cpu.esp);
+ // printf("in rtl_push: cpu.esp = 0x%x\n",cpu.esp);
   vaddr_write(cpu.esp, *src1, 4);
 }
 
