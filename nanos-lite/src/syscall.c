@@ -30,15 +30,14 @@ Log("sys = %d",a[0]);
   case SYS_exit:
     _halt(a[1]);
     break;
-  case SYS_write:
-    
+  case SYS_write:    
     if ((fd == 1) || (fd == 2))
     {
       size_t i = 0;
       for (; i < count; i++)
         _putc(buf[i]);
     }
-    //Log("in sys_write");
+    Log("in sys_write");
     c->GPRx = count;
     break;
   case SYS_brk:
