@@ -27,6 +27,7 @@ _Context *do_syscall(_Context *c)
       for (; i < count; i++)
         _putc(buf[i]);
     }
+    printf("in sys_write\n");
     c->GPRx = 0;
     break;
   default:
