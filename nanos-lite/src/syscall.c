@@ -28,7 +28,7 @@ _Context *do_syscall(_Context *c)
         _putc(buf[i]);
     }
     printf("in sys_write\n");
-    c->GPRx = 0;
+    c->GPRx = count;
     break;
   default:
     panic("Unhandled syscall ID = %d", a[0]);
