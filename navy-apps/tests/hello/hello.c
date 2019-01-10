@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main() {
-  write(1, "z", 1);
+  write(1, "zm", 2);
   // write(1, "Hello World!\n", 13);
   // int i = 2;
   // volatile int j = 0;
