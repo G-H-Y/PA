@@ -29,7 +29,7 @@ _Context *do_syscall(_Context *c)
       for (; i < count; i++)
         _putc(buf[i]);
     }
-    Log("in sys_write");
+    //Log("in sys_write");
     c->GPRx = count;
     break;
  // case SYS_brk:
