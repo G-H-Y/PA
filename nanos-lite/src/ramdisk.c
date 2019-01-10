@@ -30,5 +30,6 @@ void init_ramdisk() {
 }
 
 size_t get_ramdisk_size() {
+  printf("in get ramdisk_size: RAMDISKSIZE = %d\n",RAMDISK_SIZE);
   return RAMDISK_SIZE;
 }
