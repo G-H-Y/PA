@@ -105,6 +105,7 @@ void difftest_step(uint32_t eip) {
     nemu_state = NEMU_ABORT;
   }
   if(ref_r.ecx !=cpu.ecx){
+    print_r();
     printf("ref_r.ecx = %x != cpu.ecx = %x\n",ref_r.ecx,cpu.ecx);
     nemu_state = NEMU_ABORT;
   }
