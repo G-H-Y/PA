@@ -5,6 +5,7 @@
 #include <assert.h>
 #include <time.h>
 #include "syscall.h"
+#include <stdio.h>
 
 #if defined(__ISA_X86__)
 intptr_t _syscall_(int type, intptr_t a0, intptr_t a1, intptr_t a2){
@@ -34,7 +35,7 @@ int _open(const char *path, int flags, mode_t mode) {
 
 int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
-  //Log("in _write: begin to syscall,buf = 0x%x\n",buf);
+  printf("in _write: begin to syscall,buf = 0x%x\n",buf);
   int ret = _syscall_(SYS_write, (uintptr_t)fd, (uintptr_t)buf, (uintptr_t)count);
   return ret;
 }
