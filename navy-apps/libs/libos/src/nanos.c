@@ -34,7 +34,7 @@ int _open(const char *path, int flags, mode_t mode) {
 
 int _write(int fd, void *buf, size_t count){
   //_exit(SYS_write);
-  printf("in _write: begin to syscall\n");
+  Log("in _write: begin to syscall,buf = 0x%x\n",buf);
   int ret = _syscall_(SYS_write, (uintptr_t)fd, (uintptr_t)buf, (uintptr_t)count);
   return ret;
 }
