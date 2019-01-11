@@ -20,7 +20,7 @@ _Context *do_syscall(_Context *c)
   int flags = a[2];
   int mode = a[3];
 
-//Log("sys = %d",a[0]);
+  Log("sys = %d", a[0]);
   switch (a[0])
   {
   case SYS_yield:
@@ -30,13 +30,13 @@ _Context *do_syscall(_Context *c)
   case SYS_exit:
     _halt(a[1]);
     break;
-  case SYS_write:    
+  case SYS_write:
     if (fd)
     {
       size_t i = 0;
       for (; i < count; i++)
         _putc(buf[i]);
-        //Log("in syswrite if");
+      //Log("in syswrite if");
     }
     //Log("in sys_write");
     c->GPRx = count;
@@ -51,10 +51,10 @@ _Context *do_syscall(_Context *c)
     c->GPRx = fs_open(filename, flags, mode);
     break;
   case SYS_read:
-    c->GPRx = fs_read(fd,buf,count);
+    c->GPRx = fs_read(fd, buf, count);
     break;
   case SYS_lseek:
-    c->GPRx = fs_lseek(fd,offset,whence);
+    c->GPRx = fs_lseek(fd, offset, whence);
     break;
   case SYS_close:
     c->GPRx = fs_close(fd);
