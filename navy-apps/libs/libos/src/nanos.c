@@ -40,9 +40,15 @@ int _write(int fd, void *buf, size_t count){
   return ret;
 }
 
+extern char _end;
+intptr_t p_break = (intptr_t)&_end;
 void *_sbrk(intptr_t increment){
-  int ret = _syscall_(SYS_brk,(uintptr_t)increment,0,0);
-  if(ret == 0) return (void*)0;
+  intptr_t old_pbreak = p_break;
+  int ret = _syscall_(SYS_brk,old_pbreak + increment,0,0);
+  if(ret == 0) {
+    p_break += increment;
+    return (void*)old_pbreak;
+  }
   return (void *)-1;
 }
 
