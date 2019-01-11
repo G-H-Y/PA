@@ -2,21 +2,22 @@
 #include <assert.h>
 
 int main() {
-  printf("in text main\n");
+ // printf("in text main\n");
   FILE *fp = fopen("/share/texts/num", "r+");
   
   assert(fp);
-  printf("assert(fp)\n");
+ // printf("assert(fp)\n");
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);
   assert(size == 5000);
-  printf("assert(size == 5000)\n");
+ /// printf("assert(size == 5000)\n");
 
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
-  printf("begin first for\n");
+ // printf("begin first for\n");
   for (i = 500; i < 1000; i ++) {
+    printf("begin scanf\n");
     fscanf(fp, "%d", &n);
     printf("i = %d,n = %d\n",i,n);
     assert(n == i + 1);
