@@ -20,7 +20,7 @@ _Context *do_syscall(_Context *c)
   int flags = a[2];
   int mode = a[3];
 
-  Log("sys = %d", a[0]);
+  //Log("sys = %d", a[0]);
   switch (a[0])
   {
   case SYS_yield:
