@@ -34,12 +34,12 @@ int NDL_LoadBitmap(NDL_Bitmap *bmp, const char *filename) {
   if (hdr.bitcount != 24) return -1;
   if (hdr.compression != 0) return -1;
    //printf("%x\n",60000);
-   pixels =  (uint32_t*)malloc(0x1001);
-  //pixels = (uint32_t*)malloc(hdr.width * hdr.height * sizeof(uint32_t));
-   if(pixels) {
+   //pixels =  (uint32_t*)malloc(0x1e00);
+  pixels = (uint32_t*)malloc(hdr.width * hdr.height * sizeof(uint32_t));
+   /*if(pixels) {
      printf("pixels!\n");
      return -1;
-   }
+   }*/
   if (!pixels) return -1;
   
 
