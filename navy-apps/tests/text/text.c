@@ -20,7 +20,7 @@ int main()
   //printf("end first for\n");
 
   fseek(fp, 0, SEEK_SET);
-  printf("begin fprintf for\n");
+  //printf("begin fprintf for\n");
   for (i = 0; i < 500; i++)
   {
     fprintf(fp, "%4d\n", i + 1 + 1000);

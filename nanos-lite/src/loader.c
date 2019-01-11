@@ -9,22 +9,22 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   //printf("in loader\n");
   //printf("ramdisk size = %d\n",get_ramdisk_size());
   //ramdisk_read((void*)DEFAULT_ENTRY,0,get_ramdisk_size());
-  Log("filename : %s",filename);
+  //Log("filename : %s",filename);
   int fd = fs_open(filename,0,0);
-  Log("open file %d",fd);
+  //Log("open file %d",fd);
   if(fd){
-    int len = fs_read(fd,(void*)DEFAULT_ENTRY,fs_filesz(fd));
-    Log("read file size %d",len);
+    fs_read(fd,(void*)DEFAULT_ENTRY,fs_filesz(fd));
+    //Log("read file size %d",len);
     fs_lseek(fd,0,SEEK_SET);
     fs_close(fd);
-    Log("close file");
+    //Log("close file");
   }
   
   return DEFAULT_ENTRY;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {
-  Log("filename : %s",filename);
+  //Log("filename : %s",filename);
   uintptr_t entry = loader(pcb, filename);
   //printf("in native uload: entry = %d\n",entry);
   ((void(*)())entry) ();

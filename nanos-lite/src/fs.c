@@ -138,8 +138,8 @@ size_t fs_write(int fd, const void *buf, size_t len)
 
 int fs_close(int fd)
 {
-  Log("close file: %d",fd);
-  file_table[fd].size = 0;
+  //Log("close file: %d",fd);
+  file_table[fd].open_offset = 0;
   return 0;
 }
 
