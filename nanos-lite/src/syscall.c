@@ -46,6 +46,7 @@ _Context *do_syscall(_Context *c)
    // }
     break;
   case SYS_brk:
+    Log("in brk");
     c->GPRx = 0;
     break;
   case SYS_open:
