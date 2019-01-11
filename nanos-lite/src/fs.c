@@ -75,7 +75,8 @@ size_t fs_read(int fd, void *buf, size_t len)
     size_t aval_size = fsize - open_offset ;
     size_t read_len = (aval_size > len) ? len : aval_size;
     Log("offset = %d,read_len = %d",disk_offset + open_offset,read_len);
-    ramdisk_read(buf, disk_offset + open_offset, read_len);
+    size_t len = ramdisk_read(buf, disk_offset + open_offset, read_len);
+    fs_lseek(fd, open_offset + len, SEEK_SET);
     return ((open_offset + read_len) == fsize) ? 0 : read_len;
   }
   return -1;
@@ -122,7 +123,8 @@ size_t fs_write(int fd, const void *buf, size_t len)
     size_t fsize = file_table[fd].size;
     size_t aval_size = fsize - open_offset;
     size_t write_len = (aval_size > len) ? len : aval_size;
-    ramdisk_write(buf, disk_offset + open_offset,write_len);
+    size_t len = ramdisk_write(buf, disk_offset + open_offset,write_len);
+    fs_lseek(fd, open_offset + len, SEEK_SET);
     return write_len;
   }
   return -1;
@@ -131,6 +133,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
 int fs_close(int fd)
 {
   Log("close file: %d",fd);
+  file_table[fd].size = 0;
   return 0;
 }
 
