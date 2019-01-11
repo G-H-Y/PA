@@ -31,7 +31,7 @@ Log("sys = %d",a[0]);
     _halt(a[1]);
     break;
   case SYS_write:    
-    if ((fd == 1) || (fd == 2))
+    if (fd)
     {
       size_t i = 0;
       for (; i < count; i++)
