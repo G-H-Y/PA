@@ -52,6 +52,7 @@ int fs_open(const char *pathname, int flags, int mode)
   {
     if (strcmp(file_table[fd].name, pathname) == 0)
     {
+      Log("pathname = %s",pathname);
       break;
     }
   }
@@ -83,7 +84,8 @@ size_t fs_read(int fd, void *buf, size_t len)
 __off_t fs_lseek(int fd, __off_t offset, int whence)
 {
   if (fd)
-  {
+  { 
+    Log("whence = %d",whence);
     switch (whence)
     {
     case SEEK_SET:
@@ -114,6 +116,7 @@ __off_t fs_lseek(int fd, __off_t offset, int whence)
 size_t fs_write(int fd, const void *buf, size_t len)
 {
   if(fd){
+    Log("fd = %d",fd);
     size_t disk_offset = file_table[fd].disk_offset;
     size_t open_offset = file_table[fd].open_offset;
     size_t fsize = file_table[fd].size;
@@ -127,6 +130,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
 
 int fs_close(int fd)
 {
+  Log("close file: %d",fd);
   return 0;
 }
 
