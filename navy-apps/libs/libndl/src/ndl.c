@@ -20,18 +20,21 @@ printf("if canvas\n");
   canvas_h = h;
   canvas = malloc(sizeof(uint32_t) * w * h);
   assert(canvas);
-
+printf("assert canvas\n");
   if (getenv("NWM_APP")) {
     has_nwm = 1;
   } else {
     has_nwm = 0;
   }
+  printf("after set hass_nwm\n");
 
   if (has_nwm) {
     printf("\033[X%d;%ds", w, h); fflush(stdout);
     evtdev = stdin;
   } else {
+    printf("get display info\n");
     get_display_info();
+    printf("after get dispinfo\n");
     assert(screen_w >= canvas_w);
     assert(screen_h >= canvas_h);
     pad_x = (screen_w - canvas_w) / 2;
