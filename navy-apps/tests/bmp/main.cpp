@@ -1,9 +1,11 @@
 #include <assert.h>
 #include <stdlib.h>
 #include <ndl.h>
+#include <stdio.h>
 
 int main() {
   NDL_Bitmap *bmp = (NDL_Bitmap*)malloc(sizeof(NDL_Bitmap));
+  if(bmp) printf("bmp!\n");
   NDL_LoadBitmap(bmp, "/share/pictures/projectn.bmp");
   assert(bmp->pixels);
   NDL_OpenDisplay(bmp->w, bmp->h);
