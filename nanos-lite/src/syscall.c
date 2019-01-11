@@ -20,7 +20,7 @@ _Context *do_syscall(_Context *c)
   int flags = a[2];
   int mode = a[3];
 
-//Log("sys = %d",a[0]);
+Log("sys = %d",a[0]);
   switch (a[0])
   {
   case SYS_yield:
@@ -36,8 +36,9 @@ _Context *do_syscall(_Context *c)
       size_t i = 0;
       for (; i < count; i++)
         _putc(buf[i]);
+        Log("in syswrite if");
     }
-    //Log("in sys_write");
+    Log("in sys_write");
     c->GPRx = count;
     break;
   case SYS_brk:
