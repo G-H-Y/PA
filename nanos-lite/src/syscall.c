@@ -31,7 +31,7 @@ _Context *do_syscall(_Context *c)
     _halt(a[1]);
     break;
   case SYS_write:
-    if ((fd == 1) || (fd == 2))
+   /* if ((fd == 1) || (fd == 2))
     {
       size_t i = 0;
       for (; i < count; i++)
@@ -41,9 +41,9 @@ _Context *do_syscall(_Context *c)
       c->GPRx = count;
     }
     else if (fd > 2)
-    {
+    {*/
       c->GPRx = fs_write(fd, buf, count);
-    }
+   // }
     break;
   case SYS_brk:
     c->GPRx = 0;
