@@ -130,7 +130,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
     size_t aval_size = fsize - open_offset;
     size_t write_len = (aval_size > len) ? len : aval_size;
     size_t len = ramdisk_write(buf, disk_offset + open_offset,write_len);
-    fs_lseek(fd, open_offset + len, SEEK_SET);
+    file_table[fd].open_offset += len;
     return write_len;
   }
   return -1;

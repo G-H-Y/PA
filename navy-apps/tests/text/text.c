@@ -3,7 +3,6 @@
 
 int main()
 {
-
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
 
@@ -16,10 +15,10 @@ int main()
   for (i = 500; i < 1000; i++)
   {
     fscanf(fp, "%d", &n);
-    printf("i = %d,n = %d\n", i, n);
+    //printf("i = %d,n = %d\n", i, n);
     assert(n == i + 1);
   }
-  printf("end first for\n");
+  //printf("end first for\n");
 
   fseek(fp, 0, SEEK_SET);
   for (i = 0; i < 500; i++)
