@@ -17,7 +17,7 @@ int main() {
   int i, n;
  // printf("begin first for\n");
   for (i = 500; i < 1000; i ++) {
-    printf("i = %d,n = %d\n",i,n);
+    //printf("i = %d,n = %d\n",i,n);
     fscanf(fp, "%d", &n);
    
     assert(n == i + 1);
