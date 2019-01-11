@@ -1,5 +1,6 @@
 #include "common.h"
 #include <amdev.h>
+#include <fs.h>
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   int i = 0;
@@ -26,11 +27,19 @@ size_t events_read(void *buf, size_t offset, size_t len) {
 static char dispinfo[128] __attribute__((used));
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  memcpy(dispinfo+offset,buf,len);
+  return len;
+  //return 0;
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-  return 0;
+  //return 0;
+  int x = (offset / 4) % screen_width();
+  int y = (offset / 4) / screen_height();
+  int w = len / 4;
+  int h = 1;
+  draw_rect((unsigned int*)buf,x,y,w,h);
+  return len;
 }
 
 void init_device() {
@@ -39,4 +48,6 @@ void init_device() {
 
   // TODO: print the string to array `dispinfo` with the format
   // described in the Navy-apps convention
+  int fd = fs_open("/proc/dispinfo",0,0);
+  fs_read(fd,dispinfo,0);
 }
