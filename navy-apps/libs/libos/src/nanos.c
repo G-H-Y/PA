@@ -43,7 +43,7 @@ int _write(int fd, void *buf, size_t count){
 void *_sbrk(intptr_t increment){
   //printf("in sbrk increment = %d\n",(int)increment);
   int ret = _syscall_(SYS_brk,(uintptr_t)increment,0,0);
-  if(ret == 0) return (void*)increment;
+  if(ret == 0) return (void*)0;
   return (void *)-1;
 }
 
