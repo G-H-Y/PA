@@ -18,7 +18,7 @@ int main()
     //
     assert(n == i + 1);
   }
-  //printf("end first for\n");
+  printf("end first for\n");
 
   fseek(fp, 0, SEEK_SET);
   printf("begin fprintf for\n");
