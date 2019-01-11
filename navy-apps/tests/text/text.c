@@ -20,7 +20,7 @@ int main() {
     //
     fscanf(fp, "%d", &n);
     printf("i = %d,n = %d\n",i,n);
-    assert(n == i + 1);
+    //assert(n == i + 1);
   }
   printf("end first for\n");
 
