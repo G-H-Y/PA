@@ -17,11 +17,12 @@ int main() {
   int i, n;
  // printf("begin first for\n");
   for (i = 500; i < 1000; i ++) {
-    printf("begin scanf\n");
+   // printf("begin scanf\n");
     fscanf(fp, "%d", &n);
     printf("i = %d,n = %d\n",i,n);
     assert(n == i + 1);
   }
+  printf("end first for\n");
 
   fseek(fp, 0, SEEK_SET);
   printf("begin second for\n");
