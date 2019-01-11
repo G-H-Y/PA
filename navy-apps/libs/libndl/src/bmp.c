@@ -35,6 +35,7 @@ int NDL_LoadBitmap(NDL_Bitmap *bmp, const char *filename) {
   if (hdr.compression != 0) return -1;
   pixels = (uint32_t*)malloc(hdr.width * hdr.height * sizeof(uint32_t));
   if (!pixels) return -1;
+  printf("in NDL_LoadBItmap\n");
 
   w = hdr.width; h = hdr.height;
   int line_off = (w * 3 + 3) & ~0x3;
