@@ -13,15 +13,14 @@ int main() {
   assert(size == 5000);
  /// printf("assert(size == 5000)\n");
 
-  //fseek(fp, 500 * 5, SEEK_SET);
-  fseek(fp,0,SEEK_SET);
+  fseek(fp, 500 * 5, SEEK_SET);
   int i, n;
  // printf("begin first for\n");
   for (i = 500; i < 1000; i ++) {
     //
     fscanf(fp, "%d", &n);
     printf("i = %d,n = %d\n",i,n);
-    //assert(n == i + 1);
+    assert(n == i + 1);
   }
   printf("end first for\n");
 

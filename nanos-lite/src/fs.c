@@ -78,6 +78,7 @@ size_t fs_read(int fd, void *buf, size_t len)
     size_t read_len = (aval_size > len) ? len : aval_size;
     //Log("offset = %d,read_len = %d",disk_offset + open_offset,read_len);
     len = ramdisk_read(buf, disk_offset + open_offset, read_len);
+    Log("begin read at diskoffset = %d",disk_offset + open_offset);
     Log("read len = %d",len);
     file_table[fd].open_offset += len;
     Log("after read: openoffset = %d",file_table[fd].open_offset);
