@@ -15,7 +15,7 @@ int NDL_OpenDisplay(int w, int h) {
   if (!canvas) {
     NDL_CloseDisplay();
   }
-
+printf("if canvas\n");
   canvas_w = w;
   canvas_h = h;
   canvas = malloc(sizeof(uint32_t) * w * h);
