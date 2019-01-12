@@ -35,7 +35,7 @@ void init_proc() {
 
 _Context* schedule(_Context *prev) {
   //return NULL;
-  //Log("schedule");
+  Log("schedule");
   current->cp = prev;
   current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   //printf("current->cp = %d\n",current->cp);

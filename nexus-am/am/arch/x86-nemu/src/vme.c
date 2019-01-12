@@ -1,4 +1,5 @@
 #include <x86.h>
+#include <klib.h>
 
 #define PG_ALIGN __attribute((aligned(PGSIZE)))
 
@@ -87,5 +88,6 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
   int i = 0;
   while(i<3)
     tmp[i] = 0;
+  printf("in ucontext: tf = %d\n",tf);
   return tf;
 }
