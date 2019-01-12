@@ -36,28 +36,12 @@ _Context *do_syscall(_Context *c)
   case SYS_execve:
     naive_uload(NULL,filename);
   case SYS_write:
-   /* if ((fd == 1) || (fd == 2))
-    {
-      size_t i = 0;
-      for (; i < count; i++)
-      {
-        _putc(buf[i]);
-      }
-      c->GPRx = count;
-    }
-    else if (fd > 2)
-    {*/
       c->GPRx = fs_write(fd, buf, count);
-   // }
     break;
   case SYS_brk:
-    //Log("in brk");
     c->GPRx = 0;
     break;
   case SYS_open:
-    /*filename = (char*)a[1];
-    flags = a[2];
-    mode = a[3];*/
     c->GPRx = fs_open(filename, flags, mode);
     break;
   case SYS_read:

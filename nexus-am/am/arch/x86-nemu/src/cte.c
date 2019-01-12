@@ -50,6 +50,10 @@ int _cte_init(_Context*(*handler)(_Event, _Context*)) {
 }
 
 _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
+ /* _Context tf;
+  tf.eip = (uintptr_t)entry;
+  tf.cs = 8;
+  return &tf;*/
   return NULL;
 }
 

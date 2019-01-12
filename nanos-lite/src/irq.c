@@ -1,5 +1,6 @@
 #include "common.h"
 _Context *do_syscall(_Context *c);
+
 static _Context *do_event(_Event e, _Context *c)
 {
   switch (e.event)
@@ -8,7 +9,6 @@ static _Context *do_event(_Event e, _Context *c)
     printf("event ID = %d\n", e.event);
     break;
   case _EVENT_SYSCALL:
-    //printf("event ID = %d\n", e.event);
     do_syscall(c);
     break;
   default:
