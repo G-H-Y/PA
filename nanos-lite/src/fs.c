@@ -46,23 +46,9 @@ size_t proc_dispinfo_read(void *buf, size_t offset, size_t len)
 {
   int screen_w = screen_width();
   int screen_h = screen_height();
-  char *tmp = (char*)buf;
-  size_t i = 0;
-  strcpy(tmp, "WIDTH:");
-  i += 6;
-  strcpy(tmp+i, (char *)screen_w);
-  i += 4;
-  strcpy(tmp+i,"\n");
-  i++;
-  strcpy(tmp+i,"HEIGHT:");
-  i += 7;
-  strcpy(tmp+i,(char*)screen_h);
-  i += 4;
-  strcpy(tmp+i,"\n");
-  i++;
-  Log("buf = %s",buf);
-  Log("buf = %s",buf+6);
-  return i;
+  int cnt = sprintf(buf,"%s %d %c %s %d %c","WIDTH:",screen_w,'\n',"HEIGHT:",screen_h,'\n');
+  //file_table[FD_PROC_DISPINFO].size = cnt;
+  return cnt;
 }
 
 /* This is the information about all files in disk. */
@@ -101,7 +87,8 @@ size_t fs_read(int fd, void *buf, size_t len)
   Log("before read len = %d",len);
   if (fd == FD_PROC_DISPINFO)
   {
-    file_table[fd].read(buf, 0, 0);
+    int size = file_table[fd].read(buf, 0, 0);
+    file_table[fd].size = size;
     Log("size = %d,openoffset = %d",file_table[fd].size,file_table[fd].open_offset);
     size_t aval_size = file_table[fd].size - file_table[fd].open_offset;
     len = (aval_size > len) ? len : aval_size;
