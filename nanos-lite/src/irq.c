@@ -10,7 +10,7 @@ static _Context *do_event(_Event e, _Context *c)
   case _EVENT_YIELD:
     Log("event ID = %d\n", e.event);
     _Context *tf = schedule(c);
-       //Log("tf = %d",tf);   
+       Log("tf = %d",tf);   
     return tf;
   case _EVENT_SYSCALL:
     do_syscall(c);
