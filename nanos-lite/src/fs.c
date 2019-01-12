@@ -10,6 +10,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len);
 size_t fb_write(const void *buf, size_t offset, size_t len) ;
 size_t proc_dispinfo_read(void *buf, size_t offset, size_t len);
 size_t events_read(void *buf, size_t offset, size_t len);
+size_t dev_tty_write(const void *buf, size_t offset, size_t len);
 
 typedef struct
 {
@@ -29,6 +30,7 @@ enum
   FD_PROC_DISPINFO,
   FD_DEV_FB,
   FD_DEV_EVENTS,
+  FD_DEV_TTY,
   FD_FB
 };
 
@@ -55,6 +57,15 @@ size_t proc_dispinfo_read(void *buf, size_t offset, size_t len)
   return strlen(buf);
 }
 
+size_t dev_tty_write(const void *buf, size_t offset, size_t len){
+  int i = 0;
+  char *tmp = (char*)buf;
+  for(;i < len; i++)
+   _putc(tmp[i]);
+  return len;
+}
+
+
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
     {"stdin", 0, 0, 0, invalid_read, invalid_write},
@@ -63,6 +74,7 @@ static Finfo file_table[] __attribute__((used)) = {
     {"/proc/dispinfo", 0, 0, 0, proc_dispinfo_read, invalid_write},
     {"/dev/fb", 0, 0, 0,invalid_read,fb_write}, 
     {"/dev/events",0,0,0,events_read,invalid_write},
+    {"/dev/tty",0,0,0,invalid_read,dev_tty_write},
 #include "files.h"
 };
 
@@ -178,6 +190,10 @@ size_t fs_write(int fd, const void *buf, size_t len)
     file_table[fd].write(buf,offset,write_len);
     file_table[fd].open_offset += write_len;
     return write_len;
+  }
+  else if(fd == FD_DEV_TTY){
+    file_table[fd].write(buf,0,len);
+    return len;
   }
   else
   {
