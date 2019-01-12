@@ -154,11 +154,21 @@ __off_t fs_lseek(int fd, __off_t offset, int whence)
 
 size_t fs_write(int fd, const void *buf, size_t len)
 {
-  if (fd < FD_FB)
+  if (fd <= FD_STDERR)
   {
-    Log("fd = %d",fd);
+    //Log("fd = %d",fd);
     file_table[fd].write(buf, 0, len);
     return len;
+  }
+  else if(fd == FD_DEV_FB){
+    Log("fd = %d",fd);
+    size_t offset = file_table[fd].open_offset;
+    size_t size = file_table[fd].size;
+    size_t aval_size = size - offset;
+    size_t write_len = (aval_size > len)?len:aval_size;
+    fb_write(buf,offset,write_len);
+    file_table[fd].open_offset += write_len;
+    return write_len;
   }
   else
   {
