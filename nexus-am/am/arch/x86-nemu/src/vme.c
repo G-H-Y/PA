@@ -90,6 +90,6 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
     tmp[i] = 0;
     i++;
   }
-  printf("in ucontext: tf = %d\n",tf);
+  //printf("in ucontext: tf = %d\n",tf);
   return tf;
 }

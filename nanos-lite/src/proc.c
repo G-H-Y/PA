@@ -25,10 +25,10 @@ void hello_fun(void *arg) {
 }
 
 void init_proc() {
-  Log("in init_proc");
+  //Log("in init_proc");
   //naive_uload(NULL, "/bin/init");
   context_uload(&pcb[1], "/bin/init");
-  Log("uload end");
+  //Log("uload end");
   context_kload(&pcb[0],(void*)hello_fun);
   
   switch_boot_pcb();
@@ -36,7 +36,7 @@ void init_proc() {
 
 _Context* schedule(_Context *prev) {
   //return NULL;
-  Log("schedule");
+  //Log("schedule");
   current->cp = prev;
   current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
   //printf("current->cp = %d\n",current->cp);
