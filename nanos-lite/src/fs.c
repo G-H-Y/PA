@@ -46,9 +46,10 @@ size_t proc_dispinfo_read(void *buf, size_t offset, size_t len)
 {
   int screen_w = screen_width();
   int screen_h = screen_height();
-  int cnt = sprintf(buf,"%s %d %c %s %d %c","WIDTH:",screen_w,'\n',"HEIGHT:",screen_h,'\n');
+  sprintf(buf,"%s %d %c %s %d %c","WIDTH:",screen_w,'\n',"HEIGHT:",screen_h,'\n');
   //file_table[FD_PROC_DISPINFO].size = cnt;
-  return cnt;
+  Log("buf size = %d",strlen(buf));
+  return strlen(buf);
 }
 
 /* This is the information about all files in disk. */
