@@ -156,6 +156,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
 {
   if (fd < FD_FB)
   {
+    Log("fd = %d",fd);
     file_table[fd].write(buf, 0, len);
     return len;
   }
