@@ -13,8 +13,11 @@ int main() {
   NDL_OpenDisplay(bmp->w, bmp->h);
   printf("after OPENDISP\n");
   NDL_DrawRect(bmp->pixels, 0, 0, bmp->w, bmp->h);
+  printf("after DR\n");
   NDL_Render();
+  printf("after render\n");
   NDL_CloseDisplay();
+  printf("after close\n");
   while (1);
   return 0;
 }

@@ -66,7 +66,7 @@ int NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     }
   } else {
     for (int i = 0; i < h; i ++) {
-     printf("in DR:3th for i = %d\n",i);
+    // printf("in DR:3th for i = %d\n",i);
       for (int j = 0; j < w; j ++) {
         //printf("in DR:4th for\n");
         //printf("in DR: x = %d,y = %d,w = %d, h = %d\n",x,y,w,h);
@@ -75,7 +75,7 @@ int NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
       }
     }
   }
-  printf("end of DR\n");
+  //printf("end of DR\n");
 }
 
 int NDL_Render() {
