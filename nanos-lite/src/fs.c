@@ -99,6 +99,7 @@ size_t fs_read(int fd, void *buf, size_t len)
   if (fd == FD_PROC_DISPINFO)
   {
     file_table[fd].read(buf, 0, 0);
+    Log("size = %d,openoffset = %d",file_table[fd].size,file_table[fd].open_offset);
     size_t aval_size = file_table[fd].size - file_table[fd].open_offset;
     len = (aval_size > len) ? len : aval_size;
     file_table[fd].open_offset += file_table[fd].size;
