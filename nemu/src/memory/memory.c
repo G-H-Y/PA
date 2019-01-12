@@ -42,13 +42,18 @@ uint32_t paddr_read(paddr_t addr, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-    if (is_diff_page(addr, len))
+    if (cpu.cr0 & 0x80000000)
     {
-      Log("addr = 0x%x,len = %d", addr, len);
-      assert(0);
+      if (is_diff_page(addr, len))
+      {
+        Log("addr = 0x%x,len = %d", addr, len);
+        assert(0);
+      }
+      paddr_t phy_addr = page_translate(addr);
+      return pmem_rw(phy_addr, uint32_t) & (~0u >> ((4 - len) << 3));
     }
-    paddr_t phy_addr = page_translate(addr);
-    return pmem_rw(phy_addr, uint32_t) & (~0u >> ((4 - len) << 3));
+    else
+      return pmem_rw(addr, uint32_t) & (~0u >> ((4 - len) << 3));
   }
   else
   {
@@ -61,13 +66,20 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-    if (is_diff_page(addr, len))
+    if (cpu.cr0 & 0x80000000)
     {
-      Log("addr = 0x%x,len = %d", addr, len);
-      assert(0);
+      if (is_diff_page(addr, len))
+      {
+        Log("addr = 0x%x,len = %d", addr, len);
+        assert(0);
+      }
+      paddr_t phy_addr = page_translate(addr);
+      memcpy(guest_to_host(phy_addr), &data, len);
     }
-    paddr_t phy_addr = page_translate(addr);
-    memcpy(guest_to_host(phy_addr), &data, len);
+    else
+    {
+      memcpy(guest_to_host(addr), &data, len);
+    }
   }
   else
   {
