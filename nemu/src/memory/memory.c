@@ -15,7 +15,7 @@ uint8_t pmem[PMEM_SIZE];
 bool is_diff_page(paddr_t addr, int len)
 {
   paddr_t page_offset = addr & 0xfff;
-  paddr_t max_offset = 0xfff - len;
+  paddr_t max_offset = 0x1000 - len;
   if (page_offset > max_offset)
     return true;
   return false;
