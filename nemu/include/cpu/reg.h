@@ -49,6 +49,7 @@ typedef struct {
     rtlreg_t limit;
     rtlreg_t base;
   }ldtr;
+  rtlreg_t cr3,cr0;
   
 } CPU_state;
 
