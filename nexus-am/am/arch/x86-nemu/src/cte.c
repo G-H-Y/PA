@@ -54,6 +54,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   tf->cs = 8;
   tf->esp = (uintptr_t)(tf + sizeof(_Protect) + 4 * sizeof(uintptr_t));
   printf("tf = %d, tf->esp = %d\n",tf,tf->esp);
+  printf("_protect = %d, uintptr_t = %d\n",sizeof(_Protect),sizeof(uintptr_t));
   return tf;
 }
 
