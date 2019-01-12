@@ -40,6 +40,7 @@ make_EHelper(pusha) {
 
 make_EHelper(popa) {
   //TODO();
+  Log("before poal : esp = 0x%x",cpu.esp);
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
   rtl_pop(&cpu.ebp);
