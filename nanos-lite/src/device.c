@@ -3,6 +3,7 @@
 #include <fs.h>
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
+  _yield();
   int i = 0;
   char *tmp = (char*)buf;
   for(;i < len; i++)
@@ -22,6 +23,7 @@ static const char *keyname[256] __attribute__((used)) = {
 
 size_t events_read(void *buf, size_t offset, size_t len) {
   //return 0;
+  _yield();
   int key = read_key();
   if(key){
     if(key & 0x8000){

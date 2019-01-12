@@ -175,6 +175,7 @@ __off_t fs_lseek(int fd, __off_t offset, int whence)
 
 size_t fs_write(int fd, const void *buf, size_t len)
 {
+  _yield();
   if (fd <= FD_STDERR)
   {
     //Log("fd = %d",fd);
