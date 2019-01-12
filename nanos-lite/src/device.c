@@ -50,4 +50,5 @@ void init_device() {
   // described in the Navy-apps convention
   int fd = fs_open("/proc/dispinfo",0,0);
   fs_read(fd,dispinfo,0);
+  fs_close(fd);
 }
