@@ -24,13 +24,15 @@ bool is_diff_page(paddr_t addr, int len)
 paddr_t page_translate(paddr_t addr)
 {
   paddr_t direct_entry_addr = cpu.cr3 + ((addr >> 22) << 2);
-  paddr_t direct_entry = pmem_rw(direct_entry_addr,uint32_t);
-  assert(direct_entry & 0x1);
+  paddr_t direct_entry = pmem_rw(direct_entry_addr, uint32_t);
+  if (!(direct_entry & 0x1))
+    assert(0);
   paddr_t page_addr = direct_entry & 0xfffff000;
   paddr_t page_offset = ((addr >> 12) & 0x3ff) << 2;
   paddr_t page_entry_addr = page_addr | page_offset;
   paddr_t page_entry = pmem_rw(page_entry_addr, uint32_t);
-  assert(page_entry & 0x1);
+  if (!(page_entry & 0x1))
+    assert(0);
   paddr_t real_addr = (page_entry & 0xfffff000) | (addr & 0xfff);
   return real_addr;
 }
@@ -42,7 +44,7 @@ uint32_t paddr_read(paddr_t addr, int len)
   {
     if (is_diff_page(addr, len))
     {
-      Log("addr = 0x%x,len = %d",addr,len);
+      Log("addr = 0x%x,len = %d", addr, len);
       assert(0);
     }
     paddr_t phy_addr = page_translate(addr);
@@ -61,7 +63,7 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   {
     if (is_diff_page(addr, len))
     {
-      Log("addr = 0x%x,len = %d",addr,len);
+      Log("addr = 0x%x,len = %d", addr, len);
       assert(0);
     }
     paddr_t phy_addr = page_translate(addr);
