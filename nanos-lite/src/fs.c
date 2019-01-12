@@ -47,20 +47,21 @@ size_t proc_dispinfo_read(void *buf, size_t offset, size_t len)
   int screen_w = screen_width();
   int screen_h = screen_height();
   char *tmp = (char*)buf;
+  size_t i = 0;
   strcpy(tmp, "WIDTH:");
-  tmp += 6;
-  strcpy(tmp, (char *)screen_w);
-  tmp += 4;
-  strcpy(tmp,"\n");
-  tmp++;
-  strcpy(tmp,"HEIGHT:");
-  tmp += 7;
-  strcpy(tmp,(char*)screen_h);
-  tmp += 4;
-  strcpy(tmp,"\n");
-  tmp++;
+  i += 6;
+  strcpy(tmp+i, (char *)screen_w);
+  i += 4;
+  strcpy(tmp+i,"\n");
+  i++;
+  strcpy(tmp+i,"HEIGHT:");
+  i += 7;
+  strcpy(tmp+i,(char*)screen_h);
+  i += 4;
+  strcpy(tmp+i,"\n");
+  i++;
   Log("buf = %s",buf);
-  return (tmp - (char*)buf);
+  return i;
 }
 
 /* This is the information about all files in disk. */
