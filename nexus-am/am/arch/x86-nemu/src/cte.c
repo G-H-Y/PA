@@ -9,7 +9,6 @@ void vecnull();
 void vecsys();
 
 _Context* irq_handle(_Context *tf) {
-  // printf("now in irq handle\n");
   _Context *next = tf;
   if (user_handler) {
     _Event ev = {0};
@@ -23,7 +22,6 @@ _Context* irq_handle(_Context *tf) {
     if (next == NULL) {
       next = tf;
     }
-    // printf("in irq handle: leave!\n");
   }
 
   return next;
