@@ -52,7 +52,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   _Context *tf = stack.end - sizeof(_Context);
   tf->eip = (uintptr_t)entry;
   tf->cs = 8;
-  tf->esp = (uintptr_t)(tf + sizeof(tf->prot) + 4 * sizeof(tf->eax));
+  tf->esp = (uintptr_t)(tf + sizeof(_Protect) + 4 * sizeof(uintptr_t));
   printf("tf = %d, tf->esp = %d\n",tf,tf->esp);
   return tf;
 }
