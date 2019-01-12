@@ -18,6 +18,9 @@ make_EHelper(pop) {
   //TODO();
   rtl_pop(&(id_dest->val));
   operand_write(id_dest,&id_dest->val);
+  if(id_dest->reg == R_ESP){
+    Log("esp = 0x%x",cpu.esp);
+  }
   print_asm_template1(pop);
 }
 
