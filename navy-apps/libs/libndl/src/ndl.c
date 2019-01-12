@@ -54,8 +54,10 @@ int NDL_CloseDisplay() {
 int NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   if (has_nwm) {
     for (int i = 0; i < h; i ++) {
+      printf("in DR:first for\n");
       printf("\033[X%d;%d", x, y + i);
       for (int j = 0; j < w; j ++) {
+        printf("in DR: second for\n");
         putchar(';');
         fwrite(&pixels[i * w + j], 1, 4, stdout);
       }
@@ -63,7 +65,9 @@ int NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     }
   } else {
     for (int i = 0; i < h; i ++) {
+      printf("in DR:3th for\n");
       for (int j = 0; j < w; j ++) {
+        printf("in DR:4th for\n");
         canvas[(i + y) * canvas_w + (j + x)] = pixels[i * w + j];
       }
     }
@@ -130,22 +134,22 @@ int NDL_WaitEvent(NDL_Event *event) {
 
 static void get_display_info() {
   FILE *dispinfo = fopen("/proc/dispinfo", "r");
-  printf("after open dispinfo\n");
+ // printf("after open dispinfo\n");
   assert(dispinfo);
   screen_w = screen_h = 0;
   char buf[128], key[128], value[128], *delim;
   while (fgets(buf, 128, dispinfo)) {
-    printf("buf = %s\n",buf);
+   // printf("buf = %s\n",buf);
     *(delim = strchr(buf, ':')) = '\0';
     sscanf(buf, "%s", key);
-    printf("key = %s\n",key);
+   // printf("key = %s\n",key);
     sscanf(delim + 1, "%s", value);
     //printf("value = %d\n",value);
     if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", &screen_w);
     if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", &screen_h);
   }
   fclose(dispinfo);
-  printf("w = %d,h = %d\n",screen_w,screen_h);
+ // printf("w = %d,h = %d\n",screen_w,screen_h);
   assert(screen_w > 0 && screen_h > 0);
 }
 
