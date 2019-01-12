@@ -8,7 +8,7 @@ static _Context *do_event(_Event e, _Context *c)
   switch (e.event)
   {
   case _EVENT_YIELD:
-    printf("event ID = %d\n", e.event);
+    Log("event ID = %d\n", e.event);
     return schedule(c);
   case _EVENT_SYSCALL:
     do_syscall(c);

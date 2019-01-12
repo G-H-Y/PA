@@ -21,6 +21,7 @@ _Context* irq_handle(_Context *tf) {
     next = user_handler(ev, tf);
     if (next == NULL) {
       next = tf;
+      printf("next = null");
     }
   }
 
