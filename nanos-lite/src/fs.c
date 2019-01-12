@@ -57,7 +57,7 @@ static Finfo file_table[] __attribute__((used)) = {
     {"stdin", 0, 0, 0, invalid_read, invalid_write},
     {"stdout", 0, 0, 0, invalid_read, serial_write},
     {"stderr", 0, 0, 0, invalid_read, serial_write},
-    {"/proc/dispinfo", 23, 0, 0, proc_dispinfo_read, invalid_write},
+    {"/proc/dispinfo", 0, 0, 0, proc_dispinfo_read, invalid_write},
     {"/dev/fb", 0, 0, 0,invalid_read,fb_write}, 
 #include "files.h"
 };
@@ -154,7 +154,7 @@ __off_t fs_lseek(int fd, __off_t offset, int whence)
 
 size_t fs_write(int fd, const void *buf, size_t len)
 {
-  if (fd < 3)
+  if (fd < FD_FB)
   {
     file_table[fd].write(buf, 0, len);
     return len;
