@@ -13,11 +13,7 @@ asm_trap:
   call irq_handle
   pushl %eax
   popl %esp
-  # subl $4, %esp
-  addl $4, %esp
-
-  # addl $4, %esp
-  
+  addl $4, %esp 
   popal
   addl $8, %esp
 

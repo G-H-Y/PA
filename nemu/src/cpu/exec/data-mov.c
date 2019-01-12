@@ -18,9 +18,6 @@ make_EHelper(pop) {
   //TODO();
   rtl_pop(&(id_dest->val));
   operand_write(id_dest,&id_dest->val);
-  if(id_dest->reg == R_ESP){
-    Log("esp = 0x%x",cpu.esp);
-  }
   print_asm_template1(pop);
 }
 
@@ -40,7 +37,7 @@ make_EHelper(pusha) {
 
 make_EHelper(popa) {
   //TODO();
-  Log("before poal : esp = 0x%x",cpu.esp);
+ // Log("before poal : esp = 0x%x",cpu.esp);
   rtl_pop(&cpu.edi);
   rtl_pop(&cpu.esi);
   rtl_pop(&cpu.ebp);
@@ -49,7 +46,7 @@ make_EHelper(popa) {
   rtl_pop(&cpu.edx);
   rtl_pop(&cpu.ecx);
   rtl_pop(&cpu.eax);
-  Log("after popal : esp = 0x%x",cpu.esp);
+ // Log("after popal : esp = 0x%x",cpu.esp);
   print_asm("popa");
 }
 

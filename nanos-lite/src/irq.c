@@ -8,10 +8,7 @@ static _Context *do_event(_Event e, _Context *c)
   switch (e.event)
   {
   case _EVENT_YIELD:
-    Log("event ID = %d\n", e.event);
-    _Context *tf = schedule(c);
-    //Log("tf = %d",tf);   
-    return tf;
+    return schedule(c); 
   case _EVENT_SYSCALL:
     do_syscall(c);
     break;

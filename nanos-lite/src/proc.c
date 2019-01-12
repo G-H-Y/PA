@@ -32,9 +32,9 @@ void init_proc() {
 
 _Context* schedule(_Context *prev) {
   //return NULL;
-  Log("schedule");
+  //Log("schedule");
   current->cp = prev;
   current = &pcb[0];
-  printf("current->cp = %d\n",current->cp);
+  //printf("current->cp = %d\n",current->cp);
   return current->cp;
 }

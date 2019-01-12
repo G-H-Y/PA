@@ -21,10 +21,9 @@ _Context* irq_handle(_Context *tf) {
     next = user_handler(ev, tf);
     if (next == NULL) {
       next = tf;
-      
     }
   }
-  printf("next = %d\n",next);
+  //printf("next = %d\n",next);
   return next;
 }
 
@@ -52,11 +51,6 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   _Context *tf = stack.end - sizeof(_Context);
   tf->eip = (uintptr_t)entry;
   tf->cs = 8;
-  //tf->esp = (uintptr_t)((uintptr_t)tf + 32);
-  printf("tf->eip position = %d\n",(int)(&(tf->eip)));
-  printf("tf = %d, tf->esp = %d\n",tf,tf->esp);
-  printf("_protect = %d, uintptr_t = %d\n",sizeof(_Protect),sizeof(uintptr_t));
-  //printf("tf: eax, ecx, ebx :%d %d %d\n",tf->eax,tf->ebx,tf->ebp)
   return tf;
 }
 
