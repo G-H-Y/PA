@@ -101,7 +101,7 @@ size_t fs_read(int fd, void *buf, size_t len)
     file_table[fd].read(buf, 0, 0);
     file_table[fd].open_offset += file_table[fd].size;
     Log("len = %d",len);
-    return len;
+    return 0;
   }
   else if (fd >= FD_DEV_FB)
   {
