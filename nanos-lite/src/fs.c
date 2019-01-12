@@ -9,6 +9,7 @@ size_t serial_write(const void *buf, size_t offset, size_t len);
 size_t dispinfo_read(void *buf, size_t offset, size_t len);
 size_t fb_write(const void *buf, size_t offset, size_t len) ;
 size_t proc_dispinfo_read(void *buf, size_t offset, size_t len);
+size_t events_read(void *buf, size_t offset, size_t len);
 
 typedef struct
 {
@@ -27,6 +28,7 @@ enum
   FD_STDERR,
   FD_PROC_DISPINFO,
   FD_DEV_FB,
+  FD_DEV_EVENTS,
   FD_FB
 };
 
@@ -59,7 +61,8 @@ static Finfo file_table[] __attribute__((used)) = {
     {"stdout", 0, 0, 0, invalid_read, serial_write},
     {"stderr", 0, 0, 0, invalid_read, serial_write},
     {"/proc/dispinfo", 0, 0, 0, proc_dispinfo_read, invalid_write},
-    {"/dev/fb", 0, 0, 0}, 
+    {"/dev/fb", 0, 0, 0,invalid_read,fb_write}, 
+    {"/dev/events",0,0,0,events_read,invalid_write},
 #include "files.h"
 };
 
@@ -72,7 +75,6 @@ int fs_open(const char *pathname, int flags, int mode)
   {
     if (strcmp(file_table[fd].name, pathname) == 0)
     {
-      //Log("pathname = %s",pathname);
       file_table[fd].open_offset = 0;
       break;
     }
@@ -99,6 +101,11 @@ size_t fs_read(int fd, void *buf, size_t len)
     
    // Log("len = %d",len);
     return len;
+  }
+  else if(fd == FD_DEV_EVENTS){
+    int read_len = file_table[fd].read(buf,0,len);
+    file_table[fd].open_offset += read_len;
+    return read_len;
   }
   else if (fd >= FD_DEV_FB)
   {
@@ -168,7 +175,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
     size_t size = file_table[fd].size;
     size_t aval_size = size - offset;
     size_t write_len = (aval_size > len)?len:aval_size;
-    fb_write(buf,offset,write_len);
+    file_table[fd].write(buf,offset,write_len);
     file_table[fd].open_offset += write_len;
     return write_len;
   }
