@@ -23,7 +23,7 @@ bool is_diff_page(paddr_t addr, int len)
 
 paddr_t page_translate(paddr_t addr)
 {
-  paddr_t direct_entry_addr = cpu.cr3 + ((addr >> 22) << 2);
+  paddr_t direct_entry_addr = (cpu.cr3.val & 0xfffff000) | ((addr >> 22) << 2);
   paddr_t direct_entry = pmem_rw(direct_entry_addr, uint32_t);
   if (!(direct_entry & 0x1))
     assert(0);
@@ -42,7 +42,7 @@ uint32_t paddr_read(paddr_t addr, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-    if (cpu.cr0 & 0x80000000)
+    if (cpu.cr0.paging)
     {
       if (is_diff_page(addr, len))
       {
@@ -66,7 +66,7 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-    if (cpu.cr0 & 0x80000000)
+    if (cpu.cr0.paging)
     {
       if (is_diff_page(addr, len))
       {
