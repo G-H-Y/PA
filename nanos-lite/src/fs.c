@@ -200,5 +200,5 @@ void init_fs()
   int screen_h = 0;
   dispinfo_read(&screen_w, dispinfo + 6, 4);
   dispinfo_read(&screen_h,dispinfo + 18, 4);*/
-  file_table[FD_DEV_FB].size = screen_width() * screen_height() * 3;
+  file_table[FD_DEV_FB].size = screen_width() * screen_height() * 4;
 }
