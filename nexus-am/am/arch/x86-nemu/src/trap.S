@@ -13,9 +13,9 @@ asm_trap:
   call irq_handle
   pushl %eax
   popl %esp
-  addl $4, %esp
+  addl $16, %esp
 
-  addl $4, %esp
+  # addl $4, %esp
   
   popal
   addl $8, %esp
