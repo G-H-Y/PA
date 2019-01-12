@@ -97,12 +97,14 @@ size_t fs_read(int fd, void *buf, size_t len)
 {
   if (fd == FD_PROC_DISPINFO)
   {
-    return file_table[fd].read(buf, 0, 0);
+    size_t len = file_table[fd].read(buf, 0, 0);
+    Log("len = %d",len);
+    return len;
   }
   else if (fd >= FD_DEV_FB)
   {
     //Log("file size = %d,len = %d",file_table[fd].size,len);
-     Log("before read: openoffset = %d",file_table[fd].open_offset);
+    // Log("before read: openoffset = %d",file_table[fd].open_offset);
     size_t disk_offset = file_table[fd].disk_offset;
     size_t open_offset = file_table[fd].open_offset;
     size_t fsize = file_table[fd].size;
