@@ -94,10 +94,11 @@ size_t fs_filesz(int fd)
 }
 
 size_t fs_read(int fd, void *buf, size_t len)
-{
+{ 
+  Log("before read len = %d",len);
   if (fd == FD_PROC_DISPINFO)
   {
-    size_t len = file_table[fd].read(buf, 0, 0);
+    file_table[fd].read(buf, 0, 0);
     Log("len = %d",len);
     return len;
   }
