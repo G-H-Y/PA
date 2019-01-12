@@ -67,7 +67,7 @@ static Finfo file_table[] __attribute__((used)) = {
     {"stdin", 0, 0, 0, invalid_read, invalid_write},
     {"stdout", 0, 0, 0, invalid_read, serial_write},
     {"stderr", 0, 0, 0, invalid_read, serial_write},
-    {"/proc/dispinfo", 0, 0, 0, proc_dispinfo_read, invalid_write},
+    {"/proc/dispinfo", 23, 0, 0, proc_dispinfo_read, invalid_write},
     {"/dev/fb", 0, 0, 0,invalid_read,fb_write}, 
 #include "files.h"
 };
@@ -99,6 +99,7 @@ size_t fs_read(int fd, void *buf, size_t len)
   if (fd == FD_PROC_DISPINFO)
   {
     file_table[fd].read(buf, 0, 0);
+    file_table[fd].open_offset += file_table[fd].size;
     Log("len = %d",len);
     return len;
   }
