@@ -52,6 +52,7 @@ _Context *_kcontext(_Area stack, void (*entry)(void *), void *arg) {
   _Context *tf = stack.end - sizeof(_Context);
   tf->eip = (uintptr_t)entry;
   tf->cs = 8;
+  tf->esp = (uintptr_t)tf;
   return tf;
 }
 
