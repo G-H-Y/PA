@@ -46,6 +46,7 @@ size_t proc_dispinfo_read(void *buf, size_t offset, size_t len)
 {
   int screen_w = screen_width();
   int screen_h = screen_height();
+  Log("w = %d,h = %d",screen_w,screen_h);
   sprintf(buf,"%s %d %c %s %d %c","WIDTH:",screen_w,'\n',"HEIGHT:",screen_h,'\n');
   //file_table[FD_PROC_DISPINFO].size = cnt;
   Log("buf size = %d",strlen(buf));
@@ -161,7 +162,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
     return len;
   }
   else if(fd == FD_DEV_FB){
-    Log("fd = %d",fd);
+    //Log("fd = %d",fd);
     size_t offset = file_table[fd].open_offset;
     size_t size = file_table[fd].size;
     size_t aval_size = size - offset;
