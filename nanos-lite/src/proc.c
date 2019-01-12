@@ -35,5 +35,6 @@ _Context* schedule(_Context *prev) {
   Log("schedule");
   current->cp = prev;
   current = &pcb[0];
+  printf("current->cp = %d\n",current->cp);
   return current->cp;
 }
