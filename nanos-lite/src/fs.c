@@ -86,17 +86,17 @@ size_t fs_filesz(int fd)
 
 size_t fs_read(int fd, void *buf, size_t len)
 { 
-  Log("before read len = %d",len);
+  //Log("before read len = %d",len);
   if (fd == FD_PROC_DISPINFO)
   {
     int size = file_table[fd].read(buf, 0, 0);
     file_table[fd].size = size;
-    Log("size = %d,openoffset = %d",file_table[fd].size,file_table[fd].open_offset);
+    //Log("size = %d,openoffset = %d",file_table[fd].size,file_table[fd].open_offset);
     size_t aval_size = file_table[fd].size - file_table[fd].open_offset;
     len = (aval_size > len) ? len : aval_size;
     file_table[fd].open_offset += file_table[fd].size;
     
-    Log("len = %d",len);
+   // Log("len = %d",len);
     return len;
   }
   else if (fd >= FD_DEV_FB)
@@ -200,5 +200,5 @@ void init_fs()
   int screen_h = 0;
   dispinfo_read(&screen_w, dispinfo + 6, 4);
   dispinfo_read(&screen_h,dispinfo + 18, 4);*/
-  file_table[FD_DEV_FB].size = screen_width() * screen_height();
+  file_table[FD_DEV_FB].size = screen_width() * screen_height() * 4;
 }
