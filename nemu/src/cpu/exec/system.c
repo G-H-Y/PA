@@ -56,6 +56,7 @@ make_EHelper(int) {
 
 make_EHelper(iret) {
   //TODO();
+  Log("esp = 0x%x",cpu.esp);
   rtl_pop(&cpu.eip);
   //printf("in iret: cpu_eip = 0x%x\n",cpu.eip);
   rtl_pop(&cpu.cs);
