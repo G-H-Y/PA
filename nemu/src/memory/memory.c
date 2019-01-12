@@ -13,18 +13,19 @@ uint8_t pmem[PMEM_SIZE];
 /* Memory accessing interfaces */
 
 bool is_diff_page(paddr_t addr,int len){
-  paddr_t offset = addr & 0xfff;
+  paddr_t page_offset = ((addr >> 12) & 0x3ff) << 2;
   paddr_t max_offset = 0xfff - len;
-  if(offset > max_offset) return true;
+  if(page_offset > max_offset) return true;
   return false;
 }
 
 paddr_t page_translate(paddr_t addr){
-  paddr_t page_entry = cpu.cr3 + (addr >> 22);
+  paddr_t page_addr = cpu.cr3 + ((addr >> 22) << 2);
+  assert(page_addr & 0x1);
+  paddr_t page_offset = ((addr >> 12) & 0x3ff) << 2;
+  paddr_t page_entry = pmem_rw(page_addr + page_offset, uint32_t);
   assert(page_entry & 0x1);
-  paddr_t page = pmem_rw(page_entry,uint32_t);
-  assert(page & 0x1);
-  paddr_t real_addr = (page << 20) | (addr & 0xfff);
+  paddr_t real_addr = (page_entry & 0xfffff000) | (addr & 0xfff);
   return real_addr;
 }
 
