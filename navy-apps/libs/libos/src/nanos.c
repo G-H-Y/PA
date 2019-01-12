@@ -22,9 +22,11 @@ intptr_t _syscall_(int type, intptr_t a0, intptr_t a1, intptr_t a2){
 #else
 #error _syscall_ is not implemented
 #endif
+int _execve(const char *fname, char * const argv[], char *const envp[]);
 
 void _exit(int status) {
-  _syscall_(SYS_exit, status, 0, 0);
+  //_syscall_(SYS_exit, status, 0, 0);
+  _execve("/bin/init",NULL,NULL);
   while (1);
 }
 
@@ -74,8 +76,9 @@ off_t _lseek(int fd, off_t offset, int whence) {
 }
 
 int _execve(const char *fname, char * const argv[], char *const envp[]) {
-  _exit(SYS_execve);
-  return 0;
+  //_exit(SYS_execve);
+  int ret = _syscall_(SYS_execve,(uintptr_t)fname,(uintptr_t)argv,(uintptr_t)envp);
+  return ret;
 }
 
 // The code below is not used by Nanos-lite.

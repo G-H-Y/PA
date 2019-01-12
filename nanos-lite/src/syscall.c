@@ -1,6 +1,9 @@
 #include "common.h"
 #include "syscall.h"
 #include "fs.h"
+#include "proc.h"
+
+void naive_uload(PCB *pcb, const char *filename);
 
 _Context *do_syscall(_Context *c)
 {
@@ -30,6 +33,8 @@ _Context *do_syscall(_Context *c)
   case SYS_exit:
     _halt(a[1]);
     break;
+  case SYS_execve:
+    naive_uload(NULL,filename);
   case SYS_write:
    /* if ((fd == 1) || (fd == 2))
     {
