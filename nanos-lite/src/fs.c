@@ -59,6 +59,7 @@ size_t proc_dispinfo_read(void *buf, size_t offset, size_t len)
   tmp += 4;
   strcpy(tmp,"\n");
   tmp++;
+  Log("buf = %s",buf);
   return (tmp - (char*)buf);
 }
 
