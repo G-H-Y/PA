@@ -73,6 +73,7 @@ int fs_open(const char *pathname, int flags, int mode)
     if (strcmp(file_table[fd].name, pathname) == 0)
     {
       //Log("pathname = %s",pathname);
+      file_table[fd].open_offset = 0;
       break;
     }
   }
@@ -189,7 +190,7 @@ size_t fs_write(int fd, const void *buf, size_t len)
 int fs_close(int fd)
 {
   //Log("close file: %d",fd);
-  file_table[fd].open_offset = 0;
+  //file_table[fd].open_offset = 0;
   return 0;
 }
 
