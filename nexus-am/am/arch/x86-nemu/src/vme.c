@@ -86,8 +86,10 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
   tf->cs = 8;
   int * tmp = ustack.end - 3 * sizeof(uintptr_t);
   int i = 0;
-  while(i<3)
+  while(i<3){
     tmp[i] = 0;
+    i++;
+  }
   printf("in ucontext: tf = %d\n",tf);
   return tf;
 }
