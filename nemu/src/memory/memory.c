@@ -50,7 +50,9 @@ uint32_t paddr_read(paddr_t addr, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-    //Log("in read");
+    if(addr == 37736576){
+      Log("data = %d",pmem_rw(addr, uint32_t));
+    }
     if (cpu.cr0.paging)
     {
       //Log("translate addr");
