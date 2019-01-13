@@ -5,6 +5,7 @@ make_EHelper(mov) {
   if((id_dest->addr == 37736576)&&(id_dest->type = OP_TYPE_MEM)){
     Log("id_src->type = %d, id_src->val = %d",id_src->type,id_src->val);
     Log("id_src->reg = %d",id_src->reg);
+    Log("eip = 0x%x",cpu.eip);
   }
   operand_write(id_dest, &id_src->val);
   print_asm_template2(mov);
