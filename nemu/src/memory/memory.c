@@ -45,7 +45,7 @@ uint32_t paddr_read(paddr_t addr, int len)
     //Log("in read");
     if (cpu.cr0.paging)
     {
-      Log("translate addr");
+      //Log("translate addr");
       if (is_diff_page(addr, len))
       {
         Log("addr = 0x%x,len = %d", addr, len);
@@ -71,7 +71,7 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
    //Log("in write");
     if (cpu.cr0.paging)
     {
-       Log("translate addr");
+       //Log("translate addr");
       if (is_diff_page(addr, len))
       {
         Log("addr = 0x%x,len = %d", addr, len);
