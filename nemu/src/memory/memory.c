@@ -57,7 +57,7 @@ paddr_t page_translate(paddr_t addr)
   paddr_t direct_entry = pmem_rw(direct_entry_addr, uint32_t);
   if (!(direct_entry & 0x1)){
     //Log("eip= 0x%x",cpu.eip);
-    Log("va = %d,ptr = %d,\nptr+offset = %d,ptr[offset] = %d",addr,cpu.cr3.val,direct_entry_addr,direct_entry);
+   // Log("va = %d,ptr = %d,\nptr+offset = %d,ptr[offset] = %d",addr,cpu.cr3.val,direct_entry_addr,direct_entry);
     assert(0);
   }
     
@@ -66,7 +66,7 @@ paddr_t page_translate(paddr_t addr)
   paddr_t page_entry_addr = page_addr | page_offset;
   paddr_t page_entry = pmem_rw(page_entry_addr, uint32_t);
   if (!(page_entry & 0x1)){
-    Log("page entry : addr = 0x%x, page_entry= 0x%x",addr, page_entry);
+   // Log("page entry : addr = 0x%x, page_entry= 0x%x",addr, page_entry);
     assert(0);
   }
     
@@ -80,9 +80,6 @@ uint32_t paddr_read(paddr_t addr, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-    if(addr == 37736576){
-      Log("data = %d",pmem_rw(addr, uint32_t));
-    }
     if (cpu.cr0.paging)
     {
       //Log("translate addr");
@@ -108,9 +105,6 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-    if(addr == 37736576){
-      Log("data = %d,len = %d",data,len);
-    }
     if (cpu.cr0.paging)
     {
        //Log("translate addr");
