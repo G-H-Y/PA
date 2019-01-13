@@ -19,6 +19,7 @@ void free_page(void *p) {
 
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
+  printf("in mmbrk\n");
   //need a new page?
   uintptr_t aval_addr = 0xfff - (current->max_brk & 0xfff);
   uintptr_t inc = new_brk - current->max_brk ;
