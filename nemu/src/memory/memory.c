@@ -29,7 +29,7 @@ paddr_t page_translate(paddr_t va)
 {
     paddr_t page_dir = cpu.cr3.val;
     paddr_t dir_entry_addr = page_dir + (PDX(va) << 2);
-    PDE page_tab =(PDE)paddr_read(dir_entry_addr, 4);
+    PDE page_tab =(PDE)pmem_rw(dir_entry_addr, uint32_t);
 
     if(!page_tab.present){
       printf("Maybe we are break something down at page dir\n");
@@ -38,7 +38,7 @@ paddr_t page_translate(paddr_t va)
 
 
     paddr_t tab_entry_addr = (page_tab.val & (~1)) + (PTX(va) << 2);
-    PTE tab_entry = (PTE)paddr_read(tab_entry_addr, 4);
+    PTE tab_entry = (PTE)pmem_rw(tab_entry_addr, uint32_t);
     if(!tab_entry.present){
       printf("Maybe we are break something down at page table %x\n", va);
       assert(0);
