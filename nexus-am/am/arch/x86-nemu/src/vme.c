@@ -82,7 +82,7 @@ void _switch(_Context *c) {
   cur_as = c->prot;
 }
 
-/*int _map(_Protect *p, void *va, void *pa, int mode) {
+int _map(_Protect *p, void *va, void *pa, int mode) {
   // printf("make a map from va[%x] tp pa[%x]\n", (int)va, (int)pa);
 
   PDE * updir = p->ptr; // index of page dir
@@ -105,10 +105,10 @@ void _switch(_Context *c) {
 
   return 0;
 
-}*/
+}
 
 
-int _map(_Protect *p, void *va, void *pa, int mode) {
+/*int _map(_Protect *p, void *va, void *pa, int mode) {
   //printf("in map: va = %d\n",(uint32_t)va);
   uint32_t pd_offset = ((uintptr_t)va >> 22) << 2;
   uint32_t* ptr = p->ptr;
@@ -132,7 +132,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
   pt[pt_offset] = (uintptr_t)pa | PTE_P;
  // printf("/////////////////////////////////\n");
   return 0;
-}
+}*/
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
    _Context *tf = ustack.end - sizeof(_Context) - 3 * sizeof(uintptr_t);
