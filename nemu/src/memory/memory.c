@@ -21,9 +21,9 @@ bool is_diff_page(paddr_t addr, int len)
   return false;
 }
 
-#define PDX(va) (((uint32_t)(va) >> 22) & 0x3ff)
-#define PTX(va) (((uint32_t)(va) >> 12) & 0x3ff)
-#define OFF(va) ((uint32_t)(va)&0xfff)
+//#define PDX(va) (((uint32_t)(va) >> 22) & 0x3ff)
+//#define PTX(va) (((uint32_t)(va) >> 12) & 0x3ff)
+//#define OFF(va) ((uint32_t)(va)&0xfff)
 /**
 paddr_t page_translate(paddr_t va)
 {

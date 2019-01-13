@@ -82,7 +82,7 @@ void _switch(_Context *c) {
   cur_as = c->prot;
 }
 
-int _map(_Protect *p, void *va, void *pa, int mode) {
+/*int _map(_Protect *p, void *va, void *pa, int mode) {
   // printf("make a map from va[%x] tp pa[%x]\n", (int)va, (int)pa);
 
   PDE * updir = p->ptr; // index of page dir
@@ -105,34 +105,34 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 
   return 0;
 
-}
-/**
+}*/
+
+
 int _map(_Protect *p, void *va, void *pa, int mode) {
-  printf("in map: va = %d\n",(uint32_t)va);
+  //printf("in map: va = %d\n",(uint32_t)va);
   uint32_t pd_offset = ((uintptr_t)va >> 22) << 2;
   uint32_t* ptr = p->ptr;
-  printf("in map: ptr = %d\n",(uint32_t)ptr);
-  printf("in map: ptr+offset = %d\n",(uint32_t)ptr+pd_offset);
+  //printf("in map: ptr = %d\n",(uint32_t)ptr);
+  //printf("in map: ptr+offset = %d\n",(uint32_t)ptr+pd_offset);
   uint32_t pd_entry = ptr[pd_offset];
-  printf("pd_entry = %d\n",pd_entry);
+  //printf("pd_entry = %d\n",pd_entry);
   if(!(pd_entry & 0x1)){
     PDE *uptable = (PDE*)(pgalloc_usr(1));
     ptr[pd_offset] = (uintptr_t)uptable | PTE_P;
     pd_entry = ptr[pd_offset];
-    printf("in map: ptr[offset] = %d\n",ptr[pd_offset]);
+    //printf("in map: ptr[offset] = %d\n",ptr[pd_offset]);
   }
   else {
     pd_entry = pd_entry >> 1;
     pd_entry = pd_entry << 1;
-    printf("lsllall\n");
+    //printf("lsllall\n");
   }
   uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) << 2;
   uint32_t* pt = (uint32_t*)(pd_entry & 0xfffff000);
   pt[pt_offset] = (uintptr_t)pa | PTE_P;
-  printf("/////////////////////////////////\n");
+ // printf("/////////////////////////////////\n");
   return 0;
 }
-*/
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
    _Context *tf = ustack.end - sizeof(_Context) - 3 * sizeof(uintptr_t);
