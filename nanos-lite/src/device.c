@@ -3,6 +3,7 @@
 #include <fs.h>
 
 size_t serial_write(const void *buf, size_t offset, size_t len) {
+  Log("in serial write");
   _yield();
   int i = 0;
   char *tmp = (char*)buf;
