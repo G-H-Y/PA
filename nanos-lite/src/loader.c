@@ -14,12 +14,12 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     size_t file_size = fs_filesz(fd);
     int nr_page = file_size / PGSIZE ;
     if(file_size % PGSIZE) nr_page++;
-    printf("nr_page = %d\n",nr_page);
+    //printf("nr_page = %d\n",nr_page);
     
     void *pa = NULL;
     void *va = (void*)DEFAULT_ENTRY;
     while(nr_page--){
-      printf("va = %d\n",(uint32_t)va);
+     // printf("va = %d\n",(uint32_t)va);
       pa = (void*)(new_page(1));
       _map(&(pcb->as),(void*)va,(void*)pa,1);
       fs_read(fd,(void*)pa,PGSIZE);     
@@ -28,7 +28,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_lseek(fd,0,SEEK_SET);
     fs_close(fd);
   }
-  Log("end load");
+ // Log("end load");
   return DEFAULT_ENTRY;
 }
 
@@ -46,9 +46,9 @@ void context_kload(PCB *pcb, void *entry) {
 }
 
 void context_uload(PCB *pcb, const char *filename) {
-  Log("begin loader");
+  //Log("begin loader");
   _protect(&(pcb->as));
-  Log("pcb->as->ptr = %d",pcb->as.ptr);
+  //Log("pcb->as->ptr = %d",pcb->as.ptr);
   uintptr_t entry = loader(pcb, filename);
 
   _Area stack;
@@ -56,5 +56,5 @@ void context_uload(PCB *pcb, const char *filename) {
   stack.end = stack.start + sizeof(pcb->stack);
 
   pcb->cp = _ucontext(&pcb->as, stack, stack, (void *)entry, NULL);
-  Log("leave uload");
+  //Log("leave uload");
 }
