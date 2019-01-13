@@ -99,6 +99,7 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   }
   else
   {
+    assert(0);
     mmio_write(addr, len, data, map_NO);
   }
 }
