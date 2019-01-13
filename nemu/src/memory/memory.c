@@ -41,11 +41,11 @@ paddr_t page_translate(paddr_t va)
     PTE tab_entry = (PTE)pmem_rw(tab_entry_addr, uint32_t);
     if(!tab_entry.present){
       printf("Maybe we are break something down at page table %x\n", va);
+      printf("tab_entry is %x\n", tab_entry.val);
       assert(0);
     }
 
     return OFF(va) | (tab_entry.page_frame << 12);
-
 }
 
 /**
