@@ -223,6 +223,7 @@ static inline void update_eip(void) {
   //
   if (decoding.is_jmp) { decoding.is_jmp = 0; }
   else { cpu.eip = decoding.seq_eip; }
+  Log("eip = 0x%x",cpu.eip);
     //printf("in update_eip: eip = %x\n",cpu.eip);
 }
 
