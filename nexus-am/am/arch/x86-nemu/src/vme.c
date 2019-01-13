@@ -59,6 +59,8 @@ int _protect(_Protect *p) {
   // map kernel space
   for (int i = 0; i < NR_PDE; i ++) {
     updir[i] = kpdirs[i];
+    if(i == 128) 
+      printf("updir + i = %d\n",(uint32_t)updir+i);
   }
 
   p->area.start = (void*)0x8000000;
