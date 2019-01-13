@@ -81,6 +81,7 @@ void _switch(_Context *c) {
 int _map(_Protect *p, void *va, void *pa, int mode) {
   uint32_t pd_offset = ((uintptr_t)va >> 22) << 2;
   uint32_t* ptr = p->ptr;
+  printf("in map: ptr(cr3) = 0x%x",(uint32_t)ptr);
   uint32_t pd_entry = ptr[pd_offset];
   if(pd_entry == kpdirs[pd_offset]){
     PDE *uptable = (PDE*)(pgalloc_usr(1));
