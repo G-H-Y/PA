@@ -73,6 +73,7 @@ void get_cur_as(_Context *c) {
 }
 
 void _switch(_Context *c) {
+  printf("in switch\n");
   set_cr3(c->prot->ptr);
   cur_as = c->prot;
 }
