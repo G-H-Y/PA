@@ -43,7 +43,7 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
       }
     }
   }
-  printf("start set cr3 = %d\n",(int)kpdirs);
+ // printf("start set cr3 = %d\n",(int)kpdirs);
   set_cr3(kpdirs);
   set_cr0(get_cr0() | CR0_PG);
   //printf("in vem init: have set cr0\n");
@@ -51,16 +51,14 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
 }
 
 int _protect(_Protect *p) {
-  printf("in protect\n");
+ // printf("in protect\n");
   PDE *updir = (PDE*)(pgalloc_usr(1));
-  printf("updir = %d\n",(uint32_t)updir);
+  //printf("updir = %d\n",(uint32_t)updir);
   p->pgsize = 4096;
   p->ptr = updir;
   // map kernel space
   for (int i = 0; i < NR_PDE; i ++) {
     updir[i] = kpdirs[i];
-    if(i == 128) 
-      printf("updir + i = %d\n",(uint32_t)updir+i);
   }
 
   p->area.start = (void*)0x8000000;
@@ -77,7 +75,7 @@ void get_cur_as(_Context *c) {
 }
 
 void _switch(_Context *c) {
-  printf("in switch\n");
+ // printf("in switch\n");
   set_cr3(c->prot->ptr);
   cur_as = c->prot;
 }
