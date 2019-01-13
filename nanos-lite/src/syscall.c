@@ -2,8 +2,9 @@
 #include "syscall.h"
 #include "fs.h"
 #include "proc.h"
-
+extern PCB *current;
 void naive_uload(PCB *pcb, const char *filename);
+int mm_brk(uintptr_t new_brk);
 
 _Context *do_syscall(_Context *c)
 {
@@ -23,6 +24,7 @@ _Context *do_syscall(_Context *c)
   int flags = a[2];
   int mode = a[3];
 
+  uintptr_t new_brk = a[1];
   //Log("sys = %d", a[0]);
   switch (a[0])
   {
@@ -35,11 +37,16 @@ _Context *do_syscall(_Context *c)
     _halt(a[1]);
     break;
   case SYS_execve:
-    naive_uload(NULL,filename);
+    naive_uload(NULL, filename);
   case SYS_write:
-      c->GPRx = fs_write(fd, buf, count);
+    c->GPRx = fs_write(fd, buf, count);
     break;
   case SYS_brk:
+    if (current->max_brk < new_brk){
+      mm_brk(new_brk);
+      current->max_brk = new_brk;
+    }
+    current->cur_brk = new_brk;
     c->GPRx = 0;
     break;
   case SYS_open:

@@ -27,9 +27,9 @@ void hello_fun(void *arg) {
 void init_proc() {
   Log("in init_proc");
   //naive_uload(NULL, "/bin/init");
-  context_uload(&pcb[0], "/bin/dummy");
+  context_uload(&pcb[0], "/bin/pal");
   //Log("uload end");
-//  context_kload(&pcb[0],(void*)hello_fun);
+  context_uload(&pcb[0],"/bin/hello");
 //Log("pcb[0]->as->ptr = %d",pcb[0].as.ptr);
   
   switch_boot_pcb();
@@ -37,7 +37,7 @@ void init_proc() {
 
 _Context* schedule(_Context *prev) {
   current->cp = prev;
- // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
-  current = &pcb[0];
+  current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+  //current = &pcb[0];
   return current->cp;
 }
