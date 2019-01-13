@@ -24,7 +24,7 @@ bool is_diff_page(paddr_t addr, int len)
 #define PDX(va) (((uint32_t)(va) >> 22) & 0x3ff)
 #define PTX(va) (((uint32_t)(va) >> 12) & 0x3ff)
 #define OFF(va) ((uint32_t)(va)&0xfff)
-
+/**
 paddr_t page_translate(paddr_t va)
 {
     paddr_t page_dir = cpu.cr3.val;
@@ -47,8 +47,9 @@ paddr_t page_translate(paddr_t va)
 
     return OFF(va) | (tab_entry.page_frame << 12);
 }
+*/
 
-/**
+
 paddr_t page_translate(paddr_t addr)
 {
   
@@ -65,14 +66,14 @@ paddr_t page_translate(paddr_t addr)
   paddr_t page_entry_addr = page_addr | page_offset;
   paddr_t page_entry = pmem_rw(page_entry_addr, uint32_t);
   if (!(page_entry & 0x1)){
-    Log("page entry : addr = 0x%x",addr);
+    Log("page entry : addr = 0x%x, page_entry= 0x%x",addr, page_entry);
     assert(0);
   }
     
   paddr_t real_addr = (page_entry & 0xfffff000) | (addr & 0xfff);
   return real_addr;
 }
-*/
+
 
 uint32_t paddr_read(paddr_t addr, int len)
 {
