@@ -9,7 +9,6 @@ void init_proc(void);
 
 int main() {
 #ifdef HAS_VME
-  //Log("begin init_mm");
   init_mm();
 #endif
 

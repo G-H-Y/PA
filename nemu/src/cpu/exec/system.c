@@ -35,7 +35,7 @@ make_EHelper(mov_r2cr) {
   }
   else if(id_dest->reg == 3){
     cpu.cr3.val = id_src->val;
-    Log("cr3 = 0x%x",cpu.cr3.val);
+   // Log("cr3 = 0x%x",cpu.cr3.val);
   }
   else{
     panic("no such control reg!");
