@@ -80,31 +80,6 @@ void _switch(_Context *c) {
   cur_as = c->prot;
 }
 
-/*int _map(_Protect *p, void *va, void *pa, int mode) {
-  // printf("make a map from va[%x] tp pa[%x]\n", (int)va, (int)pa);
-
-  PDE * updir = p->ptr; // index of page dir
-  PTE pax = updir[PDX(va)] ; // address of page table
-
-  PTE * ptaddr;
-  if(!(pax & 1)){
-    ptaddr = (PTE*)(pgalloc_usr(1));
-    updir[PDX(va)] = (int)ptaddr | PTE_P;
-  }else{
-    pax = (pax >> 1) << 1;
-    ptaddr = (PTE *)pax;
-  }
-
-  ptaddr += PTX(va) ; // find the entry
-
-  *ptaddr = PTE_ADDR(pa) | PTE_P;
-
-  // mode is difficult, how to use it !
-
-  return 0;
-
-}*/
-
 //左移了两位！！！！！！！！！！！！！！！！！！！！！！！！！！
 int _map(_Protect *p, void *va, void *pa, int mode) {
   //printf("in map: va = %d\n",(uint32_t)va);
@@ -120,11 +95,6 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
     pd_entry = ptr[pd_offset];
     //printf("in map: ptr[offset] = %d\n",ptr[pd_offset]);
   }
-  /*else {
-    pd_entry = pd_entry >> 1;
-    pd_entry = pd_entry << 1;
-    //printf("lsllall\n");
-  }*/
   uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) ;
   uint32_t* pt = (uint32_t*)(pd_entry & 0xfffff000);
   pt[pt_offset] = (uintptr_t)pa | PTE_P;
