@@ -51,6 +51,7 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
 }
 
 int _protect(_Protect *p) {
+  printf("in protect\n");
   PDE *updir = (PDE*)(pgalloc_usr(1));
   p->pgsize = 4096;
   p->ptr = updir;
@@ -90,8 +91,9 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
     PDE *uptable = (PDE*)(pgalloc_usr(1));
     ptr[pd_offset] = (uintptr_t)uptable | PTE_P;
     pd_entry = ptr[pd_offset];
+    printf("in map: ptr[offset] = %d\n",ptr[pd_offset]);
   }
-  printf("in map: ptr[offset] = %d\n",ptr[pd_offset]);
+  
   uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) << 2;
   uint32_t* pt = (uint32_t*)(pd_entry & 0xfffff000);
   pt[pt_offset] = (uintptr_t)pa | PTE_P;
