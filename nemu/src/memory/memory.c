@@ -76,7 +76,9 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   int map_NO = is_mmio(addr);
   if (map_NO == -1)
   {
-   //Log("in write");
+    if(addr == 37736576){
+      Log("data = %d",data);
+    }
     if (cpu.cr0.paging)
     {
        //Log("translate addr");
