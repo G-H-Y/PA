@@ -3,7 +3,7 @@
 
 size_t get_ramdisk_size();
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
-#define DEFAULT_ENTRY 0x4000000
+#define DEFAULT_ENTRY 0x8048000
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename,0,0);
