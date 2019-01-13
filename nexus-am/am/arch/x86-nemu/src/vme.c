@@ -53,6 +53,7 @@ int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
 int _protect(_Protect *p) {
   printf("in protect\n");
   PDE *updir = (PDE*)(pgalloc_usr(1));
+  printf("updir = %d\n",(uint32_t)updir);
   p->pgsize = 4096;
   p->ptr = updir;
   // map kernel space
