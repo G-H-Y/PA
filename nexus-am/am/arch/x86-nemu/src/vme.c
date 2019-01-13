@@ -82,11 +82,11 @@ void _switch(_Context *c) {
   cur_as = c->prot;
 }
 
-int _map(_Protect *p, void *va, void *pa, int mode) {
+/*int _map(_Protect *p, void *va, void *pa, int mode) {
   // printf("make a map from va[%x] tp pa[%x]\n", (int)va, (int)pa);
 
   PDE * updir = p->ptr; // index of page dir
-  PTE pax = updir[PDX(va)] << 2; // address of page table
+  PTE pax = updir[PDX(va)] ; // address of page table
 
   PTE * ptaddr;
   if(!(pax & 1)){
@@ -97,7 +97,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
     ptaddr = (PTE *)pax;
   }
 
-  ptaddr += PTX(va) << 2; // find the entry
+  ptaddr += PTX(va) ; // find the entry
 
   *ptaddr = PTE_ADDR(pa) | PTE_P;
 
@@ -105,12 +105,12 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 
   return 0;
 
-}
+}*/
 
 
-/*int _map(_Protect *p, void *va, void *pa, int mode) {
+int _map(_Protect *p, void *va, void *pa, int mode) {
   //printf("in map: va = %d\n",(uint32_t)va);
-  uint32_t pd_offset = ((uintptr_t)va >> 22) << 2;
+  uint32_t pd_offset = ((uintptr_t)va >> 22);
   uint32_t* ptr = p->ptr;
   //printf("in map: ptr = %d\n",(uint32_t)ptr);
   //printf("in map: ptr+offset = %d\n",(uint32_t)ptr+pd_offset);
@@ -127,12 +127,12 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
     pd_entry = pd_entry << 1;
     //printf("lsllall\n");
   }
-  uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) << 2;
+  uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) ;
   uint32_t* pt = (uint32_t*)(pd_entry & 0xfffff000);
   pt[pt_offset] = (uintptr_t)pa | PTE_P;
  // printf("/////////////////////////////////\n");
   return 0;
-}*/
+}
 
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
