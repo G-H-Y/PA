@@ -14,6 +14,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     size_t file_size = fs_filesz(fd);
     int nr_page = file_size / PGSIZE ;
     if(file_size % PGSIZE) nr_page++;
+    printf("nr_page = %d\n",nr_page);
     
     uint32_t *pa = NULL;
     uint32_t *va = (uint32_t*)DEFAULT_ENTRY;
