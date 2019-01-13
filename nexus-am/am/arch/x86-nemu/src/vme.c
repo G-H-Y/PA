@@ -85,11 +85,10 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
   printf("in map: ptr = %d\n",(uint32_t)ptr);
   printf("in map: ptr+offset = %d\n",(uint32_t)ptr+pd_offset);
   uint32_t pd_entry = ptr[pd_offset];
-  //printf("pd_entry = %d",pd_entry);
+  printf("pd_entry = %d",pd_entry);
   if(pd_entry == kpdirs[pd_offset]){
     PDE *uptable = (PDE*)(pgalloc_usr(1));
-    //ptr[pd_offset] = (uintptr_t)uptable | PTE_P;
-    ptr[pd_offset] = (uintptr_t)uptable &0x1;
+    ptr[pd_offset] = (uintptr_t)uptable | PTE_P;
     pd_entry = ptr[pd_offset];
   }
   printf("in map: ptr[offset] = %d\n",ptr[pd_offset]);
