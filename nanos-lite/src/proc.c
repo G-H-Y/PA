@@ -30,6 +30,7 @@ void init_proc() {
   context_uload(&pcb[0], "/bin/dummy");
   //Log("uload end");
 //  context_kload(&pcb[0],(void*)hello_fun);
+Log("pcb[0]->as->ptr = %d",pcb[0].as.ptr);
   
   switch_boot_pcb();
 }
