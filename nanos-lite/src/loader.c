@@ -16,11 +16,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     if(file_size % PGSIZE) nr_page++;
     printf("nr_page = %d\n",nr_page);
     
-    uint32_t *pa = NULL;
-    uint32_t *va = (uint32_t*)DEFAULT_ENTRY;
+    void *pa = NULL;
+    void *va = (void*)DEFAULT_ENTRY;
     while(nr_page--){
       printf("va = %d\n",(uint32_t)va);
-      pa = (uint32_t*)(new_page(1));
+      pa = (void*)(new_page(1));
       _map(&(pcb->as),(void*)va,(void*)pa,1);
       fs_read(fd,(void*)pa,PGSIZE);     
       va += PGSIZE;
