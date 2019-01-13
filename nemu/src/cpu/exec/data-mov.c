@@ -6,6 +6,7 @@ make_EHelper(mov) {
     Log("id_src->type = %d, id_src->val = %d",id_src->type,id_src->val);
     Log("id_src->reg = %d",id_src->reg);
     Log("eip = 0x%x",cpu.eip);
+    Log("edx = %d",cpu.edx);
   }
   operand_write(id_dest, &id_src->val);
   print_asm_template2(mov);
