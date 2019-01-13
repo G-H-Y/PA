@@ -86,7 +86,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
   // printf("make a map from va[%x] tp pa[%x]\n", (int)va, (int)pa);
 
   PDE * updir = p->ptr; // index of page dir
-  PTE pax = updir[PDX(va)]; // address of page table
+  PTE pax = updir[PDX(va)] << 2; // address of page table
 
   PTE * ptaddr;
   if(!(pax & 1)){
@@ -97,7 +97,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
     ptaddr = (PTE *)pax;
   }
 
-  ptaddr += PTX(va); // find the entry
+  ptaddr += PTX(va) << 2; // find the entry
 
   *ptaddr = PTE_ADDR(pa) | PTE_P;
 
@@ -133,6 +133,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
  // printf("/////////////////////////////////\n");
   return 0;
 }*/
+
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
    _Context *tf = ustack.end - sizeof(_Context) - 3 * sizeof(uintptr_t);
