@@ -56,6 +56,7 @@ int _protect(_Protect *p) {
   //printf("updir = %d\n",(uint32_t)updir);
   p->pgsize = 4096;
   p->ptr = updir;
+  printf("updir[0] = %d",updir[0]);
   // map kernel space
   /*for (int i = 0; i < NR_PDE; i ++) {
     updir[i] = kpdirs[i];
