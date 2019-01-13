@@ -107,7 +107,7 @@ void _switch(_Context *c) {
 
 }*/
 
-
+//左移了两位！！！！！！！！！！！！！！！！！！！！！！！！！！
 int _map(_Protect *p, void *va, void *pa, int mode) {
   //printf("in map: va = %d\n",(uint32_t)va);
   uint32_t pd_offset = ((uintptr_t)va >> 22);
@@ -122,11 +122,11 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
     pd_entry = ptr[pd_offset];
     //printf("in map: ptr[offset] = %d\n",ptr[pd_offset]);
   }
-  else {
+  /*else {
     pd_entry = pd_entry >> 1;
     pd_entry = pd_entry << 1;
     //printf("lsllall\n");
-  }
+  }*/
   uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) ;
   uint32_t* pt = (uint32_t*)(pd_entry & 0xfffff000);
   pt[pt_offset] = (uintptr_t)pa | PTE_P;
