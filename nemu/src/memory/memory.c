@@ -28,7 +28,7 @@ paddr_t page_translate(paddr_t addr)
   paddr_t direct_entry = pmem_rw(direct_entry_addr, uint32_t);
   if (!(direct_entry & 0x1)){
     Log("cr3 = %d",cpu.cr3.val);
-    Log("direct entry : addr = 0x%x,direct entry = %d",addr,direct_entry);
+    Log("direct entry : va = 0x%x,direct entry = %d,pd_entry = %d",addr,direct_entry,direct_entry_addr);
     assert(0);
   }
     
