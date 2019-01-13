@@ -15,7 +15,7 @@ _Area segments[] = {      // Kernel memory mappings
 #define NR_KSEG_MAP (sizeof(segments) / sizeof(segments[0]))
 
 int _vme_init(void* (*pgalloc_f)(size_t), void (*pgfree_f)(void*)) {
-  printf("start init\n");
+  //printf("start init\n");
   pgalloc_usr = pgalloc_f;
   pgfree_usr = pgfree_f;
 
@@ -78,6 +78,17 @@ void _switch(_Context *c) {
 }
 
 int _map(_Protect *p, void *va, void *pa, int mode) {
+  uint32_t pd_offset = ((uintptr_t)va >> 22) << 2;
+  uint32_t* ptr = p->ptr;
+  uint32_t pd_entry = ptr[pd_offset];
+  if(pd_entry == kpdirs[pd_offset]){
+    PDE *uptable = (PDE*)(pgalloc_usr(1));
+    ptr[pd_offset] = (uintptr_t)uptable | PTE_P;
+    pd_entry = ptr[pd_offset];
+  }
+  uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) << 2;
+  uint32_t* pt = (uint32_t*)(pd_entry & 0xfffff000);
+  pt[pt_offset] = (uintptr_t)pa | PTE_P;
   return 0;
 }
 
@@ -85,6 +96,7 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
    _Context *tf = ustack.end - sizeof(_Context) - 3 * sizeof(uintptr_t);
   tf->eip = (uintptr_t)entry;
   tf->cs = 8;
+  tf->prot->ptr = p->ptr;
   int * tmp = ustack.end - 3 * sizeof(uintptr_t);
   int i = 0;
   while(i<3){

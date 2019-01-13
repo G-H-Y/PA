@@ -1,6 +1,7 @@
 #include <am.h>
 #include <stdlib.h>
 #include <klib.h>
+#include <x86.h>
 
 typedef struct PageMap {
   uintptr_t vpn;

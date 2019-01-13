@@ -43,7 +43,7 @@ uint32_t paddr_read(paddr_t addr, int len)
   if (map_NO == -1)
   {
     //Log("in read");
-    if (cpu.cr0.paging && (addr > 0x8000000))
+    if (cpu.cr0.paging)
     {
       //Log("translate addr");
       if (is_diff_page(addr, len))
@@ -69,7 +69,7 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   if (map_NO == -1)
   {
    //Log("in write");
-    if (cpu.cr0.paging && (addr > 0x8000000))
+    if (cpu.cr0.paging)
     {
        //Log("translate addr");
       if (is_diff_page(addr, len))

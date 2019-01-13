@@ -25,8 +25,8 @@ intptr_t _syscall_(int type, intptr_t a0, intptr_t a1, intptr_t a2){
 int _execve(const char *fname, char * const argv[], char *const envp[]);
 
 void _exit(int status) {
-  //_syscall_(SYS_exit, status, 0, 0);
-  _execve("/bin/init",NULL,NULL);
+  _syscall_(SYS_exit, status, 0, 0);
+  //_execve("/bin/init",NULL,NULL);
   while (1);
 }
 
