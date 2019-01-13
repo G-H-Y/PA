@@ -77,7 +77,7 @@ void paddr_write(paddr_t addr, uint32_t data, int len)
   if (map_NO == -1)
   {
     if(addr == 37736576){
-      Log("data = %d",data);
+      Log("data = %d,len = %d",data,len);
     }
     if (cpu.cr0.paging)
     {
