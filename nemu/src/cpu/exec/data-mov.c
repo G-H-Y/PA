@@ -2,6 +2,9 @@
 
 make_EHelper(mov) {
   //printf("in mov: id_src = %x\n",id_src->val);
+  if((id_dest->addr == 37736576)&&(id_dest->type = OP_TYPE_MEM)){
+    Log("id_src->type = %d, id_src->val = %d",id_src->type,id_src->val);
+  }
   operand_write(id_dest, &id_src->val);
   print_asm_template2(mov);
 }
