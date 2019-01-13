@@ -21,6 +21,34 @@ bool is_diff_page(paddr_t addr, int len)
   return false;
 }
 
+#define PDX(va) (((uint32_t)(va) >> 22) & 0x3ff)
+#define PTX(va) (((uint32_t)(va) >> 12) & 0x3ff)
+#define OFF(va) ((uint32_t)(va)&0xfff)
+
+paddr_t page_translate(paddr_t va)
+{
+    paddr_t page_dir = cpu.cr3.val;
+    paddr_t dir_entry_addr = page_dir + (PDX(va) << 2);
+    PDE page_tab =(PDE)paddr_read(dir_entry_addr, 4);
+
+    if(!page_tab.present){
+      printf("Maybe we are break something down at page dir\n");
+      assert(0);
+    }
+
+
+    paddr_t tab_entry_addr = (page_tab.val & (~1)) + (PTX(va) << 2);
+    PTE tab_entry = (PTE)paddr_read(tab_entry_addr, 4);
+    if(!tab_entry.present){
+      printf("Maybe we are break something down at page table %x\n", va);
+      assert(0);
+    }
+
+    return OFF(va) | (tab_entry.page_frame << 12);
+
+}
+
+/**
 paddr_t page_translate(paddr_t addr)
 {
   
@@ -44,6 +72,7 @@ paddr_t page_translate(paddr_t addr)
   paddr_t real_addr = (page_entry & 0xfffff000) | (addr & 0xfff);
   return real_addr;
 }
+*/
 
 uint32_t paddr_read(paddr_t addr, int len)
 {
