@@ -25,7 +25,7 @@ void hello_fun(void *arg) {
 }
 
 void init_proc() {
-  //Log("in init_proc");
+  Log("in init_proc");
   //naive_uload(NULL, "/bin/init");
   context_uload(&pcb[0], "/bin/dummy");
   //Log("uload end");

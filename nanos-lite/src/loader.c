@@ -25,7 +25,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     fs_lseek(fd,0,SEEK_SET);
     fs_close(fd);
   }
-  
+  Log("end load");
   return DEFAULT_ENTRY;
 }
 
@@ -43,7 +43,7 @@ void context_kload(PCB *pcb, void *entry) {
 }
 
 void context_uload(PCB *pcb, const char *filename) {
-  //Log("begin loader");
+  Log("begin loader");
   _protect(&(pcb->as));
   uintptr_t entry = loader(pcb, filename);
 
