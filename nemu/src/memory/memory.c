@@ -23,10 +23,11 @@ bool is_diff_page(paddr_t addr, int len)
 
 paddr_t page_translate(paddr_t addr)
 {
-  Log("cr3 = %d",cpu.cr3.val);
+  
   paddr_t direct_entry_addr = (cpu.cr3.val & 0xfffff000) | ((addr >> 22) << 2);
   paddr_t direct_entry = pmem_rw(direct_entry_addr, uint32_t);
   if (!(direct_entry & 0x1)){
+    Log("cr3 = %d",cpu.cr3.val);
     Log("direct entry : addr = 0x%x,direct entry = %d",addr,direct_entry);
     assert(0);
   }
