@@ -94,9 +94,6 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
   uint32_t pt_offset = (((uintptr_t)va >> 12) &(0x3ff)) << 2;
   uint32_t* pt = (uint32_t*)(pd_entry & 0xfffff000);
   pt[pt_offset] = (uintptr_t)pa | PTE_P;
-  if((uint32_t)va == 0x8048000){
-    printf("in map: 0x8048000 is %d\n",(uint32_t)pa);
-  }
   printf("/////////////////////////////////\n");
   return 0;
 }
