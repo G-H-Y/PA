@@ -21,6 +21,7 @@ void free_page(void *p) {
 int mm_brk(uintptr_t new_brk) {
   printf("in mmbrk\n");
   //need a new page?
+  printf("newbrk = %d, maxbrk = %d\n");
   uintptr_t aval_addr = 0xfff - (current->max_brk & 0xfff);
   uintptr_t inc = new_brk - current->max_brk ;
   if(inc > aval_addr){
