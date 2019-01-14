@@ -14,7 +14,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
     size_t file_size = fs_filesz(fd);
     int nr_page = file_size / PGSIZE ;
     if(file_size % PGSIZE) nr_page++;
-    printf("nr_page = %d\n",nr_page);
+   // printf("nr_page = %d\n",nr_page);
     
     void *pa = NULL;
     void *va = (void*)DEFAULT_ENTRY;
@@ -24,7 +24,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       _map(&(pcb->as),(void*)va,(void*)pa,1);
       fs_read(fd,(void*)pa,PGSIZE);     
       va += PGSIZE;
-      printf("pa = %d\n",(uintptr_t)pa);
+      //printf("pa = %d\n",(uintptr_t)pa);
     }
     pcb->max_brk = (uintptr_t)(va);
     pcb->cur_brk = (uintptr_t)(va);
