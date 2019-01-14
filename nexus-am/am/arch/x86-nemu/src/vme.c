@@ -81,6 +81,8 @@ void _switch(_Context *c) {
 }
 
 //左移了两位！！！！！！！！！！！！！！！！！！！！！！！！！！
+//ptrr[offset]的位置是ptr+offset*4!!!!我是中了什么邪才想到要左移两位的！！！
+//我靠，六个小时的bug就是这个鬼东西？？？？啊啊啊
 int _map(_Protect *p, void *va, void *pa, int mode) {
   //printf("in map: va = %d\n",(uint32_t)va);
   uint32_t pd_offset = ((uintptr_t)va >> 22);

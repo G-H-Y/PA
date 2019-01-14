@@ -1,5 +1,7 @@
 #include "proc.h"
 #include "fs.h"
+#include "amdev.h"
+#include "klib.h"
 
 #define MAX_NR_PROC 4
 
@@ -10,6 +12,7 @@ void context_uload(PCB *pcb, const char *filename);
 static PCB pcb[MAX_NR_PROC] __attribute__((used));
 static PCB pcb_boot;
 PCB *current;
+PCB *front = NULL;
 
 void switch_boot_pcb()
 {
@@ -33,6 +36,8 @@ void init_proc()
   //naive_uload(NULL, "/bin/init");
   context_uload(&pcb[0], "/bin/hello");
   context_uload(&pcb[1], "/bin/pal");
+  context_uload(&pcb[2], "/bin/pal");
+  context_uload(&pcb[3], "/bin/pal");
   //Log("uload pal end");
   //Log("pcb[0]->as->ptr = %d",pcb[1].as.ptr);
 
@@ -47,11 +52,14 @@ _Context *schedule(_Context *prev)
   current->cp = prev;
   cnt++;
   // current = &pcb[1];
-
-  current = (current == &pcb[0]) ? &pcb[1] : &pcb[0];
+  if (front == NULL)
+  {
+    front = &pcb[1];
+  }
+  current = (current == &pcb[0]) ? front : &pcb[0];
   if ((current == &pcb[0]) && (cnt % 1000))
   {
-    current = &pcb[1];
+    current = front;
   }
   //current = (current == &pcb[1]) ? &pcb[0] : &pcb[1];
   /*if(current == &pcb[1]){
@@ -63,4 +71,23 @@ _Context *schedule(_Context *prev)
  }*/
   //current = &pcb[0];
   return current->cp;
+}
+
+void switch_front(int key)
+{
+
+  switch (key)
+  {
+  case _KEY_F1:
+    front = &pcb[1];
+    break;
+  case _KEY_F2:
+    front = &pcb[2];
+    break;
+  case _KEY_F3:
+    front = &pcb[3];
+    break;
+  default:
+    break;
+  }
 }

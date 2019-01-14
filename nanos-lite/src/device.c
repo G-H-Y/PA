@@ -2,6 +2,8 @@
 #include <amdev.h>
 #include <fs.h>
 
+void switch_front(int key);
+
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   //Log("in serial write");
  // _yield();
@@ -24,11 +26,12 @@ static const char *keyname[256] __attribute__((used)) = {
 
 size_t events_read(void *buf, size_t offset, size_t len) {
   //return 0;
- // _yield();
+ // 
   int key = read_key();
   if(key){
     if(key & 0x8000){
       sprintf(buf,"%s %s %c","kd ",keyname[key & 0x7fff],'\n');
+      switch_front(key & 0x7fff);
     }
     else{
       sprintf(buf,"%s %s %c","ku ",keyname[key],'\n');
