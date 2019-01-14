@@ -13,7 +13,7 @@ static _Context *do_event(_Event e, _Context *c)
     do_syscall(c);
     break;
   case _EVENT_IRQ_TIMER:
-    Log("irq_timer");
+    //Log("irq_timer");
     _yield();
     break;
   default:
