@@ -18,7 +18,7 @@ void free_page(void *p) {
 }
 
 /* The brk() system call handler. */
-int mm_brk(uintptr_t new_brk) {
+/*int mm_brk(uintptr_t new_brk) {
   printf("in mmbrk\n");
   //need a new page?
   printf("newbrk = %d, maxbrk = %d\n",new_brk,current->max_brk);
@@ -37,7 +37,22 @@ int mm_brk(uintptr_t new_brk) {
     }
   }
   return 0;
+}*/
+
+int mm_brk(uintptr_t new_brk) {
+  // if(new_brk > max_brk){
+  if(current->max_brk > new_brk){
+    printf("max_brk %x is bigger than new_brk %x\n", current->max_brk, new_brk);
+    return 0;
+  }
+
+  for (; current->max_brk < new_brk; current->max_brk += PGSIZE) {
+    void * pa = new_page(1);
+    _map(&(current->as), (void *)(current->max_brk), pa, 0);
+  }
+  return 0;
 }
+
 
 void init_mm() {
   pf = (void *)PGROUNDUP((uintptr_t)_heap.start);
