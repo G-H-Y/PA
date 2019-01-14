@@ -56,7 +56,7 @@ uint32_t paddr_read(paddr_t addr, int len)
       int over = is_diff_page(addr, len);
       if (over)
       {
-        Log("len = %d,over = %d", len,over);
+       // Log("len = %d,over = %d", len,over);
         //assert(0);
         paddr_t low_phy_addr = page_translate(addr);
         uint32_t low_bytes = pmem_rw(low_phy_addr, uint32_t) & (~0u >> ((4 - (len-over)) << 3));
