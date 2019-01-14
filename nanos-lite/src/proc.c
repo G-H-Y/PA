@@ -30,7 +30,7 @@ void init_proc() {
   context_uload(&pcb[1], "/bin/pal");
   //Log("uload pal end");
   //Log("pcb[0]->as->ptr = %d",pcb[1].as.ptr);
-  context_uload(&pcb[0],"/bin/hello");
+ // context_uload(&pcb[0],"/bin/hello");
 //Log("pcb[0]->as->ptr = %d",pcb[0].as.ptr);
   //Log("uload hello end");
   switch_boot_pcb();
