@@ -28,8 +28,8 @@ int mm_brk(uintptr_t new_brk) {
     //need a new page
     uintptr_t nr_page = (inc - aval_addr )/ PGSIZE;
     if((inc - aval_addr) % PGSIZE) nr_page++;
-    //void* va = (void*) ((current->max_brk | 0xfff) + 1);
-    void* va = (void*)current->max_brk;
+    void* va = (void*) ((current->max_brk | 0xfff) + 1); //把这里改成下面就好了。。。
+   // void* va = (void*)current->max_brk;
     printf("nrpage = %d\n",nr_page);
     while(nr_page--){
       PDE *pa = (PDE*)(new_page(1));
