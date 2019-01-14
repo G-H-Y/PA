@@ -26,9 +26,10 @@ static const char *keyname[256] __attribute__((used)) = {
 
 size_t events_read(void *buf, size_t offset, size_t len) {
   //return 0;
-  Log("event!");
+ 
   int key = read_key();
   if(key){
+     Log("event!");
     if(key & 0x8000){
       sprintf(buf,"%s %s %c","kd ",keyname[key & 0x7fff],'\n');
       switch_front(key & 0x7fff);
