@@ -29,7 +29,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
  
   int key = read_key();
   if(key){
-     Log("event!");
+     Log("key = %d",key);
     if(key & 0x8000){
       sprintf(buf,"%s %s %c","kd ",keyname[key & 0x7fff],'\n');
       switch_front(key & 0x7fff);
