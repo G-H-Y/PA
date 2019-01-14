@@ -19,9 +19,9 @@ void free_page(void *p) {
 
 /* The brk() system call handler. */
 int mm_brk(uintptr_t new_brk) {
-  printf("in mmbrk\n");
+  //printf("in mmbrk\n");
   //need a new page?
-  printf("newbrk = %d, maxbrk = %d\n",new_brk,current->max_brk);
+  //printf("newbrk = %d, maxbrk = %d\n",new_brk,current->max_brk);
   uintptr_t aval_addr = 0xfff - (current->max_brk & 0xfff);
   uintptr_t inc = new_brk - current->max_brk ;
   if(inc > aval_addr){
@@ -30,7 +30,7 @@ int mm_brk(uintptr_t new_brk) {
     if((inc - aval_addr) % PGSIZE) nr_page++;
     //void* va = (void*) ((current->max_brk | 0xfff) + 1); //如果用这一条 loader中 maxbrk = （va-PGSIZE）；
     void* va = (void*)current->max_brk; //因为在loader中设的max值之后代表的那一页是还没加载的页
-    printf("nrpage = %d\n",nr_page);
+    //printf("nrpage = %d\n",nr_page);
     while(nr_page--){
       PDE *pa = (PDE*)(new_page(1));
       _map(&(current->as),va,(void*)pa,1);
