@@ -88,7 +88,7 @@ void switch_front(int key)
     front = &pcb[3];
     break;
   default:
-    Log("not F");
+   // Log("not F");
     break;
   }
 }
