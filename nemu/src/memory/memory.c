@@ -12,13 +12,13 @@ uint8_t pmem[PMEM_SIZE];
 
 /* Memory accessing interfaces */
 
-bool is_diff_page(paddr_t addr, int len)
+int is_diff_page(paddr_t addr, int len)
 {
   paddr_t page_offset = addr & 0xfff;
   paddr_t max_offset = 0x1000 - len;
   if (page_offset > max_offset)
-    return true;
-  return false;
+    return len - (0x1000 - page_offset);
+  return 0;
 }
 
 paddr_t page_translate(paddr_t addr)
@@ -53,11 +53,16 @@ uint32_t paddr_read(paddr_t addr, int len)
   {
     if (cpu.cr0.paging)
     {
-      //Log("translate addr");
-      if (is_diff_page(addr, len))
+      int over = is_diff_page(addr, len);
+      if (over)
       {
-        Log("addr = 0x%x,len = %d", addr, len);
-        assert(0);
+        Log("len = %d,over = %d", len,over);
+        //assert(0);
+        paddr_t low_phy_addr = page_translate(addr);
+        uint32_t low_bytes = pmem_rw(low_phy_addr, uint32_t) & (~0u >> ((4 - (len-over)) << 3));
+        paddr_t high_phy_addr = page_translate(addr + (len - over));
+        uint32_t high_bytes = pmem_rw(high_phy_addr, uint32_t) & (~0u >> ((4 - over) << 3));
+        return (high_bytes << (over << 2))|low_bytes;
       }
       paddr_t phy_addr = page_translate(addr);
       return pmem_rw(phy_addr, uint32_t) & (~0u >> ((4 - len) << 3));
