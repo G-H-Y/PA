@@ -107,7 +107,7 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
   _Context *tf = ustack.end - sizeof(_Context) - 3 * sizeof(uintptr_t);
   tf->eip = (uintptr_t)entry;
   tf->cs = 8;
-  tf->prot->ptr = p->ptr;
+  tf->prot = p;
   int * tmp = ustack.end - 3 * sizeof(uintptr_t);
   int i = 0;
   while(i<3){
