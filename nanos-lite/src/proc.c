@@ -40,11 +40,12 @@ static uint32_t cnt = 0;
 _Context* schedule(_Context *prev) {
   current->cp = prev;
  cnt++;
+ current = &pcb[1];
  
-current = (current == &pcb[0]) ? &pcb[1] : &pcb[0];
-if((current == &pcb[0])&&(cnt % 100)){
-  current = &pcb[1];
-}
+// current = (current == &pcb[0]) ? &pcb[1] : &pcb[0];
+// if((current == &pcb[0])&&(cnt % 100)){
+//   current = &pcb[1];
+// }
  //current = (current == &pcb[1]) ? &pcb[0] : &pcb[1];
  /*if(current == &pcb[1]){
    printf("begin pal!\n");
