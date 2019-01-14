@@ -139,7 +139,7 @@ make_group(gp1,
         /* 0xd8 */ EMPTY, EMPTY, EMPTY, EMPTY,
         /* 0xdc */ EMPTY, EMPTY, EMPTY, EMPTY,
         /* 0xe0 */ EMPTY, EMPTY, EMPTY, EMPTY,
-        /* 0xe4 */ IDEXW(in_I2a,in,1), EMPTY, EMPTY, EMPTY,
+        /* 0xe4 */ IDEXW(in_I2a, in, 1), EMPTY, EMPTY, EMPTY,
         /* 0xe8 */ IDEX(J, call), IDEX(J, jmp), EMPTY, IDEXW(J, jmp, 1),
         /* 0xec */ IDEXW(in_dx2a, in, 1), IDEX(in_dx2a, in), IDEXW(out_a2dx, out, 1), IDEX(out_a2dx, out),
         /* 0xf0 */ EMPTY, EMPTY, EMPTY, EMPTY,
@@ -272,14 +272,13 @@ void exec_wrapper(bool print_flag)
   }
 
 #endif
+  update_eip();
   if (cpu.INTR & cpu.eflags.IF)
   {
     cpu.INTR = false;
     raise_intr(IRQ_TIMER, cpu.eip);
     update_eip();
   }
-
-  update_eip();
 
 #if defined(DIFF_TEST)
   void difftest_step(uint32_t);
