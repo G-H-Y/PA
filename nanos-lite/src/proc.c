@@ -43,6 +43,10 @@ _Context* schedule(_Context *prev) {
  if(current == &pcb[1]){
    printf("begin pal!\n");
  }
+ if(current == &pcb[0])
+ {
+   printf("begin hello!\n");
+ }
   //current = &pcb[0];
   return current->cp;
 }
