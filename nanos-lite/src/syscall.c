@@ -44,6 +44,7 @@ _Context *do_syscall(_Context *c)
   case SYS_brk:
   Log("newbrk = %d,max_brk = %d",new_brk,current->max_brk);
     if (current->max_brk < new_brk){
+      Log("newbrk = %d\n",new_brk);
       mm_brk(new_brk);
       current->max_brk = new_brk;
     }
