@@ -42,5 +42,4 @@ void init_mm() {
   Log("free physical pages starting from %d", pf);
 
   _vme_init(new_page, free_page);
-  Log("end");
 }
