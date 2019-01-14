@@ -42,6 +42,7 @@ _Context *do_syscall(_Context *c)
     c->GPRx = fs_write(fd, buf, count);
     break;
   case SYS_brk:
+  Log("newbrk = %d,max_brk = %d",new_brk,current->max_brk);
     if (current->max_brk < new_brk){
       mm_brk(new_brk);
       current->max_brk = new_brk;
