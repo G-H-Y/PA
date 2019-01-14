@@ -24,6 +24,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       _map(&(pcb->as),(void*)va,(void*)pa,1);
       fs_read(fd,(void*)pa,PGSIZE);     
       va += PGSIZE;
+      printf("pa = %d\n",(uintptr_t)pa);
     }
     pcb->max_brk = (uintptr_t)(va);
     pcb->cur_brk = (uintptr_t)(va);
