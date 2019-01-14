@@ -33,7 +33,7 @@ _Context *do_syscall(_Context *c)
     c->GPRx = 0;
     break;
   case SYS_exit:
-  Log("in exit");
+  //Log("in exit");
     _halt(a[1]);
     break;
   case SYS_execve:

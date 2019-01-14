@@ -28,6 +28,7 @@ int mm_brk(uintptr_t new_brk) {
     uintptr_t nr_page = inc / PGSIZE;
     if((inc - aval_addr) % PGSIZE) nr_page++;
     void* va = (void*) ((current->max_brk | 0xfff) + 1);
+    printf("nrpage = %d\n",nr_page);
     while(nr_page--){
       PDE *pa = (PDE*)(new_page(1));
       _map(&(current->as),va,(void*)pa,1);
