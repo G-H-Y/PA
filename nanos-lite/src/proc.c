@@ -75,7 +75,7 @@ _Context *schedule(_Context *prev)
 
 void switch_front(int key)
 {
-
+  
   switch (key)
   {
   case _KEY_F1:
