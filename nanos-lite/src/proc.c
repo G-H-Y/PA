@@ -75,7 +75,7 @@ _Context *schedule(_Context *prev)
 
 void switch_front(int key)
 {
-  
+
   switch (key)
   {
   case _KEY_F1:
@@ -88,6 +88,7 @@ void switch_front(int key)
     front = &pcb[3];
     break;
   default:
+    Log("not F");
     break;
   }
 }
