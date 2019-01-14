@@ -30,7 +30,6 @@ _Context *do_syscall(_Context *c)
   {
   case SYS_yield:
     _yield();
-    //schedule(c);
     c->GPRx = 0;
     break;
   case SYS_exit:
