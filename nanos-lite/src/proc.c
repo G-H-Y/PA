@@ -49,7 +49,7 @@ _Context *schedule(_Context *prev)
   // current = &pcb[1];
 
   current = (current == &pcb[0]) ? &pcb[1] : &pcb[0];
-  if ((current == &pcb[0]) && (cnt % 100))
+  if ((current == &pcb[0]) && (cnt % 1000))
   {
     current = &pcb[1];
   }
