@@ -26,7 +26,7 @@ int mm_brk(uintptr_t new_brk) {
   uintptr_t inc = new_brk - current->max_brk ;
   if(inc > aval_addr){
     //need a new page
-    uintptr_t nr_page = inc / PGSIZE;
+    uintptr_t nr_page = (inc - aval_addr )/ PGSIZE;
     if((inc - aval_addr) % PGSIZE) nr_page++;
     void* va = (void*) ((current->max_brk | 0xfff) + 1);
     printf("nrpage = %d\n",nr_page);
