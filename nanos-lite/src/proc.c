@@ -78,13 +78,13 @@ void switch_front(int key)
 
   switch (key)
   {
-  case 15:
+  case _KEY_F1:
     front = &pcb[1];
     break;
-  case 16:
+  case _KEY_F2:
     front = &pcb[2];
     break;
-  case 17:
+  case _KEY_F3:
     front = &pcb[3];
     break;
   default:
