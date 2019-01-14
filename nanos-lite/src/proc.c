@@ -30,7 +30,7 @@ void init_proc() {
   context_uload(&pcb[1], "/bin/pal");
   //Log("uload pal end");
   //Log("pcb[0]->as->ptr = %d",pcb[1].as.ptr);
-  //context_uload(&pcb[0],"/bin/hello");
+  context_uload(&pcb[0],"/bin/hello");
 //Log("pcb[0]->as->ptr = %d",pcb[0].as.ptr);
   //Log("uload hello end");
   switch_boot_pcb();
@@ -38,8 +38,8 @@ void init_proc() {
 
 _Context* schedule(_Context *prev) {
   current->cp = prev;
-  current = &pcb[1];
-// current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
+
+current = (current == &pcb[0]) ? &pcb[1] : &pcb[0];
  //current = (current == &pcb[1]) ? &pcb[0] : &pcb[1];
  /*if(current == &pcb[1]){
    printf("begin pal!\n");
