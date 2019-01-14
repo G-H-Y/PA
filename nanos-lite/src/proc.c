@@ -28,7 +28,7 @@ void init_proc() {
   Log("in init_proc");
   //naive_uload(NULL, "/bin/init");
   context_uload(&pcb[0], "/bin/pal");
-  //Log("uload end");
+  Log("uload pal end");
   context_uload(&pcb[0],"/bin/hello");
 //Log("pcb[0]->as->ptr = %d",pcb[0].as.ptr);
   
