@@ -41,13 +41,13 @@ _Context* schedule(_Context *prev) {
   current = &pcb[1];
 // current = (current == &pcb[0] ? &pcb[1] : &pcb[0]);
  //current = (current == &pcb[1]) ? &pcb[0] : &pcb[1];
- if(current == &pcb[1]){
+ /*if(current == &pcb[1]){
    printf("begin pal!\n");
  }
  if(current == &pcb[0])
  {
    printf("begin hello!\n");
- }
+ }*/
   //current = &pcb[0];
   return current->cp;
 }
