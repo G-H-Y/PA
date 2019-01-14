@@ -104,7 +104,7 @@ int _map(_Protect *p, void *va, void *pa, int mode) {
 
 
 _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *args) {
-   _Context *tf = ustack.end - sizeof(_Context) - 3 * sizeof(uintptr_t);
+   /*_Context *tf = ustack.end - sizeof(_Context) - 3 * sizeof(uintptr_t);
   tf->eip = (uintptr_t)entry;
   tf->cs = 8;
   tf->prot->ptr = p->ptr;
@@ -115,5 +115,23 @@ _Context *_ucontext(_Protect *p, _Area ustack, _Area kstack, void *entry, void *
     i++;
   }
   //printf("in ucontext: tf = %d\n",tf);
-  return tf;
+  return tf;*/
+  ustack.end -= 1 * sizeof(uintptr_t);  // 1 = retaddr
+  uintptr_t ret = (uintptr_t)ustack.end;
+  *(uintptr_t *)ret = 0;
+
+  _Context *c = (_Context*)ustack.end - 1;
+  c->eip = (uintptr_t)entry;
+  c->prot = p;
+  c->eflags = 0xffffffff; // open interupt
+
+  // maybe useful, but I can not understand this now
+  // c->uc.uc_mcontext.gregs[REG_RDI] = 0;
+  // c->uc.uc_mcontext.gregs[REG_RSI] = ret; // ???
+  // c->uc.uc_mcontext.gregs[REG_RDX] = ret; // ???
+
+  return c;
+
 }
+
+
